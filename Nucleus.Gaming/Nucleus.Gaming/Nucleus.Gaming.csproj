@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{223DBDAE-E362-452C-9455-F518D002B154}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nucleus.Gaming</RootNamespace>
+    <AssemblyName>Nucleus.Gaming</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WINDOWS;UNSAFE;ALPHA;RELEASE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS;UNSAFE;ALPHA;RELEASE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>GamingKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestDebug|AnyCPU'">
+    <OutputPath>bin\TestDebug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DefineConstants>WINDOWS</DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.13.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.13.0\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
+      <HintPath>..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Coop\BackupManager.cs" />
+    <Compile Include="Coop\Data\AppDomain\AppDomainSharedAttribute.cs" />
+    <Compile Include="Coop\Data\CallbackData.cs" />
+    <Compile Include="Coop\Data\HandlerTools.cs" />
+    <Compile Include="Coop\Data\Save\SaveInfo.cs" />
+    <Compile Include="Coop\Data\UserProfileOptions.cs" />
+    <None Include="Coop\Interop\DomainWebApiConnection.cs" />
+    <Compile Include="Coop\Handler\Modules\Process\IGameProcessModule.cs" />
+    <Compile Include="Coop\Interop\HandlerDataEngine.cs" />
+    <Compile Include="Coop\HandlerDataManager.cs" />
+    <Compile Include="Coop\Handler\Modules\IO\IOModule.cs" />
+    <Compile Include="Coop\ModuleManager.cs" />
+    <Compile Include="Coop\SearchStorageInfo.cs" />
+    <Compile Include="IO\ScrConfigFile.cs" />
+    <Compile Include="Platform\Windows\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\BorderPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\BorderPanel.Designer.cs">
+      <DependentUpon>BorderPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\ControlListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\CoolListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\CustomTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\HotkeyListener.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\HotkeyListener.Designer.cs">
+      <DependentUpon>HotkeyListener.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\ICanProceed.cs" />
+    <Compile Include="Platform\Windows\Controls\IHighlightControl.cs" />
+    <Compile Include="Platform\Windows\Controls\ImageButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\IMouseHoverControl.cs" />
+    <Compile Include="Platform\Windows\Controls\MouseMessageFilter.cs" />
+    <Compile Include="Platform\Windows\Controls\NButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\PictureButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\PictureButton.Designer.cs">
+      <DependentUpon>PictureButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\SizeableCheckbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\TextMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\TextMessageBox.Designer.cs">
+      <DependentUpon>TextMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Coop\GameNameManager.cs" />
+    <Compile Include="Coop\Handler\Engine\GameHandler.cs" />
+    <Compile Include="Coop\HandlerModule.cs" />
+    <Compile Include="Diagnostics\OutputLevel.cs" />
+    <Compile Include="Platform\Windows\Controls\TitleBarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\Controls\TransparentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Platform\Windows\DirectInput\DInputManager.cs" />
+    <Compile Include="Coop\Data\GameOption.cs" />
+    <Compile Include="Coop\Data\GameOptionValue.cs" />
+    <Compile Include="Coop\Data\GameProfile.cs" />
+    <Compile Include="Coop\Handler\Modules\Cursor\CursorBarrier.cs" />
+    <Compile Include="Coop\Handler\Modules\Cursor\CursorBarrierLower.cs" />
+    <Compile Include="Coop\Handler\Modules\Cursor\CursorBarrierUpper.cs" />
+    <Compile Include="Coop\Handler\Modules\Cursor\CursorModule.cs" />
+    <Compile Include="Coop\Handler\Modules\Cursor\NativeMethods.cs" />
+    <Compile Include="Coop\Data\DynamicAttribute.cs" />
+    <Compile Include="Coop\Data\HandlerContext.cs" />
+    <Compile Include="Coop\Data\AppDomain\HandlerData.cs" />
+    <Compile Include="Coop\Handler\JoystickDatabase.cs" />
+    <Compile Include="Coop\Handler\Step\CustomStep.cs" />
+    <Compile Include="Coop\Handler\Step\CustomStepType.cs" />
+    <Compile Include="Coop\Handler\UserInfo.cs" />
+    <Compile Include="Coop\Data\GameHookData.cs" />
+    <Compile Include="DPI\DPIHandling.cs" />
+    <Compile Include="DPI\DPIManager.cs" />
+    <Compile Include="DPI\DPIMonitor.cs" />
+    <Compile Include="DPI\IDynamicSized.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="IO\JsonPropertiesFile.cs" />
+    <Compile Include="Platform\Windows\FormGraphicsUtil.cs" />
+    <Compile Include="Platform\Windows\Interop\Shell32\FileAssociation.cs" />
+    <Compile Include="Platform\Windows\Interop\Shell32\RegistryUtil.cs" />
+    <Compile Include="Platform\Windows\IO\WinDirectoryUtil.cs" />
+    <Compile Include="Platform\Windows\LockBitmap.cs" />
+    <Compile Include="Platform\Windows\Modules\WindowsGameProcessModule.cs" />
+    <Compile Include="Platform\Windows\IO\MFT\FileNameAndParentFrn.cs" />
+    <Compile Include="Platform\Windows\IO\MFT\MFTReader.cs" />
+    <Compile Include="Platform\Windows\Interop\Gdi32\Gdi32Interop.cs" />
+    <Compile Include="Platform\Windows\Interop\Kernel32\Kernel32Interop.cs" />
+    <Compile Include="Platform\Windows\Interop\Kernel32\SymbolicLink.cs" />
+    <Compile Include="Platform\Windows\Interop\Shcore\ShcoreInterop.cs" />
+    <Compile Include="Platform\Windows\Interop\User32\Structures\Display.cs" />
+    <Compile Include="Platform\Windows\Interop\User32\C\Rect.cs" />
+    <Compile Include="IO\Content\ContentManager.cs" />
+    <Compile Include="Diagnostics\ILogNode.cs" />
+    <Compile Include="IO\SourceCfgFile.cs" />
+    <Compile Include="Coop\Data\UserGameInfo.cs" />
+    <Compile Include="Coop\Data\UserProfile.cs" />
+    <Compile Include="Coop\Data\UserScreen.cs" />
+    <Compile Include="Coop\Data\UserScreenType.cs" />
+    <Compile Include="Tools\GameStarter\Data\ScanMutexData.cs" />
+    <Compile Include="Tools\GameStarter\Data\SymlinkGameData.cs" />
+    <Compile Include="Util\ThreadUtil.cs" />
+    <Compile Include="Coop\Data\Save\SaveType.cs" />
+    <Compile Include="Coop\Data\Folder.cs" />
+    <Compile Include="Platform\Windows\Interop\Shell32\Shell32.cs" />
+    <Compile Include="Platform\Windows\Interop\Shell32\ShFileInfo.cs" />
+    <Compile Include="Platform\Windows\Interop\Shell32\ShgFi.cs" />
+    <Compile Include="Coop\Data\IO\BackupFile.cs" />
+    <Compile Include="Platform\Windows\Interop\Kernel32\IniFile.cs" />
+    <None Include="Platform\Windows\Interop\Interceptor\Win32.cs" />
+    <None Include="Platform\Windows\Interop\Interceptor\Win32EnumWindows.cs" />
+    <Compile Include="Platform\Windows\Interop\Interceptor\Win32Messages.cs" />
+    <None Include="Platform\Windows\Interop\Interceptor\WindowInterceptor.cs" />
+    <Compile Include="Platform\Windows\Interop\User32\User32Util.cs" />
+    <Compile Include="Platform\Windows\Interop\User32\User32Interop.cs" />
+    <Compile Include="Platform\Windows\Interop\User32\User32_WS.cs" />
+    <Compile Include="Platform\Windows\Interop\Win32Api.cs" />
+    <Compile Include="Platform\Windows\Interop\User32\WindowShowStyle.cs" />
+    <Compile Include="Diagnostics\Log.cs" />
+    <Compile Include="Coop\GameManager.cs" />
+    <Compile Include="Platform\Windows\Controls\ImageButtonState.cs" />
+    <Compile Include="Platform\Windows\Controls\StateImageButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Coop\Data\KeyboardPlayer.cs" />
+    <Compile Include="Platform\Windows\Modules\MutexModule.cs" />
+    <Compile Include="Platform\Windows\Modules\XInputHandlerModule.cs" />
+    <Compile Include="RAction.cs" />
+    <Compile Include="Coop\Package\GameHandlerMetadata.cs" />
+    <Compile Include="Coop\Package\GameHandlerBaseMetadata.cs" />
+    <Compile Include="Coop\Package\PackageManager.cs" />
+    <Compile Include="RequestResult.cs" />
+    <Compile Include="Tools\GameStarter\StartGameApp.cs" />
+    <Compile Include="Tools\GameStarter\Data\StartGameData.cs" />
+    <Compile Include="Tools\GameStarter\GameStarterTask.cs" />
+    <Compile Include="Util\ObjectUtil.cs" />
+    <Compile Include="Util\RectangleUtil.cs" />
+    <Compile Include="Platform\Windows\MonitorDpiType.cs" />
+    <Compile Include="Platform\Windows\ProcessDpiAwareness.cs" />
+    <Compile Include="Platform\Windows\WindowsVersionInfo.cs" />
+    <Compile Include="Coop\Data\PlayerInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Coop\Handler\ProcessInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Util\AssemblyUtil.cs" />
+    <Compile Include="Util\CmdUtil.cs" />
+    <Compile Include="Util\Palette.cs" />
+    <Compile Include="Util\ConsoleU.cs" />
+    <Compile Include="Util\Extensions\DirectoryInfoExtensions.cs" />
+    <Compile Include="Util\FileUtil.cs" />
+    <Compile Include="Util\MathUtil.cs" />
+    <Compile Include="Util\ProcessUtil.cs" />
+    <Compile Include="Util\ScreensUtil.cs" />
+    <Compile Include="Tools\GameStarter\StartGameUtil.cs" />
+    <Compile Include="Util\SteamUtil.cs" />
+    <Compile Include="Util\StringUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Platform\Windows\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Platform\Windows\Controls\PictureButton.resx">
+      <DependentUpon>PictureButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Platform\Windows\Controls\TextMessageBox.resx">
+      <DependentUpon>TextMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GamingKey.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\xinput1_3.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4players.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fullscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\horizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ncoop.ini" />
+    <None Include="Resources\SmartSteamEmu.zip" />
+    <None Include="Resources\vertical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ThirdParty\WindowScrape\WindowScrape.csproj">
+      <Project>{d9716550-921d-44e8-a289-c297950db1f7}</Project>
+      <Name>WindowScrape</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gamepad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\generic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16players.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\keyboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Coop\Data\GameHookInfo.cs.d.ts">
+      <DependentUpon>GameHookData.cs</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Coop\Data\AppDomain\GenericGameInfo.cs.d.ts">
+      <DependentUpon>HandlerData.cs</DependentUpon>
+    </TypeScriptCompile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
