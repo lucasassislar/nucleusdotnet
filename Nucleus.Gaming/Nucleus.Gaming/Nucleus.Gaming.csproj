@@ -86,6 +86,13 @@
     <Compile Include="Coop\Data\HandlerTools.cs" />
     <Compile Include="Coop\Data\Save\SaveInfo.cs" />
     <Compile Include="Coop\Data\UserProfileOptions.cs" />
+    <Compile Include="Web\SimpleHttpServer\HttpBuilder.cs" />
+    <Compile Include="Web\SimpleHttpServer\HttpProcessor.cs" />
+    <Compile Include="Web\SimpleHttpServer\HttpServer.cs" />
+    <Compile Include="Web\SimpleHttpServer\Models\HttpRequest.cs" />
+    <Compile Include="Web\SimpleHttpServer\Models\HttpResponse.cs" />
+    <Compile Include="Web\SimpleHttpServer\Models\Route.cs" />
+    <Compile Include="Web\SimpleHttpServer\RouteHandlers\FileSystemRouteHandler.cs" />
     <Compile Include="WindowScrape\Constants\PositioningFlags.cs" />
     <Compile Include="WindowScrape\Constants\WindowMessages.cs" />
     <Compile Include="WindowScrape\Constants\WS.cs" />
