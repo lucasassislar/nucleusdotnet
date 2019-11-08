@@ -86,6 +86,9 @@
     <Compile Include="Coop\Data\HandlerTools.cs" />
     <Compile Include="Coop\Data\Save\SaveInfo.cs" />
     <Compile Include="Coop\Data\UserProfileOptions.cs" />
+    <Compile Include="Web\RouteAttribute.cs" />
+    <Compile Include="Web\RouteBuilder.cs" />
+    <Compile Include="Web\RouteManagerAttribute.cs" />
     <Compile Include="Web\SimpleHttpServer\HttpBuilder.cs" />
     <Compile Include="Web\SimpleHttpServer\HttpProcessor.cs" />
     <Compile Include="Web\SimpleHttpServer\HttpServer.cs" />
