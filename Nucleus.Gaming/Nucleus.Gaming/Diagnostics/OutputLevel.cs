@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nucleus.Gaming.Diagnostics
-{
+namespace Nucleus.Gaming.Diagnostics {
     /// <summary>
     /// Importance level of the output
     /// </summary>
-    public enum OutputLevel
-    {
+    public enum OutputLevel {
         Low = 0,
         Medium = 1,
-        High = 2
+        High = 2,
+        VeryHigh = 3,
+        Panel = 10
     }
 }

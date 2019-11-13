@@ -14,50 +14,23 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
         private PictureBox icon;
 
         private Label titleLabel;
-        private string text = "Form";
+        private string text = "";
 
         private Button minimize;
         private Button maximize;
         private Button close;
 
-        public bool EnableMaximize { get; set; } = true;
-
-        [Browsable(true)]
-        public override string Text {
-            get {
-                if (titleLabel == null) {
-                    return text;
-                }
-                return titleLabel.Text;
-            }
-            set {
-                text = value;
-                if (titleLabel == null) {
-                    return;
-                }
-                titleLabel.Text = value;
-            }
-        }
+        private DateTime lastUpdateDate;
+        private bool mouseDown;
+        private Point dragStartPoint;
+        private Image cachedIcon;
 
         private Font btnFont;
         private Font titleFont;
 
-        public TitleBarControl() {
-            this.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right;
-            this.Size = new Size(1000, 21);
-
-            this.BackColor = Color.FromArgb(255, 32, 34, 37);
-            this.Padding = Padding.Empty;
-            this.Margin = Padding.Empty;
-        }
-
-        protected override void OnHandleCreated(EventArgs e) {
-            base.OnHandleCreated(e);
-
-            InitializeButtons();
-        }
-
-        private Image cachedIcon;
+        public bool EnableMaximize { get; set; } = true;
+        public bool ShowIcon { get; set; }
+        public int StripWidth { get; set; } = 30;
 
         public Image Icon {
             get {
@@ -76,7 +49,37 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             }
         }
 
-        public bool ShowIcon { get; set; }
+        [Browsable(true)]
+        public override string Text {
+            get {
+                if (titleLabel == null) {
+                    return text;
+                }
+                return titleLabel.Text;
+            }
+            set {
+                text = value;
+                if (titleLabel == null) {
+                    return;
+                }
+                titleLabel.Text = value;
+            }
+        }
+       
+        public TitleBarControl() {
+            this.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right;
+            this.Size = new Size(1000, 21);
+
+            this.BackColor = Color.FromArgb(255, 32, 34, 37);
+            this.Padding = Padding.Empty;
+            this.Margin = Padding.Empty;
+        }
+
+        protected override void OnHandleCreated(EventArgs e) {
+            base.OnHandleCreated(e);
+
+            InitializeButtons();
+        }
 
         private void InitializeButtons() {
             btnFont = new Font(this.Font.FontFamily, 6, FontStyle.Regular);
@@ -87,6 +90,7 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             titleLabel.AutoSize = true;
             titleLabel.Font = titleFont;
             titleLabel.DoubleClick += TitleLabel_DoubleClick;
+            titleLabel.Visible = false;
             Controls.Add(titleLabel);
 
             icon = new PictureBox();
@@ -140,10 +144,6 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             SwapMaximized();
         }
 
-        private DateTime lastUpdateDate;
-        private bool mouseDown;
-        private Point dragStartPoint;
-
         private void SwapMaximized() {
             if (!EnableMaximize) {
                 return;
@@ -166,6 +166,15 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             }
         }
 
+        protected override void OnPaint(PaintEventArgs e) {
+            base.OnPaint(e);
+
+            float stripWidth = this.Width * (this.StripWidth / 100.0f);
+            //e.Graphics.FillRectangle(Brushes.Black, new RectangleF(21, 1, stripWidth, 19));
+            e.Graphics.DrawRectangle(Pens.Black, new Rectangle(21, 1, (int)stripWidth, 19));
+            e.Graphics.DrawString(text, this.titleLabel.Font, Brushes.White, 22, 1);
+        }
+
         protected override void OnMouseDown(MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
                 Form parent = this.ParentForm;
@@ -175,6 +184,10 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
                     dragStartPoint = nP;
                     //User32Interop.ReleaseCapture();
                     //User32Interop.SendMessage(parent.Handle, User32_WS.WM_NCLBUTTONDOWN, User32_WS.HT_CAPTION, 0);
+
+                    // menustrip
+                    float stripWidth = this.Width * (this.StripWidth / 100.0f);
+                    Refresh();
                 }
             }
         }
@@ -206,6 +219,11 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
                             parent.Location.Y - dragStartPoint.Y + e.Y);
                     }
                     this.Update();
+
+                    // menustrip
+                    float stripWidth = this.Width * (this.StripWidth / 100.0f);
+                    Refresh();
+
                 }
             }
         }
