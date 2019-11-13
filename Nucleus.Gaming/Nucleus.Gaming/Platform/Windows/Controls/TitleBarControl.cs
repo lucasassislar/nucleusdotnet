@@ -170,9 +170,14 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             base.OnPaint(e);
 
             float stripWidth = this.Width * (this.StripWidth / 100.0f);
+            int x = 2;
+            if (Icon != null) {
+                e.Graphics.DrawImage(Icon, new Rectangle(x, 1, 16, 16));
+                x = 19;
+            }
             //e.Graphics.FillRectangle(Brushes.Black, new RectangleF(21, 1, stripWidth, 19));
-            e.Graphics.DrawRectangle(Pens.Black, new Rectangle(21, 1, (int)stripWidth, 19));
-            e.Graphics.DrawString(text, this.titleLabel.Font, Brushes.White, 22, 1);
+            //e.Graphics.DrawRectangle(Pens.Black, new Rectangle(21, 1, (int)stripWidth, 19));
+            e.Graphics.DrawString(text, this.titleLabel.Font, Brushes.White, x, 1);
         }
 
         protected override void OnMouseDown(MouseEventArgs e) {
