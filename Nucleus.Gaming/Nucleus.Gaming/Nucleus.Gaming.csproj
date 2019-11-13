@@ -91,6 +91,16 @@
     <Compile Include="Threading\TaskManager.cs" />
     <Compile Include="Threading\ThreadData.cs" />
     <Compile Include="Threading\ThreadTask.cs" />
+    <Compile Include="Web\RouteAttribute.cs" />
+    <Compile Include="Web\RouteBuilder.cs" />
+    <Compile Include="Web\RouteManagerAttribute.cs" />
+    <Compile Include="Web\SimpleHttpServer\HttpBuilder.cs" />
+    <Compile Include="Web\SimpleHttpServer\HttpProcessor.cs" />
+    <Compile Include="Web\SimpleHttpServer\HttpServer.cs" />
+    <Compile Include="Web\SimpleHttpServer\Models\HttpRequest.cs" />
+    <Compile Include="Web\SimpleHttpServer\Models\HttpResponse.cs" />
+    <Compile Include="Web\SimpleHttpServer\Models\Route.cs" />
+    <Compile Include="Web\SimpleHttpServer\RouteHandlers\FileSystemRouteHandler.cs" />
     <Compile Include="WindowScrape\Constants\PositioningFlags.cs" />
     <Compile Include="WindowScrape\Constants\WindowMessages.cs" />
     <Compile Include="WindowScrape\Constants\WS.cs" />
