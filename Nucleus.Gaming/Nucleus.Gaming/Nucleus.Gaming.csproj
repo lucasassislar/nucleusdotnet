@@ -44,7 +44,7 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>
@@ -59,15 +59,12 @@
   <ItemGroup>
     <Reference Include="DotNetZip, Version=1.13.4.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.13.4\lib\net40\DotNetZip.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\..\..\Master\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
       <HintPath>..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -88,6 +85,13 @@
     <Compile Include="Coop\Data\Save\SaveInfo.cs" />
     <Compile Include="Coop\Data\UserProfileOptions.cs" />
     <Compile Include="Web\Db\DbManager.cs" />
+    <Compile Include="Diagnostics\PanelTextWriter.cs" />
+    <Compile Include="Diagnostics\Profiler\MeasureData.cs" />
+    <Compile Include="Diagnostics\Profiler\MeasureKey.cs" />
+    <Compile Include="Diagnostics\Profiler\Profiler.cs" />
+    <Compile Include="Threading\TaskManager.cs" />
+    <Compile Include="Threading\ThreadData.cs" />
+    <Compile Include="Threading\ThreadTask.cs" />
     <Compile Include="Web\RouteAttribute.cs" />
     <Compile Include="Web\RouteBuilder.cs" />
     <Compile Include="Web\RouteManagerAttribute.cs" />
@@ -310,14 +314,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ncoop.ini" />
-    <None Include="Resources\SmartSteamEmu.zip" />
     <None Include="Resources\vertical.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ThirdParty\WindowScrape\WindowScrape.csproj">
-      <Project>{d9716550-921d-44e8-a289-c297950db1f7}</Project>
-      <Name>WindowScrape</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\gamepad.png" />

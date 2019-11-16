@@ -14,6 +14,28 @@ namespace Nucleus.Gaming {
             return Numbers.Contains(c);
         }
 
+        public static string RepeatCharacter(char c, int times) {
+            string s = "";
+            for (int i = 0; i < times; i++) {
+                s += c;
+            }
+            return s;
+        }
+
+        public static void MakeSameSize(ref string a, ref string b) {
+            if (a.Length < b.Length) {
+                int dif = b.Length - a.Length;
+                for (int k = 0; k < dif; k++) {
+                    a = " " + a;
+                }
+            } else if (a.Length > b.Length) {
+                int dif = a.Length - b.Length;
+                for (int k = 0; k < dif; k++) {
+                    b = " " + b;
+                }
+            }
+        }
+
         public static string ReplaceCaseInsensitive(string str, string toFind, string toReplace) {
             string lowerOriginal = str.ToLower();
             string lowerFind = toFind.ToLower();
