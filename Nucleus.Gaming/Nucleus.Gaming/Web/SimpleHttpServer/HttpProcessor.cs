@@ -14,8 +14,16 @@ namespace Nucleus.Gaming.Web {
 
         private List<Route> Routes = new List<Route>();
         private string basePath;
+        private Dictionary<string, string> mimeTypes;
+        private string indexPath;
 
         public HttpProcessor(string basePath) {
+            this.basePath = basePath;
+
+            indexPath = "index.html";
+            mimeTypes = new Dictionary<string, string>();
+            mimeTypes.Add(".jpg", "image/jpeg");
+            mimeTypes.Add(".html", "text/html");
         }
 
         public void HandleClient(TcpClient tcpClient) {
@@ -45,47 +53,8 @@ namespace Nucleus.Gaming.Web {
 
         }
 
-        // this formats the HTTP response...
-        private static void WriteResponse(Stream stream, HttpResponse response) {
-            if (response.Content == null) {
-                response.Content = new byte[] { };
-            }
-
-            // default to text/html content type
-            if (!response.Headers.ContainsKey("Content-Type") &&
-                response.Content.Length > 0) {
-                response.Headers["Content-Type"] = "text/html";
-            }
-
-            response.Headers["Content-Length"] = response.Content.Length.ToString();
-
-            Write(stream, string.Format("HTTP/1.0 {0} {1}\r\n", response.StatusCode, response.ReasonPhrase));
-            Write(stream, string.Join("\r\n", response.Headers.Select(x => string.Format("{0}: {1}", x.Key, x.Value))));
-            Write(stream, "\r\n\r\n");
-
-            stream.Write(response.Content, 0, response.Content.Length);
-        }
-
         public void AddRoute(Route route) {
             this.Routes.Add(route);
-        }
-
-        private static string Readline(Stream stream) {
-            int next_char;
-            string data = "";
-            while (true) {
-                next_char = stream.ReadByte();
-                if (next_char == '\n') { break; }
-                if (next_char == '\r') { continue; }
-                if (next_char == -1) { Thread.Sleep(1); continue; };
-                data += Convert.ToChar(next_char);
-            }
-            return data;
-        }
-
-        private static void Write(Stream stream, string text) {
-            byte[] bytes = Encoding.UTF8.GetBytes(text);
-            stream.Write(bytes, 0, bytes.Length);
         }
 
         protected virtual Stream GetOutputStream(TcpClient tcpClient) {
@@ -98,10 +67,6 @@ namespace Nucleus.Gaming.Web {
 
         protected virtual HttpResponse RouteRequest(Stream inputStream, Stream outputStream, HttpRequest request) {
             List<Route> routes = this.Routes.Where(x => Regex.Match(request.Url, x.UrlRegex).Success).ToList();
-
-            if (!routes.Any()) {
-                return HttpBuilder.NotFound(request.Url);
-            }
 
             Dictionary<string, string> headers = new Dictionary<string, string>();
             if (request.Headers.ContainsKey("Origin")) {
@@ -120,6 +85,40 @@ namespace Nucleus.Gaming.Web {
             headers.Add("X-XSS-Protection", "1; mode=block");
             headers.Add("Date", DateTime.Now.ToLongDateString());
 
+            if (!routes.Any()) {
+                // check if it's a file
+
+                string pathToFile;
+                if (request.Url.Length == 1) {
+                    pathToFile = Path.Combine(basePath, indexPath);
+                } else {
+                    string actualPath = request.Url.Remove(0, 1);
+                    if (actualPath.ToLower().Equals(indexPath.ToLower())) {
+                        // index page
+                        headers.Add("Location", "http://localhost:9000/");
+                        return new HttpResponse() {
+                            ReasonPhrase = "OK",
+                            StatusCode = "301",
+                            ContentAsUTF8 = "",
+                            Headers = headers
+                        };
+                    }
+
+                    pathToFile = Path.Combine(basePath, actualPath);
+                }
+
+                if (File.Exists(pathToFile)) {
+                    string content = File.ReadAllText(pathToFile);
+                    return new HttpResponse() {
+                        ReasonPhrase = "OK",
+                        StatusCode = "200",
+                        ContentAsUTF8 = content,
+                        Headers = headers
+                    };
+                }
+
+                return HttpBuilder.NotFound(request.Url, headers);
+            }
 
             //X-DNS-Prefetch-Control →off
             //X-Frame-Options →SAMEORIGIN
@@ -188,8 +187,46 @@ namespace Nucleus.Gaming.Web {
                 return response;
             } catch (Exception ex) {
                 //log.Error(ex);
-                return HttpBuilder.InternalServerError();
+                return HttpBuilder.InternalServerError(headers);
             }
+        }
+
+        private static void WriteResponse(Stream stream, HttpResponse response) {
+            if (response.Content == null) {
+                response.Content = new byte[] { };
+            }
+
+            // default to text/html content type
+            if (!response.Headers.ContainsKey("Content-Type") &&
+                response.Content.Length > 0) {
+                response.Headers["Content-Type"] = "text/html";
+            }
+
+            response.Headers["Content-Length"] = response.Content.Length.ToString();
+
+            Write(stream, string.Format("HTTP/1.0 {0} {1}\r\n", response.StatusCode, response.ReasonPhrase));
+            Write(stream, string.Join("\r\n", response.Headers.Select(x => string.Format("{0}: {1}", x.Key, x.Value))));
+            Write(stream, "\r\n\r\n");
+
+            stream.Write(response.Content, 0, response.Content.Length);
+        }
+
+        private static string Readline(Stream stream) {
+            int next_char;
+            string data = "";
+            while (true) {
+                next_char = stream.ReadByte();
+                if (next_char == '\n') { break; }
+                if (next_char == '\r') { continue; }
+                if (next_char == -1) { Thread.Sleep(1); continue; };
+                data += Convert.ToChar(next_char);
+            }
+            return data;
+        }
+
+        private static void Write(Stream stream, string text) {
+            byte[] bytes = Encoding.UTF8.GetBytes(text);
+            stream.Write(bytes, 0, bytes.Length);
         }
 
         private HttpRequest GetRequest(Stream inputStream, Stream outputStream) {
