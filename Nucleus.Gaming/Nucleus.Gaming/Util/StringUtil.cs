@@ -4,6 +4,27 @@ using System.Linq;
 
 namespace Nucleus.Gaming {
     public static class StringUtil {
+
+        public static string GetCollisionStringStart(string aStr, string bStr) {
+            string col = "";
+
+            for (int i = 0; i < aStr.Length; i++) {
+                if (bStr.Length <= i) {
+                    break;
+                }
+
+                char a = aStr[i];
+                char b = bStr[i];
+                if (a == b) {
+                    col += a;
+                }else {
+                    break;
+                }
+            }
+
+            return col;
+        }
+
         public static readonly char[] Numbers = new char[]
         {
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'

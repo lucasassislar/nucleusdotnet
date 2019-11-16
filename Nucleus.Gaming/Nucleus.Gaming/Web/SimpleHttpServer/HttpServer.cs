@@ -35,22 +35,50 @@ namespace Nucleus.Gaming.Web {
             serverThread.Start();
         }
 
+        /// <summary>
+        /// Disable try-catch
+        /// </summary>
+        public bool Debug { get; set; }
+
+        /// <summary>
+        /// Lock concurrent threads
+        /// </summary>
+        public bool DebugLock { get; set; }
+
+        private object DebugLocker = new object();
+
         private void ServerThread(object state) {
             while (this.IsActive) {
-                try {
+                if (Debug) {
                     TcpClient s = this.Listener.AcceptTcpClient();
                     Thread thread = new Thread(() => {
-                        try {
+                        if (DebugLock) {
+                            lock (DebugLocker) {
+                                this.Processor.HandleClient(s);
+                            }
+                        } else {
                             this.Processor.HandleClient(s);
-                        } catch { }
+                        }
                     });
                     thread.Start();
                     Thread.Sleep(1);
-                } catch (Exception ex) {
-                    var startColor = Console.ForegroundColor;
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Exception " + ex);
-                    Console.ForegroundColor = startColor;
+
+                } else {
+                    try {
+                        TcpClient s = this.Listener.AcceptTcpClient();
+                        Thread thread = new Thread(() => {
+                            try {
+                                this.Processor.HandleClient(s);
+                            } catch { }
+                        });
+                        thread.Start();
+                        Thread.Sleep(1);
+                    } catch (Exception ex) {
+                        var startColor = Console.ForegroundColor;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Exception " + ex);
+                        Console.ForegroundColor = startColor;
+                    }
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿// Copyright (C) 2016 by David Jeske, Barend Erasmus and donated to the public domain
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -24,6 +25,12 @@ namespace Nucleus.Gaming.Web {
             mimeTypes = new Dictionary<string, string>();
             mimeTypes.Add(".jpg", "image/jpeg");
             mimeTypes.Add(".html", "text/html");
+            mimeTypes.Add(".js", "application/javascript");
+            mimeTypes.Add(".json", "application/json");
+            mimeTypes.Add(".css", "text/css");
+            mimeTypes.Add(".png", "image/png");
+            mimeTypes.Add(".unityweb", "application/octet-stream");
+            mimeTypes.Add(".ico", "image/x-icon");
         }
 
         public void HandleClient(TcpClient tcpClient) {
@@ -50,7 +57,6 @@ namespace Nucleus.Gaming.Web {
 
             inputStream.Close();
             inputStream = null;
-
         }
 
         public void AddRoute(Route route) {
@@ -70,32 +76,50 @@ namespace Nucleus.Gaming.Web {
 
             Dictionary<string, string> headers = new Dictionary<string, string>();
             if (request.Headers.ContainsKey("Origin")) {
-                headers.Add("Access-Control-Allow-Origin", request.Headers["Origin"]);
+                //headers.Add("Access-Control-Allow-Origin", request.Headers["Origin"]);
             }
-            headers.Add("Access-Control-Allow-Headers", "authorization, X-PINGOTHER, Content-Type");
-            headers.Add("Access-Control-Max-Age", "86400");
-            headers.Add("Keep-Alive", "timeout=2, max=100");
-            headers.Add("Connection", "Keep-Alive");
 
-            headers.Add("X-DNS-Prefetch-Control", "off");
-            headers.Add("X-Frame-Options", "SAMEORIGIN");
-            headers.Add("Strict-Transport-Security", "max-age=15552000; includeSubDomains");
-            headers.Add("X-Download-Options", "noopen");
-            headers.Add("X-Content-Type-Options", "nosniff");
-            headers.Add("X-XSS-Protection", "1; mode=block");
-            headers.Add("Date", DateTime.Now.ToLongDateString());
+            headers.Add("Connection", "keep-alive");
+            headers.Add("Date", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+            headers.Add("Server", "distrolucas");
+
+            //headers.Add("Access-Control-Allow-Headers", "authorization, X-PINGOTHER, Content-Type");
+            //headers.Add("Access-Control-Max-Age", "86400");
+            //headers.Add("Keep-Alive", "timeout=2, max=100");
+            //headers.Add("X-DNS-Prefetch-Control", "off");
+            //headers.Add("X-Frame-Options", "SAMEORIGIN");
+            //headers.Add("Strict-Transport-Security", "max-age=15552000; includeSubDomains");
+            //headers.Add("X-Download-Options", "noopen");
+            //headers.Add("X-Content-Type-Options", "nosniff");
+            //headers.Add("X-XSS-Protection", "1; mode=block");
 
             if (!routes.Any()) {
                 // check if it's a file
-
                 string pathToFile;
-                if (request.Url.Length == 1) {
+                string host = request.Headers["Host"];
+                string url = request.Url;
+
+                if (url.Length == 1) {
                     pathToFile = Path.Combine(basePath, indexPath);
                 } else {
-                    string actualPath = request.Url.Remove(0, 1);
+                    string actualPath = url.Remove(0, 1);
                     if (actualPath.ToLower().Equals(indexPath.ToLower())) {
                         // index page
-                        headers.Add("Location", "http://localhost:9000/");
+                        headers.Add("Location", $"http://{host}");
+                        return new HttpResponse() {
+                            ReasonPhrase = "OK",
+                            StatusCode = "301",
+                            ContentAsUTF8 = "",
+                            Headers = headers
+                        };
+                    }
+                    pathToFile = Path.Combine(basePath, actualPath);
+                }
+
+                if (Directory.Exists(pathToFile)) {
+                    if (!url.EndsWith("/")) {
+                        headers.Add("Location", $"http://{host}/{request.Url.Remove(0, 1)}/");
+
                         return new HttpResponse() {
                             ReasonPhrase = "OK",
                             StatusCode = "301",
@@ -104,20 +128,37 @@ namespace Nucleus.Gaming.Web {
                         };
                     }
 
-                    pathToFile = Path.Combine(basePath, actualPath);
+                    // user input a folder, check if there's an index file
+                    string pathToIndex = Path.Combine(pathToFile, indexPath);
+                    //headers.Add("Location", $"http://{host}/{request.Url.Remove(0, 1)}/index.html");
+                    pathToFile = pathToIndex;
                 }
 
                 if (File.Exists(pathToFile)) {
-                    string content = File.ReadAllText(pathToFile);
-                    return new HttpResponse() {
+                    string mime = Path.GetExtension(pathToFile).ToLower();
+                    if (mimeTypes.ContainsKey(mime)) {
+                        headers.Add("Content-Type", mimeTypes[mime]);
+                    } else {
+                        ConsoleU.WriteLine($"UNKNOWN MIME: {mime}", ConsoleColor.Red);
+                    }
+
+                    HttpResponse response = new HttpResponse() {
                         ReasonPhrase = "OK",
                         StatusCode = "200",
-                        ContentAsUTF8 = content,
-                        Headers = headers
+                        Headers = headers,
                     };
+                    response.Content = File.ReadAllBytes(pathToFile);
+
+                    return response;
                 }
 
-                return HttpBuilder.NotFound(request.Url, headers);
+                return new HttpResponse() {
+                    ReasonPhrase = "NOT FOUND",
+                    StatusCode = "404",
+                    ContentAsUTF8 = ""
+                };
+                //
+                //return HttpBuilder.NotFound(request.Url, headers);
             }
 
             //X-DNS-Prefetch-Control →off
@@ -132,7 +173,6 @@ namespace Nucleus.Gaming.Web {
             //Content-Length →0
 
             if (request.Method == "OPTIONS") {
-
                 string allRoutes = "";
                 for (int i = 0; i < routes.Count; i++) {
                     string r = routes[i].Method;
@@ -141,7 +181,6 @@ namespace Nucleus.Gaming.Web {
                         allRoutes += ", ";
                     }
                 }
-
                 headers.Add("Access-Control-Allow-Methods", allRoutes);
 
                 return new HttpResponse() {
@@ -202,7 +241,9 @@ namespace Nucleus.Gaming.Web {
                 response.Headers["Content-Type"] = "text/html";
             }
 
-            response.Headers["Content-Length"] = response.Content.Length.ToString();
+            if (response.StatusCode == "200") {
+                response.Headers["Content-Length"] = response.Content.Length.ToString();
+            }
 
             Write(stream, string.Format("HTTP/1.0 {0} {1}\r\n", response.StatusCode, response.ReasonPhrase));
             Write(stream, string.Join("\r\n", response.Headers.Select(x => string.Format("{0}: {1}", x.Key, x.Value))));
