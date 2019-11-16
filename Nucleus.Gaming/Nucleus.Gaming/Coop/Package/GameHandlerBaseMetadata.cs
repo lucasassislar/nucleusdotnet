@@ -1,16 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nucleus.Gaming.Package
-{
+﻿namespace Nucleus.Gaming.Package {
     /// <summary>
     /// Info about a package
     /// </summary>
-    public class GameHandlerBaseMetadata
-    {
+    public class GameHandlerBaseMetadata {
         /// <summary>
         /// ID must be unique to the handler
         /// </summary>
@@ -56,8 +48,7 @@ namespace Nucleus.Gaming.Package
         /// </summary>
         public int PlatV { get; set; }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return string.Format("{0}, v{1} by {2} for Nuke v{3}", Title, V, Dev, PlatV);
         }
     }

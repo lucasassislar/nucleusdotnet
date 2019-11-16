@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Nucleus.Gaming.Windows.Interop
-{
+namespace Nucleus.Gaming.Windows.Interop {
     [Flags]
-    public enum ShgFi : int
-    {
+    public enum ShgFi : int {
         /// <summary>get icon</summary>
         Icon = 0x000000100,
         /// <summary>get display name</summary>
@@ -44,5 +39,5 @@ namespace Nucleus.Gaming.Windows.Interop
         AddOverlays = 0x000000020,
         /// <summary>Get the index of the overlay in the upper 8 bits of the iIcon</summary>
         OverlayIndex = 0x000000040,
-    }   
+    }
 }

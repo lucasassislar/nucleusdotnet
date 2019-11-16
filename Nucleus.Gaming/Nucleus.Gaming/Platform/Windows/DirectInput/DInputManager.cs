@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 
-namespace Nucleus.Gaming.Platform.Windows.DirectInput
-{
-    public static class DInputManager
-    {
+namespace Nucleus.Gaming.Platform.Windows.DirectInput {
+    public static class DInputManager {
         private static DInputLibrary[] libraries = new DInputLibrary[]
             {
                 new DInputLibrary()
@@ -35,8 +31,7 @@ namespace Nucleus.Gaming.Platform.Windows.DirectInput
             };
 
 
-        public class DInputLibrary
-        {
+        public class DInputLibrary {
             public string Hash;
             public long Hash1;
             public long Hash2;
@@ -46,22 +41,17 @@ namespace Nucleus.Gaming.Platform.Windows.DirectInput
         private static DInputLibrary library;
         public static DInputLibrary Library { get { return library; } }
 
-        static DInputManager()
-        {
+        static DInputManager() {
             bool is64OS = Environment.Is64BitOperatingSystem;
             string path;
-            if (is64OS)
-            {
+            if (is64OS) {
                 path = @"C:\Windows\SysWow64\dinput.dll";
-            }
-            else
-            {
+            } else {
                 // no freaking idea where it really is on x86 OSes
                 path = @"C:\Windows\System32\dinput.dll";
             }
 
-            if (!File.Exists(path))
-            {
+            if (!File.Exists(path)) {
                 throw new NotSupportedException();
             }
 
@@ -72,12 +62,9 @@ namespace Nucleus.Gaming.Platform.Windows.DirectInput
             string hashStr = BitConverter.ToString(hash).Replace("-", "");
 
             DInputLibrary def = libraries.FirstOrDefault(c => c.Hash == hashStr);
-            if (def != null)
-            {
+            if (def != null) {
                 library = def;
-            }
-            else
-            {
+            } else {
                 library = libraries.First();
             }
         }

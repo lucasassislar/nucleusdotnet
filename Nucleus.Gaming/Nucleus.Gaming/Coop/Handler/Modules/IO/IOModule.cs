@@ -1,12 +1,9 @@
 ﻿using Nucleus.Gaming.Coop.Handler;
-using Nucleus.Gaming.Platform.Windows.IO;
 using Nucleus.Gaming.Tools.GameStarter;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Nucleus.Gaming.Coop.Modules {
     public class IOModule : HandlerModule {
@@ -49,7 +46,7 @@ namespace Nucleus.Gaming.Coop.Modules {
             : base(player) {
         }
 
-        public override void PrePlayPlayer( int index, HandlerContext context) {
+        public override void PrePlayPlayer(int index, HandlerContext context) {
             NucleusRootFolder = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
             TempDir = GameManager.GetTempFolder(handlerData);

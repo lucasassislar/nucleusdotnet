@@ -1,20 +1,11 @@
 ﻿using Nucleus.Gaming.Coop;
 using Nucleus.Gaming.Windows;
 using Nucleus.Gaming.Windows.Interop;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace Nucleus.Gaming
-{
-    public static class ScreensUtil
-    {
-        public static UserScreen[] GetSetup_Triple4kHorizontal()
-        {
+namespace Nucleus.Gaming {
+    public static class ScreensUtil {
+        public static UserScreen[] GetSetup_Triple4kHorizontal() {
             return new UserScreen[]
             {
                 new UserScreen(new Rectangle(0, 0, 3840, 2160)),
@@ -23,8 +14,7 @@ namespace Nucleus.Gaming
             };
         }
 
-        public static UserScreen[] GetSetup_Triple4kVertical()
-        {
+        public static UserScreen[] GetSetup_Triple4kVertical() {
             return new UserScreen[]
             {
                 new UserScreen(new Rectangle(0, 0, 2160, 3840)),
@@ -33,8 +23,7 @@ namespace Nucleus.Gaming
             };
         }
 
-        public static UserScreen[] GetSetup_Four1080pHorizontal()
-        {
+        public static UserScreen[] GetSetup_Four1080pHorizontal() {
             return new UserScreen[]
             {
                 new UserScreen(new Rectangle(-1920, 0, 1920, 1080)),
@@ -44,27 +33,23 @@ namespace Nucleus.Gaming
             };
         }
 
-        public static UserScreen[] AllScreens()
-        {
+        public static UserScreen[] AllScreens() {
             Display[] all = User32Util.GetDisplays();
             UserScreen[] rects = new UserScreen[all.Length];
 
-            for (int i = 0; i < rects.Length; i++)
-            {
+            for (int i = 0; i < rects.Length; i++) {
                 rects[i] = new UserScreen(all[i].Bounds);
             }
 
             return rects;
         }
 
-        public static Rectangle[] AllScreensRec()
-        {
+        public static Rectangle[] AllScreensRec() {
             //return GetSetup_Triple4kHorizontal();
             Display[] all = User32Util.GetDisplays();
             Rectangle[] rects = new Rectangle[all.Length];
 
-            for (int i = 0; i < all.Length; i++)
-            {
+            for (int i = 0; i < all.Length; i++) {
                 rects[i] = all[i].Bounds;
             }
 

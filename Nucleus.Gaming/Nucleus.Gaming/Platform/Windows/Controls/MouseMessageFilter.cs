@@ -1,29 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Win32;
 
-namespace Nucleus.Gaming.Platform.Windows.Controls
-{
-    public class MouseMessageFilter : IMessageFilter, IDisposable
-    {
-        public MouseMessageFilter()
-        {
+namespace Nucleus.Gaming.Platform.Windows.Controls {
+    public class MouseMessageFilter : IMessageFilter, IDisposable {
+        public MouseMessageFilter() {
         }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             StopFiltering();
         }
 
-        public bool PreFilterMessage(ref Message m)
-        {
+        public bool PreFilterMessage(ref Message m) {
             // Call the appropriate event
-            if (m.Msg == (int)Messages.WM_MOUSEMOVE)
-            {
+            if (m.Msg == (int)Messages.WM_MOUSEMOVE) {
                 IntPtr xy = m.LParam;
                 int x = unchecked((short)(long)xy);
                 int y = unchecked((short)((long)xy >> 16));
@@ -59,14 +49,12 @@ namespace Nucleus.Gaming.Platform.Windows.Controls
         public event CustomMouseEventHandler MouseDown;
         public event CustomMouseEventHandler MouseUp;
 
-        public void StartFiltering()
-        {
+        public void StartFiltering() {
             StopFiltering();
             Application.AddMessageFilter(this);
         }
 
-        public void StopFiltering()
-        {
+        public void StopFiltering() {
             Application.RemoveMessageFilter(this);
         }
     }

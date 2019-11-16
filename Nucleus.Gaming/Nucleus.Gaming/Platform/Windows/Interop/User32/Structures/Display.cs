@@ -1,30 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
-namespace Nucleus.Gaming.Windows.Interop
-{
+namespace Nucleus.Gaming.Windows.Interop {
     /// <summary>
     /// 
     /// </summary>
-    public class Display
-    {
-        public Rectangle Bounds
-        {
+    public class Display {
+        public Rectangle Bounds {
             get { return bounds; }
         }
-        public string DeviceName
-        {
+        public string DeviceName {
             get { return deviceName; }
         }
-        public bool Primary
-        {
+        public bool Primary {
             get { return primary; }
         }
-        public IntPtr Handle
-        {
+        public IntPtr Handle {
             get { return ptr; }
         }
 
@@ -33,8 +24,7 @@ namespace Nucleus.Gaming.Windows.Interop
         private bool primary;
         private IntPtr ptr;
 
-        public Display(IntPtr pointer, Rectangle size, string device, bool isPrimary)
-        {
+        public Display(IntPtr pointer, Rectangle size, string device, bool isPrimary) {
             ptr = pointer;
             bounds = size;
             deviceName = device;

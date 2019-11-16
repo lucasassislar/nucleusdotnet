@@ -47,7 +47,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>GamingKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestDebug|AnyCPU'">
     <OutputPath>bin\TestDebug\</OutputPath>
@@ -86,6 +87,7 @@
     <Compile Include="Coop\Data\HandlerTools.cs" />
     <Compile Include="Coop\Data\Save\SaveInfo.cs" />
     <Compile Include="Coop\Data\UserProfileOptions.cs" />
+    <Compile Include="Web\Db\DbManager.cs" />
     <Compile Include="Web\RouteAttribute.cs" />
     <Compile Include="Web\RouteBuilder.cs" />
     <Compile Include="Web\RouteManagerAttribute.cs" />
@@ -292,7 +294,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="GamingKey.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

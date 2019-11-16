@@ -4,13 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 
-namespace Nucleus.Gaming
-{
-    public class ContentManager : IDisposable
-    {
+namespace Nucleus.Gaming {
+    public class ContentManager : IDisposable {
         private Dictionary<string, Image> loadedImages;
         private bool isDisposed;
         private HandlerData game;
@@ -21,8 +17,7 @@ namespace Nucleus.Gaming
 
         public string PackageFolder { get { return pkgFolder; } }
 
-        public ContentManager(GameHandlerMetadata info, HandlerData game)
-        {
+        public ContentManager(GameHandlerMetadata info, HandlerData game) {
             this.game = game;
             loadedImages = new Dictionary<string, Image>();
 
@@ -33,34 +28,28 @@ namespace Nucleus.Gaming
             DefaultImage = new Bitmap(1, 1);
         }
 
-        public void Dispose()
-        {
-            if (isDisposed)
-            {
+        public void Dispose() {
+            if (isDisposed) {
                 return;
             }
 
             isDisposed = true;
-            foreach (Image image in loadedImages.Values)
-            {
+            foreach (Image image in loadedImages.Values) {
                 image.Dispose();
             }
             loadedImages = null;
         }
 
-        public Image LoadImage(string url)
-        {
+        public Image LoadImage(string url) {
             // clear the url
             url = url.ToLower();
             Image img;
-            if (loadedImages.TryGetValue(url, out img))
-            {
+            if (loadedImages.TryGetValue(url, out img)) {
                 return img;
             }
 
             string fullPath = Path.Combine(pkgFolder, PackageManager.AssetsFolder, url);
-            if (!File.Exists(fullPath))
-            {
+            if (!File.Exists(fullPath)) {
                 return DefaultImage;
             }
 

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections;
 
-namespace Nucleus.Gaming.Coop
-{
+namespace Nucleus.Gaming.Coop {
     /// <summary>
     /// A custom game option that can be modified by the user
     /// </summary>
-    public class GameOption
-    {
+    public class GameOption {
         private string name;
         private string description;
         private object value;
@@ -18,8 +12,7 @@ namespace Nucleus.Gaming.Coop
         private IList dataSet; // should we create a new GameOption for Collection options?
         private object defaultValue;
 
-        public IList DataSet
-        {
+        public IList DataSet {
             get { return dataSet; }
             set { dataSet = value; }
         }
@@ -27,8 +20,7 @@ namespace Nucleus.Gaming.Coop
         /// <summary>
         /// The value to default to when no value was set by the user
         /// </summary>
-        public object DefaultValue
-        {
+        public object DefaultValue {
             get { return defaultValue; }
             set { defaultValue = value; }
         }
@@ -36,8 +28,7 @@ namespace Nucleus.Gaming.Coop
         /// <summary>
         /// The name of the option
         /// </summary>
-        public string Name
-        {
+        public string Name {
             get { return name; }
             set { name = value; }
         }
@@ -45,8 +36,7 @@ namespace Nucleus.Gaming.Coop
         /// <summary>
         /// The description of the option
         /// </summary>
-        public string Description
-        {
+        public string Description {
             get { return description; }
             set { description = value; }
         }
@@ -54,8 +44,7 @@ namespace Nucleus.Gaming.Coop
         /// <summary>
         /// The current value of option
         /// </summary>
-        public object Value
-        {
+        public object Value {
             get { return value; }
             set { this.value = value; }
         }
@@ -63,8 +52,7 @@ namespace Nucleus.Gaming.Coop
         /// <summary>
         /// The key to this variable
         /// </summary>
-        public string Key
-        {
+        public string Key {
             get { return key; }
             set { key = value; }
         }
@@ -74,8 +62,7 @@ namespace Nucleus.Gaming.Coop
         /// </summary>
         public bool Hidden { get; set; }
 
-        private GameOption()
-        {
+        private GameOption() {
 
         }
 
@@ -87,8 +74,7 @@ namespace Nucleus.Gaming.Coop
         /// <param name="key"></param>
         /// <param name="value"></param>
         public GameOption(string name, string desc, string key, object value)
-            : this(name, desc, key, value, null)
-        {
+            : this(name, desc, key, value, null) {
         }
 
         /// <summary>
@@ -99,46 +85,37 @@ namespace Nucleus.Gaming.Coop
         /// <param name="key">The key for accesing this game option</param>
         /// <param name="value">The value </param>
         /// <param name="defaultValue"></param>
-        public GameOption(string name, string desc, string key, object value, object defaultValue)
-        {
+        public GameOption(string name, string desc, string key, object value, object defaultValue) {
             this.name = name;
             this.description = desc;
             this.value = value;
             this.key = key;
 
-            if (value is IList)
-            {
+            if (value is IList) {
                 this.dataSet = (IList)value;
                 this.value = 0;
-            }
-            else
-            {
+            } else {
                 this.defaultValue = defaultValue;
             }
         }
 
-        public GameOption Instantiate()
-        {
+        public GameOption Instantiate() {
             return new GameOption(this.Name, this.Description, this.Key, this.Value);
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return string.Format("{0} : {1}", Key, Value);
         }
 
-        public bool IsCollection()
-        {
+        public bool IsCollection() {
             return dataSet != null;
         }
 
-        public IList GetCollection()
-        {
+        public IList GetCollection() {
             return dataSet;
         }
 
-        public T GetValue<T>()
-        {
+        public T GetValue<T>() {
             return (T)value;
         }
     }

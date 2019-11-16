@@ -1,8 +1,4 @@
 ﻿using Nucleus.Gaming.Coop.Handler;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Nucleus.Gaming.Coop {
     /// <summary>

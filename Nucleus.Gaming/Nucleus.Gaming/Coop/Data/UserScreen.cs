@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
-namespace Nucleus.Gaming.Coop
-{
+namespace Nucleus.Gaming.Coop {
     [AppDomainShared]
-    public class UserScreen
-    {
+    public class UserScreen {
         public Rectangle SwapTypeBounds { get; set; }
 
         public Rectangle UIBounds { get; set; }
@@ -18,22 +11,18 @@ namespace Nucleus.Gaming.Coop
 
         public Rectangle MonitorBounds { get; set; }
 
-        private UserScreen()
-        {
+        private UserScreen() {
 
         }
 
-        public UserScreen(Rectangle display)
-        {
+        public UserScreen(Rectangle display) {
             this.MonitorBounds = display;
 
             Type = UserScreenType.FullScreen;
         }
 
-        public int GetPlayerCount()
-        {
-            switch (Type)
-            {
+        public int GetPlayerCount() {
+            switch (Type) {
                 case UserScreenType.DualHorizontal:
                 case UserScreenType.DualVertical:
                     return 2;
@@ -46,23 +35,19 @@ namespace Nucleus.Gaming.Coop
             }
         }
 
-        public bool IsFullscreen()
-        {
+        public bool IsFullscreen() {
             return Type == UserScreenType.FullScreen;
         }
 
-        public bool IsDualHorizontal()
-        {
+        public bool IsDualHorizontal() {
             return Type == UserScreenType.DualHorizontal;
         }
 
-        public bool IsDualVertical()
-        {
+        public bool IsDualVertical() {
             return Type == UserScreenType.DualVertical;
         }
 
-        public bool IsFourPlayers()
-        {
+        public bool IsFourPlayers() {
             return Type == UserScreenType.FourPlayers;
         }
     }

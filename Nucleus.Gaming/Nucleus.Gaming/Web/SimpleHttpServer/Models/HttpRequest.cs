@@ -1,14 +1,10 @@
 ﻿// Copyright (C) 2016 by Barend Erasmus and donated to the public domain
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace SimpleHttpServer.Models
-{
-    public class HttpRequest
-    {
+namespace Nucleus.Gaming.Web {
+    public class HttpRequest {
         public string Method { get; set; }
         public string Url { get; set; }
         public string Path { get; set; } // either the Url, or the first regex group
@@ -16,13 +12,11 @@ namespace SimpleHttpServer.Models
         public Route Route { get; set; }
         public Dictionary<string, string> Headers { get; set; }
 
-        public HttpRequest()
-        {
+        public HttpRequest() {
             this.Headers = new Dictionary<string, string>();
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             if (!string.IsNullOrWhiteSpace(this.Content))
                 if (!this.Headers.ContainsKey("Content-Length"))
                     this.Headers.Add("Content-Length", this.Content.Length.ToString());

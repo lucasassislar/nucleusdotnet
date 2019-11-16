@@ -3,17 +3,13 @@ using Nucleus.Gaming.Coop.Handler;
 using Nucleus.Gaming.Coop.Modules;
 using Nucleus.Gaming.Tools.GameStarter;
 using Nucleus.Gaming.Windows;
-using Nucleus.Gaming.Windows.Interop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using WindowScrape.Constants;
 using WindowScrape.Types;
 
 namespace Nucleus.Gaming.Platform.Windows {

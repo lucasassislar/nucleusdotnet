@@ -1,22 +1,15 @@
 ﻿// Copyright (C) 2016 by David Jeske, Barend Erasmus and donated to the public domain
+// Further modified for Nucleus.Gaming
 
-using SimpleHttpServer;
-using SimpleHttpServer.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace SimpleHttpServer
-{
-
-    public class HttpServer
-    {
-        public int Port
-        {
+namespace Nucleus.Gaming.Web {
+    public class HttpServer {
+        public int Port {
             get; private set;
         }
 
@@ -25,19 +18,16 @@ namespace SimpleHttpServer
         private bool IsActive = true;
         private Thread serverThread;
 
-        public HttpServer(int port, List<Route> routes)
-        {
+        public HttpServer(int port, List<Route> routes, string path) {
             this.Port = port;
-            this.Processor = new HttpProcessor();
+            this.Processor = new HttpProcessor(path);
 
-            foreach (var route in routes)
-            {
+            foreach (var route in routes) {
                 this.Processor.AddRoute(route);
             }
         }
 
-        public void Listen()
-        {
+        public void Listen() {
             this.Listener = new TcpListener(IPAddress.Any, this.Port);
             this.Listener.Start();
 
@@ -45,26 +35,18 @@ namespace SimpleHttpServer
             serverThread.Start();
         }
 
-        private void ServerThread(object state)
-        {
-            while (this.IsActive)
-            {
-                try
-                {
+        private void ServerThread(object state) {
+            while (this.IsActive) {
+                try {
                     TcpClient s = this.Listener.AcceptTcpClient();
-                    Thread thread = new Thread(() =>
-                    {
-                        try
-                        {
+                    Thread thread = new Thread(() => {
+                        try {
                             this.Processor.HandleClient(s);
-                        }
-                        catch { }
+                        } catch { }
                     });
                     thread.Start();
                     Thread.Sleep(1);
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     var startColor = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Exception " + ex);

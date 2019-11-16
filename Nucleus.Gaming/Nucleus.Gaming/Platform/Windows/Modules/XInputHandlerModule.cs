@@ -2,14 +2,9 @@
 using Nucleus.Gaming.Coop.Handler;
 using Nucleus.Gaming.Coop.Modules;
 using Nucleus.Gaming.Platform.Windows.Interop;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
 namespace Nucleus.Gaming.Platform.Windows {
     /// <summary>

@@ -17,14 +17,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endregion
 
+using Nucleus.Gaming.Coop.Handler;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Nucleus.Gaming.Coop.Handler;
-using Nucleus.Gaming.Windows.Interop;
 
 namespace Nucleus.Gaming.Coop.Modules {
     /// <summary>

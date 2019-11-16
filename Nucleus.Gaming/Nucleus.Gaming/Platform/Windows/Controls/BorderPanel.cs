@@ -1,31 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
-namespace Nucleus.Gaming.Platform.Windows.Controls
-{
+namespace Nucleus.Gaming.Platform.Windows.Controls {
     /// <summary>
     /// Panel that uses custom images on the edge (untested in the latest version)
     /// </summary>
-    public partial class BorderPanel : Panel
-    {
+    public partial class BorderPanel : Panel {
         protected Bitmap edge;
         protected Bitmap eRight;
         protected Bitmap eBRight;
         protected Bitmap eLeft;
 
         protected Bitmap len;
-        public Bitmap EdgeImage
-        {
+        public Bitmap EdgeImage {
             get { return edge; }
-            set
-            {
+            set {
                 edge = value;
 
                 eRight = (Bitmap)edge.Clone();
@@ -41,17 +32,14 @@ namespace Nucleus.Gaming.Platform.Windows.Controls
             }
         }
 
-        public Color BackgroundColor
-        {
+        public Color BackgroundColor {
             get;
             set;
         }
 
-        public Bitmap BorderImage
-        {
+        public Bitmap BorderImage {
             get { return len; }
-            set
-            {
+            set {
                 len = value;
 
                 right = (Bitmap)len.Clone();
@@ -71,26 +59,22 @@ namespace Nucleus.Gaming.Platform.Windows.Controls
         private Bitmap left;
         private Bitmap bottom;
 
-        public BorderPanel()
-        {
+        public BorderPanel() {
             BackgroundColor = Color.FromArgb(25, 25, 25);
             InitializeComponent();
 
             this.Resize += BorderPanel_Resize;
         }
 
-        void BorderPanel_Resize(object sender, EventArgs e)
-        {
+        void BorderPanel_Resize(object sender, EventArgs e) {
             this.Invalidate();
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
+        protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            if (edge != null)
-            {
+            if (edge != null) {
                 g.SmoothingMode = SmoothingMode.None;
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 g.PixelOffsetMode = PixelOffsetMode.None;

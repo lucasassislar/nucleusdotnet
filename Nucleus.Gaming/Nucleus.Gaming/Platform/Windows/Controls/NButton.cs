@@ -1,36 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Nucleus.Gaming.Platform.Windows.Controls
-{
-    public class NButton : Button
-    {
+namespace Nucleus.Gaming.Platform.Windows.Controls {
+    public class NButton : Button {
         protected Color defaultForeColor = Color.Black;
         protected Color disabledForeColor = Color.Black;
-        public Color DefaultForeColor
-        {
+        public Color DefaultForeColor {
             get { return defaultForeColor; }
             set { defaultForeColor = value; }
         }
-        public Color DisabledForeColor
-        {
+        public Color DisabledForeColor {
             get { return disabledForeColor; }
             set { disabledForeColor = value; }
         }
 
-        protected override void OnPaint(PaintEventArgs pevent)
-        {
-            if (base.Enabled)
-            {
+        protected override void OnPaint(PaintEventArgs pevent) {
+            if (base.Enabled) {
                 base.OnPaint(pevent);
                 base.ForeColor = defaultForeColor;
-            }
-            else
-            {
+            } else {
                 base.OnPaint(pevent);
                 SizeF sf = pevent.Graphics.MeasureString(this.Text, this.Font, this.Width);
                 Point ThePoint = new Point();

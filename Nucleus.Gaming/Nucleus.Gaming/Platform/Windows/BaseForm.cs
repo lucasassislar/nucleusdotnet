@@ -1,15 +1,9 @@
 ﻿using Nucleus.Gaming;
 using Nucleus.Gaming.Coop;
-using Nucleus.Gaming.Platform.Windows;
 using Nucleus.Gaming.Platform.Windows.Controls;
 using Nucleus.Gaming.Windows;
-using Nucleus.Gaming.Windows.Interop;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Nucleus.Coop {

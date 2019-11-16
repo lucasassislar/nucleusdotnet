@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
-namespace Nucleus.Gaming.Platform.Windows.Controls
-{
-    public partial class HotkeyListener : Form
-    {
-        public HotkeyListener()
-        {
+namespace Nucleus.Gaming.Platform.Windows.Controls {
+    public partial class HotkeyListener : Form {
+        public HotkeyListener() {
             InitializeComponent();
         }
 
@@ -20,16 +11,13 @@ namespace Nucleus.Gaming.Platform.Windows.Controls
 
         public event Action HotKeyPressed;
 
-        protected override void WndProc(ref Message m)
-        {
-            if (m.Msg == 0x0312 && m.WParam.ToInt32() == MYACTION_HOTKEY_ID)
-            {
+        protected override void WndProc(ref Message m) {
+            if (m.Msg == 0x0312 && m.WParam.ToInt32() == MYACTION_HOTKEY_ID) {
                 // My hotkey has been typed
 
                 // Do what you want here
                 // ...
-                if (HotKeyPressed != null)
-                {
+                if (HotKeyPressed != null) {
                     HotKeyPressed();
                 }
             }

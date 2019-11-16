@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using Microsoft.Win32;
-using Nucleus.Gaming.Coop;
+﻿using Microsoft.Win32;
 using Nucleus.Gaming.Coop.Handler;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Nucleus.Gaming.Coop
-{
+namespace Nucleus.Gaming.Coop {
     /// <summary>
     /// All information the handler needs to handle a game
     /// </summary>
@@ -151,8 +147,7 @@ namespace Nucleus.Gaming.Coop
         /// <param name="required"></param>
         /// <param name="title"></param>
         /// <returns></returns>
-        public CustomStep ShowOptionAsStep(string optionKey, bool required, string title)
-        {
+        public CustomStep ShowOptionAsStep(string optionKey, bool required, string title) {
             GameOption option = Options.First(c => c.Key == optionKey);
             option.Hidden = true;
 
@@ -165,14 +160,10 @@ namespace Nucleus.Gaming.Coop
             return step;
         }
 
-        public void RegisterAdditional(string key, string value)
-        {
-            if (!AdditionalData.ContainsKey(key))
-            {
+        public void RegisterAdditional(string key, string value) {
+            if (!AdditionalData.ContainsKey(key)) {
                 AdditionalData.Add(key, value);
-            }
-            else
-            {
+            } else {
                 AdditionalData[key] = value;
             }
         }
@@ -181,23 +172,18 @@ namespace Nucleus.Gaming.Coop
         /// Clones this Game Info into a new Generic Context
         /// </summary>
         /// <returns></returns>
-        public virtual HandlerContext CreateContext(GameProfile profile, PlayerInfo info, bool hasKeyboardPlayer)
-        {
+        public virtual HandlerContext CreateContext(GameProfile profile, PlayerInfo info, bool hasKeyboardPlayer) {
             HandlerContext context = new HandlerContext(profile, info, hasKeyboardPlayer);
             ObjectUtil.DeepCopy(this, context);
 
             return context;
         }
 
-        public string GetSteamLanguage()
-        {
+        public string GetSteamLanguage() {
             string result;
-            if (Environment.Is64BitOperatingSystem)
-            {
+            if (Environment.Is64BitOperatingSystem) {
                 result = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", "Language", null);
-            }
-            else
-            {
+            } else {
                 result = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "Language", null);
             }
 
@@ -212,8 +198,7 @@ namespace Nucleus.Gaming.Coop
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="defaultValue"></param>
-        public void AddOption(string name, string description, string key, object value, object defaultValue)
-        {
+        public void AddOption(string name, string description, string key, object value, object defaultValue) {
             Options.Add(new GameOption(name, description, key, value, defaultValue));
         }
 
@@ -225,8 +210,7 @@ namespace Nucleus.Gaming.Coop
         /// <param name="desc"></param>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public void AddOption(string name, string description, string key, object value)
-        {
+        public void AddOption(string name, string description, string key, object value) {
             Options.Add(new GameOption(name, description, key, value));
         }
     }

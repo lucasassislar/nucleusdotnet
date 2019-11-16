@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
-using System.Diagnostics;
+﻿using Newtonsoft.Json;
 using SlimDX.DirectInput;
-using Nucleus.Gaming.Coop;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
-namespace Nucleus.Gaming.Coop
-{
+namespace Nucleus.Gaming.Coop {
     [AppDomainShared]
-    public class PlayerInfo
-    {
+    public class PlayerInfo {
         [JsonIgnore]
         public List<HandlerModule> Modules { get; private set; } = new List<HandlerModule>();
 
@@ -42,8 +36,7 @@ namespace Nucleus.Gaming.Coop
         /// <summary>
         /// The bounds of this player's game screen
         /// </summary>
-        public Rectangle MonitorBounds
-        {
+        public Rectangle MonitorBounds {
             get { return monitorBounds; }
             set { monitorBounds = value; }
         }
@@ -51,8 +44,7 @@ namespace Nucleus.Gaming.Coop
 
         // Runtime
 
-        public Rectangle SourceEditBounds
-        {
+        public Rectangle SourceEditBounds {
             get { return sourceEditBounds; }
             set { sourceEditBounds = value; }
         }
@@ -61,8 +53,7 @@ namespace Nucleus.Gaming.Coop
         /// A temporary rectangle to show the user
         /// where the game screen is going to be located
         /// </summary>
-        public Rectangle EditBounds
-        {
+        public Rectangle EditBounds {
             get { return editBounds; }
             set { editBounds = value; }
         }
@@ -70,8 +61,7 @@ namespace Nucleus.Gaming.Coop
         /// <summary>
         /// The index of this player
         /// </summary>
-        public int ScreenIndex
-        {
+        public int ScreenIndex {
             get { return screenIndex; }
             set { screenIndex = value; }
         }
@@ -79,8 +69,7 @@ namespace Nucleus.Gaming.Coop
         /// <summary>
         /// Information about the game's process, null if its not running
         /// </summary>
-        public ProcessInfo ProcessData
-        {
+        public ProcessInfo ProcessData {
             get { return processData; }
             set { processData = value; }
         }

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nucleus.Gaming.Coop
-{
+﻿namespace Nucleus.Gaming.Coop {
     /// <summary>
     /// Holds information about our custom x360ce/xinput hook dll
     /// </summary>
-    public class GameHookData
-    {
+    public class GameHookData {
         public bool ClipMouse { get; set; }
 
         /// <summary>

@@ -1,8 +1,5 @@
-﻿using Ionic.Zip;
-using Newtonsoft.Json;
+﻿using Nucleus.Gaming.Coop.Handler;
 using Nucleus.Gaming.Diagnostics;
-using Nucleus.Gaming.IO;
-using Nucleus.Gaming.Properties;
 using Nucleus.Gaming.Package;
 using System;
 using System.Collections.Generic;
@@ -10,8 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
-using Nucleus.Gaming.Coop.IO;
-using Nucleus.Gaming.Coop.Handler;
 
 namespace Nucleus.Gaming.Coop {
     /// <summary>
@@ -290,7 +285,7 @@ namespace Nucleus.Gaming.Coop {
             return Path.Combine(appData, gameId);
         }
 
-       
+
 
         private void LoadUser() {
             string userProfile = GetUserProfilePath();

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nucleus.Gaming.Windows
-{
+﻿namespace Nucleus.Gaming.Windows {
     /// <summary>
     /// Identifies the dots per inch (dpi) setting for a monitor.
     /// </summary>
-    public enum MonitorDpiType : uint
-    {
+    public enum MonitorDpiType : uint {
         /// <summary>
         /// The effective DPI. This value should be used when determining the correct scale factor for scaling UI elements. This incorporates the scale factor set by the user for this specific display.
         /// </summary>

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Nucleus.Gaming.Windows.Interop
-{
-    public static class User32_WS
-    {
+namespace Nucleus.Gaming.Windows.Interop {
+    public static class User32_WS {
         /*GWL_ID = (-12)
         GWL_STYLE = (-16)
         GWL_EXSTYLE = (-20)*/

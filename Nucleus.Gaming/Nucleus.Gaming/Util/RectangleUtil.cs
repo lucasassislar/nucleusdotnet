@@ -1,42 +1,29 @@
 ﻿using Nucleus.Gaming.Coop;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Nucleus.Gaming
-{
-    public static class RectangleUtil
-    {
-        public static Rectangle Float(float x, float y, float width, float height)
-        {
+namespace Nucleus.Gaming {
+    public static class RectangleUtil {
+        public static Rectangle Float(float x, float y, float width, float height) {
             return new Rectangle((int)x, (int)y, (int)width, (int)height);
         }
 
-        public static Rectangle Union(params UserScreen[] rects)
-        {
+        public static Rectangle Union(params UserScreen[] rects) {
             Rectangle r = new Rectangle();
-            for (int i = 0; i < rects.Length; i++)
-            {
+            for (int i = 0; i < rects.Length; i++) {
                 r = Rectangle.Union(r, rects[i].MonitorBounds);
             }
             return r;
         }
 
-        public static Rectangle Union(params Rectangle[] rects)
-        {
+        public static Rectangle Union(params Rectangle[] rects) {
             Rectangle r = new Rectangle();
-            for (int i = 0; i < rects.Length; i++)
-            {
+            for (int i = 0; i < rects.Length; i++) {
                 r = Rectangle.Union(r, rects[i]);
             }
             return r;
         }
 
-        public static Rectangle ScaleAndCenter(Size srcSize, Rectangle parent)
-        {
+        public static Rectangle ScaleAndCenter(Size srcSize, Rectangle parent) {
             float width = srcSize.Width;
             float height = srcSize.Height;
 
@@ -46,15 +33,12 @@ namespace Nucleus.Gaming
             float pratio = pwidth / pheight;
             float ratio = width / height;
 
-            if (pratio > ratio)
-            {
+            if (pratio > ratio) {
                 height = pheight;
                 width = pheight * ratio;
-            }
-            else
-            {
+            } else {
                 width = pwidth;
-                height = pwidth * ( 1 / ratio);
+                height = pwidth * (1 / ratio);
             }
 
             return new Rectangle(
@@ -64,8 +48,7 @@ namespace Nucleus.Gaming
                 (int)height);
         }
 
-        public static Rectangle Center(Rectangle rect, Rectangle parent)
-        {
+        public static Rectangle Center(Rectangle rect, Rectangle parent) {
             float rectWidth = rect.Width / 2.0f;
             float rectHeight = rect.Height / 2.0f;
 
@@ -79,8 +62,7 @@ namespace Nucleus.Gaming
                 rect.Height);
         }
 
-        public static PointF Center(SizeF rect, Rectangle parent)
-        {
+        public static PointF Center(SizeF rect, Rectangle parent) {
             float rectWidth = rect.Width / 2.0f;
             float rectHeight = rect.Height / 2.0f;
 
@@ -98,16 +80,12 @@ namespace Nucleus.Gaming
         /// <param name="first"></param>
         /// <param name="parent"></param>
         /// <returns></returns>
-        public static float PcInside(Rectangle first, Rectangle parent)
-        {
+        public static float PcInside(Rectangle first, Rectangle parent) {
             float pc = 0;
 
-            if (parent.Contains(first))
-            {
+            if (parent.Contains(first)) {
                 return 1;
-            }
-            else if (parent.IntersectsWith(first))
-            {
+            } else if (parent.IntersectsWith(first)) {
                 Rectangle intersection = Rectangle.Intersect(first, parent);
                 float peri = first.Width * first.Height;
                 float nperi = intersection.Width * intersection.Height;
@@ -124,8 +102,7 @@ namespace Nucleus.Gaming
         /// <param name="rect"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static Rectangle Scale(Rectangle rect, float value)
-        {
+        public static Rectangle Scale(Rectangle rect, float value) {
             return new Rectangle(
                 (int)(rect.X * value),
                 (int)(rect.Y * value),

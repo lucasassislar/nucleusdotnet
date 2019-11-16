@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -257,7 +256,7 @@ namespace Nucleus.Gaming.Interop {
             return null;
         }
 
-        public static List<Win32API.SYSTEM_HANDLE_INFORMATION> GetHandles(Process process, string IN_strObjectTypeName, 
+        public static List<Win32API.SYSTEM_HANDLE_INFORMATION> GetHandles(Process process, string IN_strObjectTypeName,
             string IN_strObjectName, string inclusiveName) {
             uint nStatus;
             int nHandleInfoSize = 0x10000;

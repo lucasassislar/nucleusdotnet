@@ -1,15 +1,9 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 
-namespace Nucleus.Gaming.Windows.Interop
-{
-    public static class Shell32Interop
-    {
+namespace Nucleus.Gaming.Windows.Interop {
+    public static class Shell32Interop {
         private static object getIconState = new object();
 
         [DllImport("shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -35,19 +29,14 @@ namespace Nucleus.Gaming.Windows.Interop
         /// <param name="strPath">full path to the file</param>
         /// <param name="bSmall">if true, the 16x16 icon is returned otherwise the 32x32</param>
         /// <returns></returns>
-        public static Icon GetIcon(string strPath, bool bSmall)
-        {
-            lock (getIconState)
-            {
+        public static Icon GetIcon(string strPath, bool bSmall) {
+            lock (getIconState) {
                 ShFileInfo info = new ShFileInfo(true);
                 int cbFileInfo = Marshal.SizeOf(info);
                 ShgFi flags;
-                if (bSmall)
-                {
+                if (bSmall) {
                     flags = ShgFi.Icon | ShgFi.SmallIcon | ShgFi.UseFileAttributes;
-                }
-                else
-                {
+                } else {
                     flags = ShgFi.Icon | ShgFi.LargeIcon | ShgFi.UseFileAttributes;
                 }
 

@@ -1,14 +1,11 @@
 ﻿using Ionic.Zip;
 using Newtonsoft.Json;
-using Nucleus.Gaming.Coop;
 using Nucleus.Gaming.Diagnostics;
 using Nucleus.Gaming.IO;
 using Nucleus.Gaming.Platform.Windows.Interop;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Xml;
 
 namespace Nucleus.Gaming.Coop {

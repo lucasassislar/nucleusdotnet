@@ -1,16 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Nucleus.Gaming.Package
-{
+namespace Nucleus.Gaming.Package {
     /// <summary>
     /// Metadata included in the package file
     /// </summary>
-    public class GameHandlerMetadata : GameHandlerBaseMetadata
-    {
+    public class GameHandlerMetadata : GameHandlerBaseMetadata {
         /// <summary>
         /// The context needed to find the executable of the game
         /// </summary>

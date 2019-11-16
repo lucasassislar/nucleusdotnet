@@ -1,44 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Nucleus.Gaming.Platform.Windows.Controls;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Nucleus.Gaming;
-using Nucleus.Gaming.Platform.Windows.Controls;
 
-namespace Nucleus.Gaming.Windows.Controls
-{
-    public class CoolListControl : UserControl, IRadioControl
-    {
+namespace Nucleus.Gaming.Windows.Controls {
+    public class CoolListControl : UserControl, IRadioControl {
         private Label titleLabel;
         protected Label descLabel;
 
         protected int defaultHeight = 72;
         protected int expandedHeight = 156;
 
-        public Font TitleFont
-        {
+        public Font TitleFont {
             get { return titleLabel.Font; }
             set { titleLabel.Font = value; }
         }
-        public Font DetailsFont
-        {
+        public Font DetailsFont {
             get { return descLabel.Font; }
             set { descLabel.Font = value; }
         }
 
-        public string Title
-        {
+        public string Title {
             get { return titleLabel.Text; }
             set { this.titleLabel.Text = value; }
         }
 
-        public string Details
-        {
+        public string Details {
             get { return descLabel.Text; }
             set { descLabel.Text = value; }
         }
@@ -52,8 +39,7 @@ namespace Nucleus.Gaming.Windows.Controls
         public Color ColorUnselected { get; set; } = Color.FromArgb(0, 0, 0, 0);//Color.FromArgb(47, 49, 54);
         public Color ColorMouseOver { get; set; } = Color.FromArgb(47, 49, 54);
 
-        public CoolListControl(bool enableHightlighting)
-        {
+        public CoolListControl(bool enableHightlighting) {
             EnableHighlighting = enableHightlighting;
             //this.BorderStyle = BorderStyle.FixedSingle;
 

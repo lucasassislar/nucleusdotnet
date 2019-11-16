@@ -1,10 +1,5 @@
-﻿using Nucleus.Gaming;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace Nucleus.Gaming.IO {
     /// <summary>
@@ -163,8 +158,8 @@ namespace Nucleus.Gaming.IO {
             int keyPos = 0;
             for (; ; ) {
                 keyPos = rawData.IndexOf(propName, keyPos + 1);
-                if (keyPos == -1 || 
-                    keyPos == 0 || 
+                if (keyPos == -1 ||
+                    keyPos == 0 ||
                     rawData[keyPos - 1] != '!') {
                     break;
                 }

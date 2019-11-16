@@ -1,22 +1,15 @@
 ﻿using Newtonsoft.Json;
 using Nucleus.Gaming.Package;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 
-namespace Nucleus.Gaming.Coop
-{
+namespace Nucleus.Gaming.Coop {
     /// <summary>
     /// Info for a game installed in the end-user machine
     /// </summary>
-    public class UserGameInfo
-    {
+    public class UserGameInfo {
         [JsonIgnore]
-        public Bitmap Icon
-        {
+        public Bitmap Icon {
             get;
             set;
         }
@@ -26,8 +19,7 @@ namespace Nucleus.Gaming.Coop
 
         public string ExePath { get; set; }
 
-        public UserGameInfo()
-        {
+        public UserGameInfo() {
 
         }
 
@@ -35,8 +27,7 @@ namespace Nucleus.Gaming.Coop
         /// If the game is still installed in the user machine
         /// </summary>
         /// <returns></returns>
-        public bool IsGamePresent()
-        {
+        public bool IsGamePresent() {
             return File.Exists(ExePath);
         }
 
@@ -46,8 +37,7 @@ namespace Nucleus.Gaming.Coop
         /// </summary>
         /// <param name="game">A reference to the </param>
         /// <param name="exePath"></param>
-        public void InitializeDefault(GameHandlerMetadata game, string exePath)
-        {
+        public void InitializeDefault(GameHandlerMetadata game, string exePath) {
             ExePath = exePath;
             //Profiles = new List<GameProfile>();
 

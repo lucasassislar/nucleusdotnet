@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Nucleus.Gaming.Platform.Windows.Controls
-{
-    public class ImageButton : UserControl
-    {
+namespace Nucleus.Gaming.Platform.Windows.Controls {
+    public class ImageButton : UserControl {
         public Image Image { get; set; }
 
         public Button Button { get; private set; }
 
-        public ImageButton()
-        {
+        public ImageButton() {
             Button = new Button();
             Button.FlatStyle = FlatStyle.Flat;
 
@@ -33,18 +26,15 @@ namespace Nucleus.Gaming.Platform.Windows.Controls
             this.Controls.Add(Button);
         }
 
-        private void Button_Click(object sender, EventArgs e)
-        {
+        private void Button_Click(object sender, EventArgs e) {
             this.OnClick(e);
         }
 
-        protected override void OnPaint(PaintEventArgs pevent)
-        {
+        protected override void OnPaint(PaintEventArgs pevent) {
             base.OnPaint(pevent);
 
             Graphics g = pevent.Graphics;
-            if (Image != null)
-            {
+            if (Image != null) {
                 int borderSize = Button.FlatAppearance.BorderSize * 2;
                 int borderSize2 = borderSize * 2;
                 g.DrawImage(Image, new Rectangle(borderSize, borderSize, this.Width - borderSize2, this.Height - borderSize2), new Rectangle(Point.Empty, Image.Size), GraphicsUnit.Pixel);

@@ -1,11 +1,7 @@
 ﻿using Nucleus.Gaming.Coop;
 using Nucleus.Gaming.Coop.Handler;
 using Nucleus.Gaming.Tools.GameStarter;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 
 namespace Nucleus.Gaming.Platform.Windows {
     public class MutexModule : HandlerModule {

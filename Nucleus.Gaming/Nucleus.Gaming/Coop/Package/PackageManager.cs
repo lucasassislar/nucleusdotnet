@@ -1,15 +1,10 @@
 ﻿using Ionic.Zip;
 using Newtonsoft.Json;
 using Nucleus.Gaming.Coop;
-using Nucleus.Gaming.Diagnostics;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace Nucleus.Gaming.Package {
     public class PackageManager {
