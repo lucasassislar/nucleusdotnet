@@ -1,4 +1,5 @@
-﻿namespace Nucleus.Gaming.Platform.Windows.Controls
+﻿#if WINDOWS
+namespace Nucleus.Gaming.Platform.Windows.Controls
 {
     partial class BorderPanel
     {
@@ -20,7 +21,7 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+#region Component Designer generated code
 
         /// <summary> 
         /// Required method for Designer support - do not modify 
@@ -31,6 +32,7 @@
             components = new System.ComponentModel.Container();
         }
 
-        #endregion
+#endregion
     }
 }
+#endif

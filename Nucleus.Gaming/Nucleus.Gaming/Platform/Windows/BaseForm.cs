@@ -1,4 +1,5 @@
-﻿using Nucleus.Gaming;
+﻿#if WINDOWS
+using Nucleus.Gaming;
 using Nucleus.Gaming.Coop;
 using Nucleus.Gaming.Platform.Windows.Controls;
 using Nucleus.Gaming.Windows;
@@ -335,3 +336,4 @@ namespace Nucleus.Coop {
         }
     }
 }
+#endif

@@ -62,22 +62,20 @@ namespace Nucleus.Gaming.Web {
                     });
                     thread.Start();
                     Thread.Sleep(1);
-
                 } else {
                     try {
                         TcpClient s = this.Listener.AcceptTcpClient();
                         Thread thread = new Thread(() => {
                             try {
                                 this.Processor.HandleClient(s);
-                            } catch { }
+                            } catch (Exception ex) {
+                                ConsoleU.WriteLine("Exception " + ex, ConsoleColor.Red);
+                            }
                         });
                         thread.Start();
                         Thread.Sleep(1);
                     } catch (Exception ex) {
-                        var startColor = Console.ForegroundColor;
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Exception " + ex);
-                        Console.ForegroundColor = startColor;
+                        ConsoleU.WriteLine("Exception " + ex, ConsoleColor.Red);
                     }
                 }
             }

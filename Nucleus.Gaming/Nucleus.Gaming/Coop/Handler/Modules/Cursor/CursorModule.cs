@@ -16,6 +16,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endregion
+#if WINFORMS
 
 using Nucleus.Gaming.Coop.Handler;
 using System;
@@ -240,3 +241,4 @@ namespace Nucleus.Gaming.Coop.Modules {
         }
     }
 }
+#endif

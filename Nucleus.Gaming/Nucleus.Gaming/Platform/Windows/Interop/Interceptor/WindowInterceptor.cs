@@ -1,3 +1,4 @@
+#if WINFORMS
 //********************************************************************************************
 //Author: Sergey Stoyan, CliverSoft Co.
 //        stoyan@cliversoft.com
@@ -94,3 +95,4 @@ namespace CliverSoft
         }
     }
 }
+#endif

@@ -1,8 +1,11 @@
-﻿using Nucleus.Gaming.Windows;
+﻿#if WINFORMS
+using Nucleus.Gaming.Windows;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+#if WINFORMS
 using System.Windows.Forms;
+#endif
 
 namespace Nucleus.Gaming {
     // this is not the right solution bruh
@@ -10,19 +13,23 @@ namespace Nucleus.Gaming {
         public static float Scale = 1f;
         private static List<IDynamicSized> components = new List<IDynamicSized>();
 
+#if WINFORMS
         public static Font Font;
+#endif
 
         public static void PreInitialize() {
             Scale = User32Util.GetDPIScalingFactor();
         }
 
         private static void UpdateFont() {
+#if WINFORMS
             if (Font != null) {
                 Font.Dispose();
             }
 
             int fontSize = (int)(12 * DPIManager.Scale);
             Font = new Font("Segoe UI", fontSize, GraphicsUnit.Point);
+#endif
         }
 
         public static void AddForm(Form form) {
@@ -82,3 +89,4 @@ namespace Nucleus.Gaming {
         }
     }
 }
+#endif

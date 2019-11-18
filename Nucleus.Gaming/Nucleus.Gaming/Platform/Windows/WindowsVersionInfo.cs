@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿#if WINDOWS
+
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -977,3 +979,4 @@ namespace Nucleus.Gaming.Windows {
         #endregion Registry Methods
     }
 }
+#endif

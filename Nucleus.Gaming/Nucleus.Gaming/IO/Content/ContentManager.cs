@@ -1,4 +1,5 @@
-﻿using Nucleus.Gaming.Coop;
+﻿#if WINFORMS
+using Nucleus.Gaming.Coop;
 using Nucleus.Gaming.Package;
 using System;
 using System.Collections.Generic;
@@ -59,3 +60,4 @@ namespace Nucleus.Gaming {
         }
     }
 }
+#endif

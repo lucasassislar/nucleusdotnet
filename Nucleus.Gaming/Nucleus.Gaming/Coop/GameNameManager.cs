@@ -12,19 +12,23 @@ namespace Nucleus.Gaming.Coop {
     /// This exists because Nucleus Coop does not know the name of the games, this data comes from game packages
     /// </summary>
     public class GameMetadataManager {
+#if WINFORMS
         private Dictionary<string, List<Action<Bitmap>>> callbacks;
-
-        public Dictionary<string, string> GameNames { get; private set; }
         public Dictionary<string, Bitmap> GameIcons { get; private set; }
+#endif
+        public Dictionary<string, string> GameNames { get; private set; }
 
         public GameMetadataManager() {
             GameNames = new Dictionary<string, string>();
+#if WINFORMS
             GameIcons = new Dictionary<string, Bitmap>();
             callbacks = new Dictionary<string, List<Action<Bitmap>>>();
+#endif
         }
 
         private void ThreadGetIcon(object state) {
             UserGameInfo game = (UserGameInfo)state;
+#if WINFORMS
             Icon icon = Shell32Interop.GetIcon(game.ExePath, false);
 
             Bitmap bmp = icon.ToBitmap();
@@ -42,8 +46,10 @@ namespace Nucleus.Gaming.Coop {
 
                 GameIcons.Add(game.GameID, bmp);
             }
+#endif
         }
 
+#if WINFORMS
         public void GetIcon(UserGameInfo game, Action<Bitmap> callback) {
             Bitmap icon;
             if (GameIcons.TryGetValue(game.GameID, out icon)) {
@@ -62,7 +68,8 @@ namespace Nucleus.Gaming.Coop {
                 }
 
             }
-        }
+    }
+#endif
 
         public bool UpdateNaming(GameHandlerMetadata info) {
             // TODO: better logic so repositories can agree on game name

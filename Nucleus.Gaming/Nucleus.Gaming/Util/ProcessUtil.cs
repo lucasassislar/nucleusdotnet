@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Management;
 using System.Runtime.InteropServices;
+#if WINDOWS
+using System.Management;
+#endif
 
 namespace Nucleus.Gaming {
     public static class ProcessUtil {
@@ -255,19 +257,20 @@ namespace Nucleus.Gaming {
         }
 
         public static List<int> GetChildrenProcesses(Process process) {
+            List<int> ids = new List<int>();
+
+#if WINDOWS
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(
                         "SELECT * " +
                         "FROM Win32_Process " +
                         "WHERE ParentProcessId=" + process.Id);
             ManagementObjectCollection collection = searcher.Get();
-
-            List<int> ids = new List<int>();
-            foreach (var item in collection) {
+             foreach (var item in collection) {
                 uint ui = (uint)item["ProcessId"];
 
                 ids.Add((int)ui);
             }
-
+#endif
             return ids;
         }
 

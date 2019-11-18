@@ -1,4 +1,5 @@
-﻿namespace Nucleus.Gaming.Platform.Windows.Controls {
+﻿#if WINDOWS
+namespace Nucleus.Gaming.Platform.Windows.Controls {
     public interface ICanProceed {
         bool CanProceed { get; }
         bool AutoProceed { get; }
@@ -8,3 +9,4 @@
         void Restart();
     }
 }
+#endif

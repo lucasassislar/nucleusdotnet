@@ -1,4 +1,5 @@
-﻿namespace Nucleus.Gaming.Platform.Windows.Controls {
+﻿#if WINDOWS
+namespace Nucleus.Gaming.Platform.Windows.Controls {
     public interface IRadioControl {
         void RadioSelected();
         void RadioUnselected();
@@ -15,3 +16,4 @@
         //void Darken();
     }
 }
+#endif

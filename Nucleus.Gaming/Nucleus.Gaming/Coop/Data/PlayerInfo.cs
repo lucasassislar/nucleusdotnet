@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
-using SlimDX.DirectInput;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+#if WINDOWS
+using SlimDX.DirectInput;
+#endif
 
 namespace Nucleus.Gaming.Coop {
     [AppDomainShared]
@@ -28,8 +30,10 @@ namespace Nucleus.Gaming.Coop {
         public string GamepadName;
         public int GamepadMask;
 
+#if WINDOWS
         [JsonIgnore]
         public Joystick DInputJoystick;
+#endif
 
         // Serialized
 

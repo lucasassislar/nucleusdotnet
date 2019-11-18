@@ -31,6 +31,7 @@ namespace Nucleus.Gaming.Coop.Interop {
             Evidence evidence = new Evidence();
             evidence.AddHostEvidence(new Zone(SecurityZone.Untrusted));
 
+#if WINDOWS
             PermissionSet permissionSet = new PermissionSet(PermissionState.None);
 
             permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery | FileIOPermissionAccess.Write, tempPath));
@@ -49,6 +50,9 @@ namespace Nucleus.Gaming.Coop.Interop {
             ObjectHandle jsobj = domain.CreateInstance("Nucleus.Gaming.Coop.Engine", "Nucleus.Gaming.Coop.Engine.AppDomainEngine");
             jsEngine = jsobj.Unwrap();
             // TODO: strong typing on dynamic object (cache the fields/use reflection)
+#else
+            throw new Exception("LINUX CURRENTLY UNSUPPORTED");
+#endif
         }
 
         public void Dispose() {

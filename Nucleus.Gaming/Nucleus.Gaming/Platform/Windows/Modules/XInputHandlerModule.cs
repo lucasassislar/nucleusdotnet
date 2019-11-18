@@ -40,6 +40,7 @@ namespace Nucleus.Gaming.Platform.Windows {
 
             IOModule ioModule = handler.GetModule<IOModule>(Player);
 
+#if WINDOWS
             byte[] xdata = Properties.Resources.xinput1_3;
             if (context.Hook.XInputNames == null) {
                 using (Stream str = File.OpenWrite(Path.Combine(ioModule.LinkedWorkingDir, "xinput1_3.dll"))) {
@@ -99,6 +100,7 @@ namespace Nucleus.Gaming.Platform.Windows {
             x360.IniWriteValue("Options", "DInputEnabled", context.Hook.DInputEnabled.ToString(CultureInfo.InvariantCulture));
             x360.IniWriteValue("Options", "DInputGuid", Player.GamepadGuid.ToString().ToUpper());
             x360.IniWriteValue("Options", "DInputForceDisable", context.Hook.DInputForceDisable.ToString());
+#endif
         }
 
         public static bool IsNeeded(HandlerData data) {

@@ -67,6 +67,7 @@ namespace Nucleus.Gaming.Coop {
         [JsonIgnore]
         public int Width {
             get {
+#if WINDOWS
                 switch (DPIHandling) {
                     case DPIHandling.Scaled:
                         return (int)((PlayerInfo.MonitorBounds.Width * DPIManager.Scale) + 0.5);
@@ -76,12 +77,16 @@ namespace Nucleus.Gaming.Coop {
                     default:
                         return PlayerInfo.MonitorBounds.Width;
                 }
+#else 
+                throw new Exception();
+#endif
             }
         }
 
         [JsonIgnore]
         public int Height {
             get {
+#if WINDOWS
                 switch (DPIHandling) {
                     case DPIHandling.Scaled:
                         return (int)((PlayerInfo.MonitorBounds.Height * DPIManager.Scale) + 0.5);
@@ -91,6 +96,9 @@ namespace Nucleus.Gaming.Coop {
                     default:
                         return PlayerInfo.MonitorBounds.Height;
                 }
+#else
+                throw new Exception();
+#endif
             }
         }
 

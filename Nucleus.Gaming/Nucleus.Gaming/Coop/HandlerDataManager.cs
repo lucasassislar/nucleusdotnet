@@ -13,7 +13,9 @@ namespace Nucleus.Gaming.Coop {
 
         public HandlerDataEngine Engine { get; private set; }
 
+#if WINFORMS
         public ContentManager Content { get; private set; }
+#endif
 
         public HandlerDataManager(GameHandlerMetadata metadata, string jsCode) {
             Initialize(metadata, jsCode);
@@ -33,8 +35,11 @@ namespace Nucleus.Gaming.Coop {
             string handlerStr = Engine.Initialize();
             HandlerData = JsonConvert.DeserializeObject<HandlerData>(handlerStr);
 
+#if WINFORMS
+
             // content manager is shared within the same game
             Content = new ContentManager(metadata, HandlerData);
+#endif
         }
 
         public void Dispose() {
@@ -45,15 +50,21 @@ namespace Nucleus.Gaming.Coop {
 
             Engine.Dispose();
 
+#if WINFORMS
+
             Content.Dispose();
+#endif
         }
 
         public void Play(HandlerContext context, PlayerInfo player) {
+#if WINFORMS
+
             // ugly solution
             context.PackageFolder = Content.PackageFolder;
             string contextData = Engine.Play(context, player);
 
             JsonConvert.PopulateObject(contextData, context);
+#endif
         }
     }
 }

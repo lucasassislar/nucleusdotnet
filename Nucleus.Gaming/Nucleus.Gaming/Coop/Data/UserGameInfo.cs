@@ -8,11 +8,13 @@ namespace Nucleus.Gaming.Coop {
     /// Info for a game installed in the end-user machine
     /// </summary>
     public class UserGameInfo {
+#if WINFORMS
         [JsonIgnore]
         public Bitmap Icon {
             get;
             set;
         }
+#endif
 
         public string GameID { get; set; }
         //public List<GameProfile> Profiles { get; set; }

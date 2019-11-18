@@ -34,9 +34,20 @@ namespace Nucleus.Gaming.Web {
         }
 
         public void HandleClient(TcpClient tcpClient) {
+            Console.WriteLine($"CLIENT {tcpClient.Client.RemoteEndPoint}");
+
             Stream inputStream = GetInputStream(tcpClient);
             Stream outputStream = GetOutputStream(tcpClient);
-            HttpRequest request = GetRequest(inputStream, outputStream);
+
+            HttpRequest request = null;
+            try {
+                request = GetRequest(inputStream, outputStream);
+            } catch (Exception ex) {
+                Console.WriteLine("Exception " + ex);
+                return;
+            }
+
+            Console.WriteLine("Streams on");
 
             // route and handle the request...
             HttpResponse response = RouteRequest(inputStream, outputStream, request);
@@ -57,6 +68,8 @@ namespace Nucleus.Gaming.Web {
 
             inputStream.Close();
             inputStream = null;
+
+            Console.WriteLine($"CLIENT END {tcpClient.Client.RemoteEndPoint}");
         }
 
         public void AddRoute(Route route) {

@@ -22,6 +22,7 @@ namespace Nucleus.Gaming.Coop.Interop
 
         public DomainWebApiConnection()
         {
+#if WINDOWS
             Evidence evidence = new Evidence();
             evidence.AddHostEvidence(new Zone(SecurityZone.Untrusted));
 
@@ -37,6 +38,7 @@ namespace Nucleus.Gaming.Coop.Interop
 
             ObjectHandle apiObj = domain.CreateInstance("Nucleus.Gaming.Coop.Api", "Nucleus.Gaming.Coop.Api.ApiConnection");
             apiConnection = apiObj.Unwrap();
+#endif
         }
 
         private RequestResult<T> ParseRequest<T>(RequestResult<String> request)

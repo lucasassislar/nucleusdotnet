@@ -1,4 +1,5 @@
-﻿namespace Nucleus.Gaming.Platform.Windows.Controls
+﻿#if WINDOWS
+namespace Nucleus.Gaming.Platform.Windows.Controls
 {
     partial class HotkeyListener
     {
@@ -20,7 +21,7 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+#region Windows Form Designer generated code
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -33,6 +34,7 @@
             this.Text = "HotkeyListener";
         }
 
-        #endregion
+#endregion
     }
 }
+#endif

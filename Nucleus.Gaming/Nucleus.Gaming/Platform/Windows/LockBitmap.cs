@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if WINFORMS
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -148,3 +149,4 @@ namespace Nucleus.Gaming.Platform.Windows {
         }
     }
 }
+#endif

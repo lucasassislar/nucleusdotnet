@@ -114,6 +114,8 @@ namespace Nucleus.Gaming {
             return d[n, m];
         }
 
+#if WINFORMS
+
         /// <summary>
         /// This method can be made better
         /// </summary>
@@ -165,5 +167,6 @@ namespace Nucleus.Gaming {
 
             return result;
         }
+#endif
     }
 }
