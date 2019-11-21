@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nucleus.Gaming.Threading {
     public class ThreadTask {
@@ -40,6 +37,20 @@ namespace Nucleus.Gaming.Threading {
 
             StartTime = Stopwatch.GetTimestamp();
             Name = name;
+        }
+
+        public bool CanExecute {
+            get {
+                if (Enabled) {
+                    for (int i = 0; i < DependsOn.Length; i++) {
+                        if (!DependsOn[i].Finished) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
         }
 
         public override string ToString() {

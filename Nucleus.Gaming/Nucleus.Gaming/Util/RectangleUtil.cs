@@ -1,19 +1,13 @@
-﻿using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nucleus.Gaming.Coop;
+﻿using Nucleus.Gaming.Coop;
+using System.Drawing;
 
-namespace Nucleus.Gaming
-{
-    public static class RectangleUtil
-    {
+namespace Nucleus.Gaming {
+    public static class RectangleUtil {
         public static float CalculateHeight(float oWidth, float oHeight, float nWidth) {
-            return (oWidth / oHeight) * nWidth; 
+            return (oWidth / oHeight) * nWidth;
         }
 
-        public static Rectangle Float(float x, float y, float width, float height)
-        {
+        public static Rectangle Float(float x, float y, float width, float height) {
             return new Rectangle((int)x, (int)y, (int)width, (int)height);
         }
 

@@ -68,7 +68,7 @@ namespace Nucleus.Gaming.Coop {
                 }
 
             }
-    }
+        }
 #endif
 
         public bool UpdateNaming(GameHandlerMetadata info) {

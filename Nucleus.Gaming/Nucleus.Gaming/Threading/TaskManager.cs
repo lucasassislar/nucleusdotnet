@@ -2,10 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Nucleus.Gaming.Threading {
     public class TaskManager {
@@ -75,30 +72,14 @@ namespace Nucleus.Gaming.Threading {
             }
         }
 
-        private ThreadTask GrabTask(int threadId) {
-            long currentTime = Stopwatch.GetTimestamp();
-
+        private ThreadTask GrabTask(long currentTime) {
             lock (queuedTasks) {
                 queuedTasks.Sort(Compare);
                 foreach (ThreadTask task in queuedTasks) {
                     if (!task.Enabled ||
-                        currentTime < task.OffssetTime) {
+                        currentTime < task.OffssetTime ||
+                        !task.CanExecute) {
                         continue;
-                    }
-
-                    if (task.DependsOn != null &&
-                        task.DependsOn.Length > 0) {
-                        bool ignore = false;
-                        for (int i = 0; i < task.DependsOn.Length; i++) {
-                            if (!task.DependsOn[i].Finished) {
-                                ignore = true;
-                                break;
-                            }
-                        }
-
-                        if (ignore) {
-                            continue;
-                        }
                     }
 
                     queuedTasks.Remove(task);
@@ -111,6 +92,7 @@ namespace Nucleus.Gaming.Threading {
 
         private void ReturnTask(ThreadTask task) {
             task.AssignThread(-1);
+            task.SetProgress(0);
 
             lock (queuedTasks) {
                 //queuedTasks.Insert(0, task);
@@ -127,7 +109,7 @@ namespace Nucleus.Gaming.Threading {
 
             for (; ; ) {
                 long startTime = Stopwatch.GetTimestamp();
-                ThreadTask task = GrabTask(tData.ThreadID);
+                ThreadTask task = GrabTask(startTime);
 
                 if (task != null) {
                     tData.CurrentTask = task;
