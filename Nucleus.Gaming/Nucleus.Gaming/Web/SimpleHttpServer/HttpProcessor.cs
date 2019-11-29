@@ -111,6 +111,12 @@ namespace Nucleus.Gaming.Web {
                 string pathToFile;
                 string host = request.Headers["Host"];
                 string url = request.Url;
+                int paramsIndex = url.IndexOf('?');
+                string urlParams = "";
+                if (paramsIndex != -1) {
+                    urlParams = url.Remove(0, paramsIndex);
+                    url = url.Remove(paramsIndex, url.Length - paramsIndex);
+                }
 
                 if (url.Length == 1) {
                     pathToFile = Path.Combine(basePath, indexPath);
@@ -147,6 +153,10 @@ namespace Nucleus.Gaming.Web {
                     pathToFile = pathToIndex;
                 }
 
+                if (!File.Exists(pathToFile)) {
+                    pathToFile = pathToFile + ".html";
+                }
+
                 if (File.Exists(pathToFile)) {
                     string mime = Path.GetExtension(pathToFile).ToLower();
                     if (mimeTypes.ContainsKey(mime)) {
@@ -170,7 +180,6 @@ namespace Nucleus.Gaming.Web {
                     StatusCode = "404",
                     ContentAsUTF8 = ""
                 };
-                //
                 //return HttpBuilder.NotFound(request.Url, headers);
             }
 
