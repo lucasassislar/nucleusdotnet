@@ -17,7 +17,7 @@ namespace Nucleus.Gaming {
                 char b = bStr[i];
                 if (a == b) {
                     col += a;
-                }else {
+                } else {
                     break;
                 }
             }

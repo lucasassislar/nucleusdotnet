@@ -60,7 +60,7 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
                 titleLabel.Text = value;
             }
         }
-       
+
         public TitleBarControl() {
             this.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right;
             this.Size = new Size(1000, 21);

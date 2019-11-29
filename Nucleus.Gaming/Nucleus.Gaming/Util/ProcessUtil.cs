@@ -265,7 +265,7 @@ namespace Nucleus.Gaming {
                         "FROM Win32_Process " +
                         "WHERE ParentProcessId=" + process.Id);
             ManagementObjectCollection collection = searcher.Get();
-             foreach (var item in collection) {
+            foreach (var item in collection) {
                 uint ui = (uint)item["ProcessId"];
 
                 ids.Add((int)ui);

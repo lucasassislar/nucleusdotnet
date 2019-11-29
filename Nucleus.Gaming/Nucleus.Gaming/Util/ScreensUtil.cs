@@ -1,7 +1,6 @@
 ﻿using Nucleus.Gaming.Coop;
 using Nucleus.Gaming.Windows;
 using Nucleus.Gaming.Windows.Interop;
-using System;
 using System.Drawing;
 
 namespace Nucleus.Gaming {
