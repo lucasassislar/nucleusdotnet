@@ -10,14 +10,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nucleus.Gaming</RootNamespace>
     <AssemblyName>Nucleus.Gaming</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -61,7 +60,7 @@
       <HintPath>..\packages\DotNetZip.1.13.4\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Master\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\Master\packages\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
       <HintPath>..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
@@ -78,19 +77,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Coop\BackupManager.cs" />
-    <Compile Include="Coop\Data\AppDomain\AppDomainSharedAttribute.cs" />
-    <Compile Include="Coop\Data\CallbackData.cs" />
-    <Compile Include="Coop\Data\HandlerTools.cs" />
-    <Compile Include="Coop\Data\Save\SaveInfo.cs" />
-    <Compile Include="Coop\Data\UserProfileOptions.cs" />
     <Compile Include="Diagnostics\PanelTextWriter.cs" />
     <Compile Include="Diagnostics\Profiler\MeasureData.cs" />
     <Compile Include="Diagnostics\Profiler\MeasureKey.cs" />
     <Compile Include="Diagnostics\Profiler\Profiler.cs" />
+    <Compile Include="AppDomainSharedAttribute.cs" />
+    <Compile Include="IO\SearchStorageInfo.cs" />
+    <Compile Include="Platform\Windows\Controls\ListBoxControlCollection.cs" />
     <Compile Include="Threading\TaskManager.cs" />
     <Compile Include="Threading\ThreadData.cs" />
     <Compile Include="Threading\ThreadTask.cs" />
+    <Compile Include="Util\ApplicationUtil.cs" />
+    <Compile Include="Util\UserScreen.cs" />
+    <Compile Include="Util\UserScreenType.cs" />
     <Compile Include="Web\RouteAttribute.cs" />
     <Compile Include="Web\RouteBuilder.cs" />
     <Compile Include="Web\RouteManagerAttribute.cs" />
@@ -107,14 +106,6 @@
     <Compile Include="WindowScrape\Static\HwndInterface.cs" />
     <Compile Include="WindowScrape\Types\APIRECT.cs" />
     <Compile Include="WindowScrape\Types\HwndObject.cs" />
-    <None Include="Coop\Interop\DomainWebApiConnection.cs" />
-    <Compile Include="Coop\Handler\Modules\Process\IGameProcessModule.cs" />
-    <Compile Include="Coop\Interop\HandlerDataEngine.cs" />
-    <Compile Include="Coop\HandlerDataManager.cs" />
-    <Compile Include="Coop\Handler\Modules\IO\IOModule.cs" />
-    <Compile Include="Coop\ModuleManager.cs" />
-    <Compile Include="Coop\SearchStorageInfo.cs" />
-    <Compile Include="IO\ScrConfigFile.cs" />
     <Compile Include="Platform\Windows\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,9 +155,6 @@
     <Compile Include="Platform\Windows\Controls\TextMessageBox.Designer.cs">
       <DependentUpon>TextMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Coop\GameNameManager.cs" />
-    <Compile Include="Coop\Handler\Engine\GameHandler.cs" />
-    <Compile Include="Coop\HandlerModule.cs" />
     <Compile Include="Diagnostics\OutputLevel.cs" />
     <Compile Include="Platform\Windows\Controls\TitleBarControl.cs">
       <SubType>UserControl</SubType>
@@ -175,22 +163,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Platform\Windows\DirectInput\DInputManager.cs" />
-    <Compile Include="Coop\Data\GameOption.cs" />
-    <Compile Include="Coop\Data\GameOptionValue.cs" />
-    <Compile Include="Coop\Data\GameProfile.cs" />
-    <Compile Include="Coop\Handler\Modules\Cursor\CursorBarrier.cs" />
-    <Compile Include="Coop\Handler\Modules\Cursor\CursorBarrierLower.cs" />
-    <Compile Include="Coop\Handler\Modules\Cursor\CursorBarrierUpper.cs" />
-    <Compile Include="Coop\Handler\Modules\Cursor\CursorModule.cs" />
-    <Compile Include="Coop\Handler\Modules\Cursor\NativeMethods.cs" />
-    <Compile Include="Coop\Data\DynamicAttribute.cs" />
-    <Compile Include="Coop\Data\HandlerContext.cs" />
-    <Compile Include="Coop\Data\AppDomain\HandlerData.cs" />
-    <Compile Include="Coop\Handler\JoystickDatabase.cs" />
-    <Compile Include="Coop\Handler\Step\CustomStep.cs" />
-    <Compile Include="Coop\Handler\Step\CustomStepType.cs" />
-    <Compile Include="Coop\Handler\UserInfo.cs" />
-    <Compile Include="Coop\Data\GameHookData.cs" />
     <Compile Include="DPI\DPIHandling.cs" />
     <Compile Include="DPI\DPIManager.cs" />
     <Compile Include="DPI\DPIMonitor.cs" />
@@ -202,7 +174,6 @@
     <Compile Include="Platform\Windows\Interop\Shell32\RegistryUtil.cs" />
     <Compile Include="Platform\Windows\IO\WinDirectoryUtil.cs" />
     <Compile Include="Platform\Windows\LockBitmap.cs" />
-    <Compile Include="Platform\Windows\Modules\WindowsGameProcessModule.cs" />
     <Compile Include="Platform\Windows\IO\MFT\FileNameAndParentFrn.cs" />
     <Compile Include="Platform\Windows\IO\MFT\MFTReader.cs" />
     <Compile Include="Platform\Windows\Interop\Gdi32\Gdi32Interop.cs" />
@@ -211,22 +182,13 @@
     <Compile Include="Platform\Windows\Interop\Shcore\ShcoreInterop.cs" />
     <Compile Include="Platform\Windows\Interop\User32\Structures\Display.cs" />
     <Compile Include="Platform\Windows\Interop\User32\C\Rect.cs" />
-    <Compile Include="IO\Content\ContentManager.cs" />
     <Compile Include="Diagnostics\ILogNode.cs" />
-    <Compile Include="IO\SourceCfgFile.cs" />
-    <Compile Include="Coop\Data\UserGameInfo.cs" />
-    <Compile Include="Coop\Data\UserProfile.cs" />
-    <Compile Include="Coop\Data\UserScreen.cs" />
-    <Compile Include="Coop\Data\UserScreenType.cs" />
     <Compile Include="Tools\GameStarter\Data\ScanMutexData.cs" />
     <Compile Include="Tools\GameStarter\Data\SymlinkGameData.cs" />
     <Compile Include="Util\ThreadUtil.cs" />
-    <Compile Include="Coop\Data\Save\SaveType.cs" />
-    <Compile Include="Coop\Data\Folder.cs" />
     <Compile Include="Platform\Windows\Interop\Shell32\Shell32.cs" />
     <Compile Include="Platform\Windows\Interop\Shell32\ShFileInfo.cs" />
     <Compile Include="Platform\Windows\Interop\Shell32\ShgFi.cs" />
-    <Compile Include="Coop\Data\IO\BackupFile.cs" />
     <Compile Include="Platform\Windows\Interop\Kernel32\IniFile.cs" />
     <None Include="Platform\Windows\Interop\Interceptor\Win32.cs" />
     <None Include="Platform\Windows\Interop\Interceptor\Win32EnumWindows.cs" />
@@ -238,18 +200,11 @@
     <Compile Include="Platform\Windows\Interop\Win32Api.cs" />
     <Compile Include="Platform\Windows\Interop\User32\WindowShowStyle.cs" />
     <Compile Include="Diagnostics\Log.cs" />
-    <Compile Include="Coop\GameManager.cs" />
     <Compile Include="Platform\Windows\Controls\ImageButtonState.cs" />
     <Compile Include="Platform\Windows\Controls\StateImageButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Coop\Data\KeyboardPlayer.cs" />
-    <Compile Include="Platform\Windows\Modules\MutexModule.cs" />
-    <Compile Include="Platform\Windows\Modules\XInputHandlerModule.cs" />
     <Compile Include="RAction.cs" />
-    <Compile Include="Coop\Package\GameHandlerMetadata.cs" />
-    <Compile Include="Coop\Package\GameHandlerBaseMetadata.cs" />
-    <Compile Include="Coop\Package\PackageManager.cs" />
     <Compile Include="RequestResult.cs" />
     <Compile Include="Tools\GameStarter\StartGameApp.cs" />
     <Compile Include="Tools\GameStarter\Data\StartGameData.cs" />
@@ -259,9 +214,7 @@
     <Compile Include="Platform\Windows\MonitorDpiType.cs" />
     <Compile Include="Platform\Windows\ProcessDpiAwareness.cs" />
     <Compile Include="Platform\Windows\WindowsVersionInfo.cs" />
-    <Compile Include="Coop\Data\PlayerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Coop\Handler\ProcessInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -329,14 +282,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Coop\Data\GameHookInfo.cs.d.ts">
-      <DependentUpon>GameHookData.cs</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Coop\Data\AppDomain\GenericGameInfo.cs.d.ts">
-      <DependentUpon>HandlerData.cs</DependentUpon>
-    </TypeScriptCompile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

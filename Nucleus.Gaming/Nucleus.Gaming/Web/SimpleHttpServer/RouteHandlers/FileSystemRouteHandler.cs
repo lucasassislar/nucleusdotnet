@@ -6,12 +6,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace SimpleHttpServer.RouteHandlers
-{
-    public class FileSystemRouteHandler
-    {
+namespace SimpleHttpServer.RouteHandlers {
+    public class FileSystemRouteHandler {
 
         public string BasePath { get; set; }
         public bool ShowDirectories { get; set; }
@@ -23,11 +20,11 @@ namespace SimpleHttpServer.RouteHandlers
             // NOTE: this is probably not bulletproof/secure
             url_part = url_part.Replace("\\..\\", "\\");
             url_part = url_part.Replace("/../", "/");
-            url_part = url_part.Replace("//","/");
-            url_part = url_part.Replace(@"\\",@"\");
-            url_part = url_part.Replace(":","");           
-            url_part = url_part.Replace("/",Path.DirectorySeparatorChar.ToString());
-           
+            url_part = url_part.Replace("//", "/");
+            url_part = url_part.Replace(@"\\", @"\");
+            url_part = url_part.Replace(":", "");
+            url_part = url_part.Replace("/", Path.DirectorySeparatorChar.ToString());
+
             // make sure the first part of the path is not 
             if (url_part.Length > 0) {
                 var first_char = url_part.ElementAt(0);
@@ -36,7 +33,7 @@ namespace SimpleHttpServer.RouteHandlers
                 }
             }
             var local_path = Path.Combine(this.BasePath, url_part);
-                
+
             if (ShowDirectories && Directory.Exists(local_path)) {
                 // Console.WriteLine("FileSystemRouteHandler Dir {0}",local_path);
                 return Handle_LocalDir(request, local_path);
@@ -46,12 +43,12 @@ namespace SimpleHttpServer.RouteHandlers
             } else {
                 return new HttpResponse {
                     StatusCode = "404",
-                    ReasonPhrase = string.Format("Not Found ({0}) handler({1})",local_path,request.Route.Name),
+                    ReasonPhrase = string.Format("Not Found ({0}) handler({1})", local_path, request.Route.Name),
                 };
             }
         }
 
-        HttpResponse Handle_LocalFile(HttpRequest request, string local_path) {        
+        HttpResponse Handle_LocalFile(HttpRequest request, string local_path) {
             var file_extension = Path.GetExtension(local_path);
 
             var response = new HttpResponse();
@@ -65,14 +62,14 @@ namespace SimpleHttpServer.RouteHandlers
 
         HttpResponse Handle_LocalDir(HttpRequest request, string local_path) {
             var output = new StringBuilder();
-            output.Append(string.Format("<h1> Directory: {0} </h1>",request.Url));
-                        
-            foreach (var entry in Directory.GetFiles(local_path)) {                
+            output.Append(string.Format("<h1> Directory: {0} </h1>", request.Url));
+
+            foreach (var entry in Directory.GetFiles(local_path)) {
                 var file_info = new System.IO.FileInfo(entry);
 
                 var filename = file_info.Name;
-                output.Append(string.Format("<a href=\"{1}\">{1}</a> <br>",filename,filename));                
-            }            
+                output.Append(string.Format("<a href=\"{1}\">{1}</a> <br>", filename, filename));
+            }
 
             return new HttpResponse() {
                 StatusCode = "200",
@@ -87,8 +84,7 @@ namespace SimpleHttpServer.RouteHandlers
 
     // http://stackoverflow.com/questions/1029740/get-mime-type-from-filename-extension
 
-    public class QuickMimeTypeMapper
-    {
+    public class QuickMimeTypeMapper {
 
         public static string GetMimeType(string extension) {
             if (extension == null) {

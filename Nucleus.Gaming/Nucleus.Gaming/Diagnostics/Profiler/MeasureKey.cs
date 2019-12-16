@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Nucleus.Gaming.Diagnostics {
+﻿namespace Nucleus.Gaming.Diagnostics {
     public struct MeasureKey {
         public object Parent { get; private set; }
         public string Key { get; private set; }

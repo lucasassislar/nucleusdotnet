@@ -1,11 +1,7 @@
-﻿using Newtonsoft.Json;
-using Nucleus.Gaming.Coop;
+﻿using SplitScreenMe.Core;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace Nucleus.Gaming.Tools.GameStarter {
     public class StartGameApp {
@@ -41,6 +37,17 @@ namespace Nucleus.Gaming.Tools.GameStarter {
         public void BeginKillMutex(int processId, params string[] mutex) {
             data = new StartGameData();
             data.Task = GameStarterTask.KillMutex;
+
+            var list = mutex.ToList();
+            list.Insert(0, processId.ToString());
+            data.Parameters = list.ToArray();
+
+            RunStartGame(data, true);
+        }
+
+        public void BeginRenameMutex(int processId, params string[] mutex) {
+            data = new StartGameData();
+            data.Task = GameStarterTask.RenameMutex;
 
             var list = mutex.ToList();
             list.Insert(0, processId.ToString());

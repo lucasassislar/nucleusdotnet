@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Nucleus.Gaming.Windows.Interop;
 
 namespace Nucleus.Gaming.Platform.Windows.Controls {
     public class TitleBarControl : UserControl {
@@ -65,7 +59,7 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
                 titleLabel.Text = value;
             }
         }
-       
+
         public TitleBarControl() {
             this.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right;
             this.Size = new Size(1000, 21);
@@ -73,6 +67,8 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             this.BackColor = Color.FromArgb(255, 32, 34, 37);
             this.Padding = Padding.Empty;
             this.Margin = Padding.Empty;
+
+            this.SetStyle(ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
         }
 
         protected override void OnHandleCreated(EventArgs e) {

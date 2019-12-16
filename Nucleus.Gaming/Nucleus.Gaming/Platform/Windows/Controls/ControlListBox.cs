@@ -1,35 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace Nucleus.Gaming.Platform.Windows.Controls {
     /// <summary>
     /// Lists controls dynamically in a list
     /// </summary>
     public class ControlListBox : UserControl {
-        private int totalHeight;
-        private int border = 1;
-
         public event Action<Control> SelectedChanged;
-        public Size Offset { get; set; }
-        public Control SelectedControl { get; protected set; }
 
+        public Control SelectedControl { get; protected set; }
+        public Size Offset { get; set; }
+        public bool CanSelectControls { get; set; } = true;
+        public bool VerticalScrollEnabled { get; set; } = true;
 
         public int Border {
             get { return border; }
             set { border = value; }
-        }
-
-        public ControlListBox() {
-            //this.AutoScroll = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScroll = false;
         }
 
         public override bool AutoScroll {
@@ -40,17 +27,31 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
                     this.HorizontalScroll.Visible = false;
                     this.HorizontalScroll.Enabled = false;
                     this.VerticalScroll.Visible = false;
+                    this.VerticalScroll.Enabled = false;
                 }
             }
         }
 
-        protected override void OnSizeChanged(EventArgs e) {
-            base.OnSizeChanged(e);
-            UpdateSizes();
+        private int border = 1;
+        private int totalHeight;
+        private int maxScrollHeight;
+        private bool updatingSize;
+        private Panel contentPanel;
 
+        public ControlListBox() {
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScroll = false;
+
+            AutoScaleMode = AutoScaleMode.None;
+
+            this.Controls.Add(contentPanel);
         }
 
-        private bool updatingSize;
+        public void Deselect() {
+            SelectedControl = null;
+            c_Click(this, EventArgs.Empty);
+        }
+
         public void UpdateSizes() {
             if (updatingSize) {
                 return;
@@ -62,8 +63,8 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             bool isVerticalVisible = VerticalScroll.Visible;
             int v = isVerticalVisible ? (1 + SystemInformation.VerticalScrollBarWidth) : 0;
 
-            for (int i = 0; i < this.Controls.Count; i++) {
-                var con = Controls[i];
+            for (int i = 0; i < contentPanel.Controls.Count; i++) {
+                var con = contentPanel.Controls[i];
                 con.Width = this.Width - v;
 
                 con.Location = new Point(0, totalHeight);
@@ -75,41 +76,61 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             updatingSize = false;
 
             HorizontalScroll.Visible = false;
-            VerticalScroll.Visible = totalHeight > this.Height;
+            VerticalScroll.Visible = VerticalScrollEnabled ? (totalHeight > this.Height) : false;
+
+            maxScrollHeight = totalHeight - this.Height;
+
+            contentPanel.Size = new Size(this.Width, totalHeight);
+            contentPanel.Location = new Point(0, 0);
+            contentPanel.Invalidate();
+            contentPanel.BringToFront();
+
             if (VerticalScroll.Visible != isVerticalVisible) {
-                UpdateSizes(); // need to update again
+                //UpdateSizes(); // need to update again
             }
         }
 
-        private void C_SizeChanged(object sender, EventArgs e) {
-            Control con = (Control)sender;
-            // this has the potential of being incredibly slow
+        protected override Control.ControlCollection CreateControlsInstance() {
+            this.contentPanel = new Panel();
+            return new ListBoxControlCollection(contentPanel, this);
+        }
+
+        protected override void OnSizeChanged(EventArgs e) {
+            base.OnSizeChanged(e);
             UpdateSizes();
         }
 
-        protected override void OnControlAdded(ControlEventArgs e) {
-            base.OnControlAdded(e);
+        public void AddedControl(Control nControl) {
+            //protected override void OnControlAdded(ControlEventArgs e) {
+            //base.OnControlAdded(e);
 
-            if (!this.DesignMode && e.Control != null) {
-                Control c = e.Control;
+            if (!this.DesignMode && nControl != null) {
+                Control c = nControl;
+                if (c == contentPanel) {
+                    return;
+                }
 
                 c.ControlAdded += C_ControlAdded;
                 c.SizeChanged += C_SizeChanged;
                 if (c is IRadioControl) {
                     if (c is IMouseHoverControl) {
                         IMouseHoverControl mouse = (IMouseHoverControl)c;
-                        //mouse.Mouse.MouseClick += c_MouseClick;
                         mouse.Mouse.MouseEnter += c_MouseEnter;
+                        mouse.Mouse.MouseMove += c_MouseMove;
+                        mouse.Mouse.MouseWheel += c_MouseWheel;
                         mouse.Mouse.MouseLeave += c_MouseLeave;
                     } else {
                         c.Click += C_Click;
-                        //c.MouseClick += c_MouseClick;
                         c.MouseEnter += c_MouseEnter;
+                        c.MouseMove += c_MouseMove;
+                        c.MouseWheel += c_MouseWheel;
                         c.MouseLeave += c_MouseLeave;
                     }
+                } else {
+                    c.MouseWheel += c_MouseWheel;
                 }
 
-                int index = this.Controls.IndexOf(c);
+                int index = contentPanel.Controls.IndexOf(c);
                 Size s = c.Size;
 
                 c.Location = new Point(0, totalHeight);
@@ -117,14 +138,8 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             }
         }
 
-        protected override void OnControlRemoved(ControlEventArgs e) {
-            base.OnControlRemoved(e);
+        public void RemovedControl(Control nControl) {
             UpdateSizes();
-        }
-
-        public void Deselect() {
-            SelectedControl = null;
-            c_Click(this, EventArgs.Empty);
         }
 
         private void C_ControlAdded(object sender, ControlEventArgs e) {
@@ -146,6 +161,21 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             }
         }
 
+        private void c_MouseMove(object sender, MouseEventArgs e) {
+            // scroll bar
+            //Debug.WriteLine(e.Delta);
+            //VerticalScroll.Value += e.Delta;
+        }
+
+        private void c_MouseWheel(object sender, MouseEventArgs e) {
+            // scroll bar
+            Point loc = contentPanel.Location;
+            Point nPoint = new Point(loc.X, (int)(loc.Y + (e.Delta * 0.5f)));
+            nPoint.Y = MathUtil.Clamp(nPoint.Y, -maxScrollHeight, 0);
+            contentPanel.Location = nPoint;
+            contentPanel.Refresh();
+        }
+
         private void c_MouseLeave(object sender, EventArgs e) {
             Control parent = (Control)sender;
             if (parent is TransparentControl) {
@@ -160,11 +190,15 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             }
         }
 
+        private void C_SizeChanged(object sender, EventArgs e) {
+            Control con = (Control)sender;
+            // this has the potential of being incredibly slow
+            UpdateSizes();
+        }
+
         private void C_Click(object sender, EventArgs e) {
             OnClick(sender);
         }
-
-        public bool CanSelectControls { get; set; } = true;
 
         private void OnClick(object sender) {
             if (!CanSelectControls) {
@@ -183,8 +217,8 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
                 }
             }
 
-            for (int i = 0; i < this.Controls.Count; i++) {
-                Control c = this.Controls[i];
+            for (int i = 0; i < contentPanel.Controls.Count; i++) {
+                Control c = contentPanel.Controls[i];
                 if (c is IRadioControl) {
                     IRadioControl high = (IRadioControl)c;
                     if (parent == c && high.EnableClicking) {

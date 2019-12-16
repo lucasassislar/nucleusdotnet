@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nucleus.Gaming.Windows.Interop
-{
+﻿namespace Nucleus.Gaming.Windows.Interop {
     /// <summary>
     /// Enumeration of the different ways of showing a window using 
     /// ShowWindow
     /// </summary>
-    public enum WindowShowStyle : uint
-    {
+    public enum WindowShowStyle : uint {
         /// <summary>Hides the window and activates another window.</summary>
         /// <remarks>See SW_HIDE</remarks>
         Hide = 0,

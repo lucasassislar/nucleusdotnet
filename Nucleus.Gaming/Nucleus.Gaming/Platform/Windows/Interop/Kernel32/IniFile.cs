@@ -1,10 +1,7 @@
-﻿using Nucleus.Gaming.Platform.Windows.Interop;
-using System;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Linq;
-using System.Collections.Generic;
+using System.Text;
 
 namespace Nucleus.Gaming.Platform.Windows.Interop {
     /// <summary>

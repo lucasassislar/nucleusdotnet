@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nucleus.Gaming.Tools.GameStarter {
+﻿namespace Nucleus.Gaming.Tools.GameStarter {
     public enum GameStarterTask {
         // runs the game and orphans its process
         StartGame,
 
         // kills a mutex for a specific process id (ADMIN)
         KillMutex,
+
+        // renames a mutex to a new random name
+        RenameMutex,
+
         // scans a specified process name until it's open and kill its mutexes (ADMIN)
         ScanKillMutex,
 

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nucleus.Gaming
-{
-    public static class Globals
-    {
-        public const uint Version = 10;
+﻿namespace Nucleus.Gaming {
+    public static class Globals {
+        public const uint Version = 11;
         public const bool Alpha = true;
     }
 }

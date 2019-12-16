@@ -11,23 +11,19 @@ using System.Runtime.InteropServices;
 
 // Thakts to Brisingr Aerowing for help with the Windows 10 adapatation
 
-namespace Nucleus.Gaming.Windows
-{
+namespace Nucleus.Gaming.Windows {
     /// <summary>
     /// Provides detailed information about the host operating system.
     /// </summary>
-    public static class WindowsVersionInfo
-    {
+    public static class WindowsVersionInfo {
         #region ENUMS
-        public enum SoftwareArchitecture
-        {
+        public enum SoftwareArchitecture {
             Unknown = 0,
             Bit32 = 1,
             Bit64 = 2
         }
 
-        public enum ProcessorArchitecture
-        {
+        public enum ProcessorArchitecture {
             Unknown = 0,
             Bit32 = 1,
             Bit64 = 2,
@@ -43,16 +39,13 @@ namespace Nucleus.Gaming.Windows
         /// <summary>
         /// Determines if the current application is 32 or 64-bit.
         /// </summary>
-        static public SoftwareArchitecture ProgramBits
-        {
-            get
-            {
+        public static SoftwareArchitecture ProgramBits {
+            get {
                 SoftwareArchitecture pbits = SoftwareArchitecture.Unknown;
 
                 System.Collections.IDictionary test = Environment.GetEnvironmentVariables();
 
-                switch (IntPtr.Size * 8)
-                {
+                switch (IntPtr.Size * 8) {
                     case 64:
                         pbits = SoftwareArchitecture.Bit64;
                         break;
@@ -70,14 +63,11 @@ namespace Nucleus.Gaming.Windows
             }
         }
 
-        static public SoftwareArchitecture OSBits
-        {
-            get
-            {
+        public static SoftwareArchitecture OSBits {
+            get {
                 SoftwareArchitecture osbits = SoftwareArchitecture.Unknown;
 
-                switch (IntPtr.Size * 8)
-                {
+                switch (IntPtr.Size * 8) {
                     case 64:
                         osbits = SoftwareArchitecture.Bit64;
                         break;
@@ -101,19 +91,15 @@ namespace Nucleus.Gaming.Windows
         /// <summary>
         /// Determines if the current processor is 32 or 64-bit.
         /// </summary>
-        static public ProcessorArchitecture ProcessorBits
-        {
-            get
-            {
+        public static ProcessorArchitecture ProcessorBits {
+            get {
                 ProcessorArchitecture pbits = ProcessorArchitecture.Unknown;
 
-                try
-                {
+                try {
                     SYSTEM_INFO l_System_Info = new SYSTEM_INFO();
                     GetNativeSystemInfo(ref l_System_Info);
 
-                    switch (l_System_Info.uProcessorInfo.wProcessorArchitecture)
-                    {
+                    switch (l_System_Info.uProcessorInfo.wProcessorArchitecture) {
                         case 9: // PROCESSOR_ARCHITECTURE_AMD64
                             pbits = ProcessorArchitecture.Bit64;
                             break;
@@ -127,9 +113,7 @@ namespace Nucleus.Gaming.Windows
                             pbits = ProcessorArchitecture.Unknown;
                             break;
                     }
-                }
-                catch
-                {
+                } catch {
                     // Ignore        
                 }
 
@@ -139,14 +123,12 @@ namespace Nucleus.Gaming.Windows
         #endregion BITS
 
         #region EDITION
-        static private string s_Edition;
+        private static string s_Edition;
         /// <summary>
         /// Gets the edition of the operating system running on this computer.
         /// </summary>
-        static public string Edition
-        {
-            get
-            {
+        public static string Edition {
+            get {
                 if (s_Edition != null)
                     return s_Edition;  //***** RETURN *****//
 
@@ -156,30 +138,22 @@ namespace Nucleus.Gaming.Windows
                 OSVERSIONINFOEX osVersionInfo = new OSVERSIONINFOEX();
                 osVersionInfo.dwOSVersionInfoSize = Marshal.SizeOf(typeof(OSVERSIONINFOEX));
 
-                if (GetVersionEx(ref osVersionInfo))
-                {
+                if (GetVersionEx(ref osVersionInfo)) {
                     int majorVersion = osVersion.Version.Major;
                     int minorVersion = osVersion.Version.Minor;
                     byte productType = osVersionInfo.wProductType;
                     short suiteMask = osVersionInfo.wSuiteMask;
 
                     #region VERSION 4
-                    if (majorVersion == 4)
-                    {
-                        if (productType == VER_NT_WORKSTATION)
-                        {
+                    if (majorVersion == 4) {
+                        if (productType == VER_NT_WORKSTATION) {
                             // Windows NT 4.0 Workstation
                             edition = "Workstation";
-                        }
-                        else if (productType == VER_NT_SERVER)
-                        {
-                            if ((suiteMask & VER_SUITE_ENTERPRISE) != 0)
-                            {
+                        } else if (productType == VER_NT_SERVER) {
+                            if ((suiteMask & VER_SUITE_ENTERPRISE) != 0) {
                                 // Windows NT 4.0 Server Enterprise
                                 edition = "Enterprise Server";
-                            }
-                            else
-                            {
+                            } else {
                                 // Windows NT 4.0 Server
                                 edition = "Standard Server";
                             }
@@ -188,61 +162,39 @@ namespace Nucleus.Gaming.Windows
                     #endregion VERSION 4
 
                     #region VERSION 5
-                    else if (majorVersion == 5)
-                    {
-                        if (productType == VER_NT_WORKSTATION)
-                        {
-                            if ((suiteMask & VER_SUITE_PERSONAL) != 0)
-                            {
+                    else if (majorVersion == 5) {
+                        if (productType == VER_NT_WORKSTATION) {
+                            if ((suiteMask & VER_SUITE_PERSONAL) != 0) {
                                 edition = "Home";
-                            }
-                            else
-                            {
+                            } else {
                                 if (GetSystemMetrics(86) == 0) // 86 == SM_TABLETPC
                                     edition = "Professional";
                                 else
                                     edition = "Tablet Edition";
                             }
-                        }
-                        else if (productType == VER_NT_SERVER)
-                        {
-                            if (minorVersion == 0)
-                            {
-                                if ((suiteMask & VER_SUITE_DATACENTER) != 0)
-                                {
+                        } else if (productType == VER_NT_SERVER) {
+                            if (minorVersion == 0) {
+                                if ((suiteMask & VER_SUITE_DATACENTER) != 0) {
                                     // Windows 2000 Datacenter Server
                                     edition = "Datacenter Server";
-                                }
-                                else if ((suiteMask & VER_SUITE_ENTERPRISE) != 0)
-                                {
+                                } else if ((suiteMask & VER_SUITE_ENTERPRISE) != 0) {
                                     // Windows 2000 Advanced Server
                                     edition = "Advanced Server";
-                                }
-                                else
-                                {
+                                } else {
                                     // Windows 2000 Server
                                     edition = "Server";
                                 }
-                            }
-                            else
-                            {
-                                if ((suiteMask & VER_SUITE_DATACENTER) != 0)
-                                {
+                            } else {
+                                if ((suiteMask & VER_SUITE_DATACENTER) != 0) {
                                     // Windows Server 2003 Datacenter Edition
                                     edition = "Datacenter";
-                                }
-                                else if ((suiteMask & VER_SUITE_ENTERPRISE) != 0)
-                                {
+                                } else if ((suiteMask & VER_SUITE_ENTERPRISE) != 0) {
                                     // Windows Server 2003 Enterprise Edition
                                     edition = "Enterprise";
-                                }
-                                else if ((suiteMask & VER_SUITE_BLADE) != 0)
-                                {
+                                } else if ((suiteMask & VER_SUITE_BLADE) != 0) {
                                     // Windows Server 2003 Web Edition
                                     edition = "Web Edition";
-                                }
-                                else
-                                {
+                                } else {
                                     // Windows Server 2003 Standard Edition
                                     edition = "Standard";
                                 }
@@ -252,15 +204,12 @@ namespace Nucleus.Gaming.Windows
                     #endregion VERSION 5
 
                     #region VERSION 6
-                    else if (majorVersion == 6)
-                    {
+                    else if (majorVersion == 6) {
                         int ed;
                         if (GetProductInfo(majorVersion, minorVersion,
                             osVersionInfo.wServicePackMajor, osVersionInfo.wServicePackMinor,
-                            out ed))
-                        {
-                            switch (ed)
-                            {
+                            out ed)) {
+                            switch (ed) {
                                 case PRODUCT_BUSINESS:
                                     edition = "Business";
                                     break;
@@ -484,14 +433,12 @@ namespace Nucleus.Gaming.Windows
         #endregion EDITION
 
         #region NAME
-        static private string s_Name;
+        private static string s_Name;
         /// <summary>
         /// Gets the name of the operating system running on this computer.
         /// </summary>
-        static public string Name
-        {
-            get
-            {
+        public static string Name {
+            get {
                 if (s_Name != null)
                     return s_Name;  //***** RETURN *****//
 
@@ -501,13 +448,11 @@ namespace Nucleus.Gaming.Windows
                 OSVERSIONINFOEX osVersionInfo = new OSVERSIONINFOEX();
                 osVersionInfo.dwOSVersionInfoSize = Marshal.SizeOf(typeof(OSVERSIONINFOEX));
 
-                if (GetVersionEx(ref osVersionInfo))
-                {
+                if (GetVersionEx(ref osVersionInfo)) {
                     int majorVersion = osVersion.Version.Major;
                     int minorVersion = osVersion.Version.Minor;
 
-                    if (majorVersion == 6 && minorVersion == 2)
-                    {
+                    if (majorVersion == 6 && minorVersion == 2) {
                         //The registry read workaround is by Scott Vickery. Thanks a lot for the help!
 
                         //http://msdn.microsoft.com/en-us/library/windows/desktop/ms724832(v=vs.85).aspx
@@ -515,156 +460,139 @@ namespace Nucleus.Gaming.Windows
                         // For applications that have been manifested for Windows 8.1 & Windows 10. Applications not manifested for 8.1 or 10 will return the Windows 8 OS version value (6.2). 
                         // By reading the registry, we'll get the exact version - meaning we can even compare against  Win 8 and Win 8.1.
                         string exactVersion = RegistryRead(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion", "");
-                        if (!string.IsNullOrEmpty(exactVersion))
-                        {
+                        if (!string.IsNullOrEmpty(exactVersion)) {
                             string[] splitResult = exactVersion.Split('.');
                             majorVersion = Convert.ToInt32(splitResult[0]);
                             minorVersion = Convert.ToInt32(splitResult[1]);
                         }
-                        if (IsWindows10())
-                        {
+                        if (IsWindows10()) {
                             majorVersion = 10;
                             minorVersion = 0;
                         }
                     }
 
-                    switch (osVersion.Platform)
-                    {
+                    switch (osVersion.Platform) {
                         case PlatformID.Win32S:
                             name = "Windows 3.1";
                             break;
                         case PlatformID.WinCE:
                             name = "Windows CE";
                             break;
-                        case PlatformID.Win32Windows:
-                            {
-                                if (majorVersion == 4)
-                                {
-                                    string csdVersion = osVersionInfo.szCSDVersion;
-                                    switch (minorVersion)
-                                    {
-                                        case 0:
-                                            if (csdVersion == "B" || csdVersion == "C")
-                                                name = "Windows 95 OSR2";
-                                            else
-                                                name = "Windows 95";
-                                            break;
-                                        case 10:
-                                            if (csdVersion == "A")
-                                                name = "Windows 98 Second Edition";
-                                            else
-                                                name = "Windows 98";
-                                            break;
-                                        case 90:
-                                            name = "Windows Me";
-                                            break;
-                                    }
-                                }
-                                break;
-                            }
-                        case PlatformID.Win32NT:
-                            {
-                                byte productType = osVersionInfo.wProductType;
-
-                                switch (majorVersion)
-                                {
-                                    case 3:
-                                        name = "Windows NT 3.51";
-                                        break;
-                                    case 4:
-                                        switch (productType)
-                                        {
-                                            case 1:
-                                                name = "Windows NT 4.0";
-                                                break;
-                                            case 3:
-                                                name = "Windows NT 4.0 Server";
-                                                break;
-                                        }
-                                        break;
-                                    case 5:
-                                        switch (minorVersion)
-                                        {
-                                            case 0:
-                                                name = "Windows 2000";
-                                                break;
-                                            case 1:
-                                                name = "Windows XP";
-                                                break;
-                                            case 2:
-                                                name = "Windows Server 2003";
-                                                break;
-                                        }
-                                        break;
-                                    case 6:
-                                        switch (minorVersion)
-                                        {
-                                            case 0:
-                                                switch (productType)
-                                                {
-                                                    case 1:
-                                                        name = "Windows Vista";
-                                                        break;
-                                                    case 3:
-                                                        name = "Windows Server 2008";
-                                                        break;
-                                                }
-                                                break;
-
-                                            case 1:
-                                                switch (productType)
-                                                {
-                                                    case 1:
-                                                        name = "Windows 7";
-                                                        break;
-                                                    case 3:
-                                                        name = "Windows Server 2008 R2";
-                                                        break;
-                                                }
-                                                break;
-                                            case 2:
-                                                switch (productType)
-                                                {
-                                                    case 1:
-                                                        name = "Windows 8";
-                                                        break;
-                                                    case 3:
-                                                        name = "Windows Server 2012";
-                                                        break;
-                                                }
-                                                break;
-                                            case 3:
-                                                switch (productType)
-                                                {
-                                                    case 1:
-                                                        name = "Windows 8.1";
-                                                        break;
-                                                    case 3:
-                                                        name = "Windows Server 2012 R2";
-                                                        break;
-                                                }
-                                                break;
-                                        }
+                        case PlatformID.Win32Windows: {
+                            if (majorVersion == 4) {
+                                string csdVersion = osVersionInfo.szCSDVersion;
+                                switch (minorVersion) {
+                                    case 0:
+                                        if (csdVersion == "B" || csdVersion == "C")
+                                            name = "Windows 95 OSR2";
+                                        else
+                                            name = "Windows 95";
                                         break;
                                     case 10:
-                                        switch (minorVersion)
-                                        {
-                                            case 0:
-                                                switch (productType)
-                                                {
-                                                    case 1:
-                                                        name = "Windows 10";
-                                                        break;
-                                                    case 3:
-                                                        name = "Windows Server 2016";
-                                                        break;
-                                                }
-                                                break;
-                                        }
+                                        if (csdVersion == "A")
+                                            name = "Windows 98 Second Edition";
+                                        else
+                                            name = "Windows 98";
+                                        break;
+                                    case 90:
+                                        name = "Windows Me";
                                         break;
                                 }
-                                break;
                             }
+                            break;
+                        }
+                        case PlatformID.Win32NT: {
+                            byte productType = osVersionInfo.wProductType;
+
+                            switch (majorVersion) {
+                                case 3:
+                                    name = "Windows NT 3.51";
+                                    break;
+                                case 4:
+                                    switch (productType) {
+                                        case 1:
+                                            name = "Windows NT 4.0";
+                                            break;
+                                        case 3:
+                                            name = "Windows NT 4.0 Server";
+                                            break;
+                                    }
+                                    break;
+                                case 5:
+                                    switch (minorVersion) {
+                                        case 0:
+                                            name = "Windows 2000";
+                                            break;
+                                        case 1:
+                                            name = "Windows XP";
+                                            break;
+                                        case 2:
+                                            name = "Windows Server 2003";
+                                            break;
+                                    }
+                                    break;
+                                case 6:
+                                    switch (minorVersion) {
+                                        case 0:
+                                            switch (productType) {
+                                                case 1:
+                                                    name = "Windows Vista";
+                                                    break;
+                                                case 3:
+                                                    name = "Windows Server 2008";
+                                                    break;
+                                            }
+                                            break;
+
+                                        case 1:
+                                            switch (productType) {
+                                                case 1:
+                                                    name = "Windows 7";
+                                                    break;
+                                                case 3:
+                                                    name = "Windows Server 2008 R2";
+                                                    break;
+                                            }
+                                            break;
+                                        case 2:
+                                            switch (productType) {
+                                                case 1:
+                                                    name = "Windows 8";
+                                                    break;
+                                                case 3:
+                                                    name = "Windows Server 2012";
+                                                    break;
+                                            }
+                                            break;
+                                        case 3:
+                                            switch (productType) {
+                                                case 1:
+                                                    name = "Windows 8.1";
+                                                    break;
+                                                case 3:
+                                                    name = "Windows Server 2012 R2";
+                                                    break;
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case 10:
+                                    switch (minorVersion) {
+                                        case 0:
+                                            switch (productType) {
+                                                case 1:
+                                                    name = "Windows 10";
+                                                    break;
+                                                case 3:
+                                                    name = "Windows Server 2016";
+                                                    break;
+                                            }
+                                            break;
+                                    }
+                                    break;
+                            }
+                            break;
+                        }
                     }
                 }
 
@@ -709,8 +637,7 @@ namespace Nucleus.Gaming.Windows
 
         #region OSVERSIONINFOEX
         [StructLayout(LayoutKind.Sequential)]
-        private struct OSVERSIONINFOEX
-        {
+        private struct OSVERSIONINFOEX {
             public int dwOSVersionInfoSize;
             public int dwMajorVersion;
             public int dwMinorVersion;
@@ -728,8 +655,7 @@ namespace Nucleus.Gaming.Windows
 
         #region SYSTEM_INFO
         [StructLayout(LayoutKind.Sequential)]
-        public struct SYSTEM_INFO
-        {
+        public struct SYSTEM_INFO {
             internal _PROCESSOR_INFO_UNION uProcessorInfo;
             public uint dwPageSize;
             public IntPtr lpMinimumApplicationAddress;
@@ -745,8 +671,7 @@ namespace Nucleus.Gaming.Windows
 
         #region _PROCESSOR_INFO_UNION
         [StructLayout(LayoutKind.Explicit)]
-        public struct _PROCESSOR_INFO_UNION
-        {
+        public struct _PROCESSOR_INFO_UNION {
             [FieldOffset(0)]
             internal uint dwOemId;
             [FieldOffset(0)]
@@ -758,10 +683,10 @@ namespace Nucleus.Gaming.Windows
 
         #region 64 BIT OS DETECTION
         [DllImport("kernel32", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
-        public extern static IntPtr LoadLibrary(string libraryName);
+        public static extern IntPtr LoadLibrary(string libraryName);
 
         [DllImport("kernel32", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
-        public extern static IntPtr GetProcAddress(IntPtr hwnd, string procedureName);
+        public static extern IntPtr GetProcAddress(IntPtr hwnd, string procedureName);
         #endregion 64 BIT OS DETECTION
 
         #region PRODUCT
@@ -859,17 +784,14 @@ namespace Nucleus.Gaming.Windows
         /// <summary>
         /// Gets the service pack information of the operating system running on this computer.
         /// </summary>
-        static public string ServicePack
-        {
-            get
-            {
+        public static string ServicePack {
+            get {
                 string servicePack = String.Empty;
                 OSVERSIONINFOEX osVersionInfo = new OSVERSIONINFOEX();
 
                 osVersionInfo.dwOSVersionInfoSize = Marshal.SizeOf(typeof(OSVERSIONINFOEX));
 
-                if (GetVersionEx(ref osVersionInfo))
-                {
+                if (GetVersionEx(ref osVersionInfo)) {
                     servicePack = osVersionInfo.szCSDVersion;
                 }
 
@@ -883,10 +805,8 @@ namespace Nucleus.Gaming.Windows
         /// <summary>
         /// Gets the build version number of the operating system running on this computer.
         /// </summary>
-        static public int BuildVersion
-        {
-            get
-            {
+        public static int BuildVersion {
+            get {
                 return int.Parse(RegistryRead(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuildNumber", "0"));
             }
         }
@@ -897,10 +817,8 @@ namespace Nucleus.Gaming.Windows
         /// <summary>
         /// Gets the full version string of the operating system running on this computer.
         /// </summary>
-        static public string VersionString
-        {
-            get
-            {
+        public static string VersionString {
+            get {
                 return Version.ToString();
             }
         }
@@ -910,10 +828,8 @@ namespace Nucleus.Gaming.Windows
         /// <summary>
         /// Gets the full version of the operating system running on this computer.
         /// </summary>
-        static public Version Version
-        {
-            get
-            {
+        public static Version Version {
+            get {
                 return new Version(MajorVersion, MinorVersion, BuildVersion, RevisionVersion);
             }
         }
@@ -924,17 +840,13 @@ namespace Nucleus.Gaming.Windows
         /// <summary>
         /// Gets the major version number of the operating system running on this computer.
         /// </summary>
-        static public int MajorVersion
-        {
-            get
-            {
-                if(IsWindows10())
-                {
+        public static int MajorVersion {
+            get {
+                if (IsWindows10()) {
                     return 10;
                 }
                 string exactVersion = RegistryRead(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion", "");
-                if(!string.IsNullOrEmpty(exactVersion))
-                {
+                if (!string.IsNullOrEmpty(exactVersion)) {
                     string[] splitVersion = exactVersion.Split('.');
                     return int.Parse(splitVersion[0]);
                 }
@@ -947,17 +859,13 @@ namespace Nucleus.Gaming.Windows
         /// <summary>
         /// Gets the minor version number of the operating system running on this computer.
         /// </summary>
-        static public int MinorVersion
-        {
-            get
-            {
-                if (IsWindows10())
-                {
+        public static int MinorVersion {
+            get {
+                if (IsWindows10()) {
                     return 0;
                 }
                 string exactVersion = RegistryRead(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion", "");
-                if (!string.IsNullOrEmpty(exactVersion))
-                {
+                if (!string.IsNullOrEmpty(exactVersion)) {
                     string[] splitVersion = exactVersion.Split('.');
                     return int.Parse(splitVersion[1]);
                 }
@@ -970,12 +878,9 @@ namespace Nucleus.Gaming.Windows
         /// <summary>
         /// Gets the revision version number of the operating system running on this computer.
         /// </summary>
-        static public int RevisionVersion
-        {
-            get
-            {
-                if(IsWindows10())
-                {
+        public static int RevisionVersion {
+            get {
+                if (IsWindows10()) {
                     return 0;
                 }
                 return Environment.OSVersion.Version.Revision;
@@ -985,16 +890,13 @@ namespace Nucleus.Gaming.Windows
         #endregion VERSION
 
         #region 64 BIT OS DETECTION
-        private static IsWow64ProcessDelegate GetIsWow64ProcessDelegate()
-        {
+        private static IsWow64ProcessDelegate GetIsWow64ProcessDelegate() {
             IntPtr handle = LoadLibrary("kernel32");
 
-            if (handle != IntPtr.Zero)
-            {
+            if (handle != IntPtr.Zero) {
                 IntPtr fnPtr = GetProcAddress(handle, "IsWow64Process");
 
-                if (fnPtr != IntPtr.Zero)
-                {
+                if (fnPtr != IntPtr.Zero) {
                     return (IsWow64ProcessDelegate)Marshal.GetDelegateForFunctionPointer((IntPtr)fnPtr, typeof(IsWow64ProcessDelegate));
                 }
             }
@@ -1002,20 +904,17 @@ namespace Nucleus.Gaming.Windows
             return null;
         }
 
-        private static bool Is32BitProcessOn64BitProcessor()
-        {
+        private static bool Is32BitProcessOn64BitProcessor() {
             IsWow64ProcessDelegate fnDelegate = GetIsWow64ProcessDelegate();
 
-            if (fnDelegate == null)
-            {
+            if (fnDelegate == null) {
                 return false;
             }
 
             bool isWow64;
             bool retVal = fnDelegate.Invoke(Process.GetCurrentProcess().Handle, out isWow64);
 
-            if (retVal == false)
-            {
+            if (retVal == false) {
                 return false;
             }
 
@@ -1025,11 +924,9 @@ namespace Nucleus.Gaming.Windows
 
         #region Windows 10 Detection
 
-        private static bool IsWindows10()
-        {
+        private static bool IsWindows10() {
             string productName = RegistryRead(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", "");
-            if (productName.StartsWith("Windows 10", StringComparison.OrdinalIgnoreCase))
-            {
+            if (productName.StartsWith("Windows 10", StringComparison.OrdinalIgnoreCase)) {
                 return true;
             }
             return false;
@@ -1039,19 +936,16 @@ namespace Nucleus.Gaming.Windows
 
         #region Registry Methods
 
-        private static string RegistryRead(string RegistryPath, string Field, string DefaultValue)
-        {
+        private static string RegistryRead(string RegistryPath, string Field, string DefaultValue) {
             string rtn = "";
             string backSlash = "";
             string newRegistryPath = "";
 
-            try
-            {
+            try {
                 RegistryKey OurKey = null;
                 string[] split_result = RegistryPath.Split('\\');
 
-                if (split_result.Length > 0)
-                {
+                if (split_result.Length > 0) {
                     split_result[0] = split_result[0].ToUpper();        // Make the first entry uppercase...
 
                     if (split_result[0] == "HKEY_CLASSES_ROOT") OurKey = Registry.ClassesRoot;
@@ -1060,16 +954,13 @@ namespace Nucleus.Gaming.Windows
                     else if (split_result[0] == "HKEY_USERS") OurKey = Registry.Users;
                     else if (split_result[0] == "HKEY_CURRENT_CONFIG") OurKey = Registry.CurrentConfig;
 
-                    if (OurKey != null)
-                    {
-                        for (int i = 1; i < split_result.Length; i++)
-                        {
+                    if (OurKey != null) {
+                        for (int i = 1; i < split_result.Length; i++) {
                             newRegistryPath += backSlash + split_result[i];
                             backSlash = "\\";
                         }
 
-                        if (newRegistryPath != "")
-                        {
+                        if (newRegistryPath != "") {
                             //rtn = (string)Registry.GetValue(RegistryPath, "CurrentVersion", DefaultValue);
 
                             OurKey = OurKey.OpenSubKey(newRegistryPath);
@@ -1078,8 +969,7 @@ namespace Nucleus.Gaming.Windows
                         }
                     }
                 }
-            }
-            catch { }
+            } catch { }
 
             return rtn;
         }

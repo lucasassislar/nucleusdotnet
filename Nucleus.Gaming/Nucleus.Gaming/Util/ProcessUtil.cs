@@ -1,13 +1,9 @@
-﻿using System;
+﻿using Nucleus.Gaming.Interop;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
-using Nucleus.Gaming.Interop;
-using System.Threading;
 using System.Management;
-using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Nucleus.Gaming {
     public static class ProcessUtil {
@@ -227,6 +223,23 @@ namespace Nucleus.Gaming {
         }
 
         public static bool KillMutex(Process process, string mutexName) {
+            var handles = Win32Processes.GetHandles(process, "Mutant", "\\Sessions\\", mutexName);
+            if (handles.Count == 0) {
+                return false;
+            }
+
+            foreach (Win32API.SYSTEM_HANDLE_INFORMATION handle in handles) {
+                IntPtr ipHandle = IntPtr.Zero;
+                if (!Win32API.DuplicateHandle(Process.GetProcessById(handle.ProcessID).Handle, (IntPtr)handle.Handle, Win32API.GetCurrentProcess(), out ipHandle, 0, false, Win32API.DUPLICATE_CLOSE_SOURCE)) {
+                    Console.WriteLine("DuplicateHandle() failed, error = {0}", Marshal.GetLastWin32Error());
+                }
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool RenameMutex(Process process, string mutexName) {
             var handles = Win32Processes.GetHandles(process, "Mutant", "\\Sessions\\", mutexName);
             if (handles.Count == 0) {
                 return false;

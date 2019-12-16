@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json;
-using Nucleus.Gaming.Coop;
-using System;
-using System.Collections.Generic;
+using SplitScreenMe.Core;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Nucleus.Gaming.Tools.GameStarter {
     /// <summary>
@@ -63,6 +59,14 @@ namespace Nucleus.Gaming.Tools.GameStarter {
 
 
         public static void KillMutex(Process p, params string[] mutex) {
+            ClearStartData();
+
+            StartGameApp app = new StartGameApp();
+            app.BeginKillMutex(p.Id, mutex);
+            app.WaitForExit();
+        }
+
+        public static void RenameMutex(Process p, params string[] mutex) {
             ClearStartData();
 
             StartGameApp app = new StartGameApp();

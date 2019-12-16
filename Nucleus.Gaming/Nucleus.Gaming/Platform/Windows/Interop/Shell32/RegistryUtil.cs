@@ -1,12 +1,5 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nucleus.Gaming.Windows.Interop {
     public static class RegistryUtil {
@@ -25,26 +18,6 @@ namespace Nucleus.Gaming.Windows.Interop {
 
             if (madeChanges) {
                 Shell32Interop.SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_FLUSH, IntPtr.Zero, IntPtr.Zero);
-            }
-        }
-
-        const string UriScheme = "nuke";
-        const string FriendlyName = "Nucleus Coop";
-
-        public static void RegisterUriScheme() {
-            using (var key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\Classes\\" + UriScheme)) {
-                string applicationLocation = Assembly.GetEntryAssembly().Location;
-
-                key.SetValue("", "URL:" + FriendlyName);
-                key.SetValue("URL Protocol", "");
-
-                using (var defaultIcon = key.CreateSubKey("DefaultIcon")) {
-                    defaultIcon.SetValue("", applicationLocation + ",1");
-                }
-
-                using (var commandKey = key.CreateSubKey(@"shell\open\command")) {
-                    commandKey.SetValue("", "\"" + applicationLocation + "\" \"%1\"");
-                }
             }
         }
 

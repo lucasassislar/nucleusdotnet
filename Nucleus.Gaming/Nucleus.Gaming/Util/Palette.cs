@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 
-namespace Nucleus.Gaming
-{
-    public static class Palette
-    {
+namespace Nucleus.Gaming {
+    public static class Palette {
         public static ConsoleColor Success = ConsoleColor.Green;
         public static ConsoleColor Help = ConsoleColor.Green;
         public static ConsoleColor Error = ConsoleColor.Red;

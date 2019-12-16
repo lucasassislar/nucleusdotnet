@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nucleus.Gaming.Util;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Nucleus.Gaming.Tools.GameStarter {
@@ -10,7 +8,7 @@ namespace Nucleus.Gaming.Tools.GameStarter {
         public string[] Parameters { get; set; }
 
         public string GetAsArguments() {
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this)));
+            return ApplicationUtil.GetObjectAsArgument(this);
         }
     }
 }

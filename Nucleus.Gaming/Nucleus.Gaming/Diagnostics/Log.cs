@@ -1,10 +1,7 @@
-﻿using Nucleus.Gaming.Coop;
+﻿using Nucleus.Gaming.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -56,11 +53,11 @@ namespace Nucleus.Gaming.Diagnostics {
             Instance.logCallbacks.Remove(node);
         }
 
-        public void LogExceptionFile(Exception ex) {
-            string local = GameManager.GetAppDataPath();
+        public void LogExceptionFile(string appDataPath, Exception ex) {
+            string local = ApplicationUtil.GetAppDataPath();
             DateTime now = DateTime.Now;
             string file = string.Format("{0}{1}{2}_{3}{4}{5}", now.Day.ToString("00"), now.Month.ToString("00"), now.Year.ToString("0000"), now.Hour.ToString("00"), now.Minute.ToString("00"), now.Second.ToString("00")) + ".log";
-            string path = Path.Combine(local, file);
+            string path = Path.Combine(appDataPath, file);
 
             using (Stream stream = File.OpenWrite(path)) {
                 using (StreamWriter writer = new StreamWriter(stream)) {
@@ -95,10 +92,10 @@ namespace Nucleus.Gaming.Diagnostics {
         }
 
         protected static string GetLogPath() {
-            if (GameManager.IsGameTasksApp()) {
-                return Path.Combine(GameManager.GetAppDataPath(), "gametasks.log");
+            if (ApplicationUtil.IsGameTasksApp()) {
+                return Path.Combine(ApplicationUtil.GetAppDataPath(), "gametasks.log");
             }
-            return Path.Combine(GameManager.GetAppDataPath(), "app.log");
+            return Path.Combine(ApplicationUtil.GetAppDataPath(), "app.log");
         }
 
         private object writeLineLock = new object();

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nucleus.Gaming.Diagnostics {
+﻿namespace Nucleus.Gaming.Diagnostics {
     /// <summary>
     /// Importance level of the output
     /// </summary>

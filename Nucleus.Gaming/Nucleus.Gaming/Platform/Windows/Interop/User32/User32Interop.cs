@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 
-namespace Nucleus.Gaming.Windows.Interop
-{
-    public static class User32Interop
-    {
+namespace Nucleus.Gaming.Windows.Interop {
+    public static class User32Interop {
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
         public static extern IntPtr GetFocus();
 
@@ -21,6 +15,8 @@ namespace Nucleus.Gaming.Windows.Interop
         internal static extern bool EnumThreadWindows(int dwThreadId, EnumThreadDelegate lpfn,
             IntPtr lParam);
 
+        [DllImport("user32.dll")]
+        static extern bool SetWindowText(IntPtr hWnd, string text);
 
         // size of a device name string
         private const int CCHDEVICENAME = 32;
@@ -32,8 +28,7 @@ namespace Nucleus.Gaming.Windows.Interop
         /// for the display monitor.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        public struct MonitorInfoEx
-        {
+        public struct MonitorInfoEx {
             /// <summary>
             /// The size, in bytes, of the structure. Set this member to sizeof(MONITORINFOEX) (72) before calling the GetMonitorInfo function. 
             /// Doing so lets the function determine the type of structure you are passing to it.
@@ -69,8 +64,7 @@ namespace Nucleus.Gaming.Windows.Interop
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = CCHDEVICENAME)]
             public string DeviceName;
 
-            public void Init()
-            {
+            public void Init() {
                 this.Size = 40 + 2 * CCHDEVICENAME;
                 this.DeviceName = string.Empty;
             }
@@ -87,8 +81,7 @@ namespace Nucleus.Gaming.Windows.Interop
         /// the right column and bottom row of pixels. This structure is identical to the RECTL structure.
         /// </remarks>
         [StructLayout(LayoutKind.Sequential)]
-        public struct RectStruct
-        {
+        public struct RectStruct {
             /// <summary>
             /// The x-coordinate of the upper-left corner of the rectangle.
             /// </summary>
@@ -207,9 +200,5 @@ namespace Nucleus.Gaming.Windows.Interop
 
         [DllImport("user32.dll")]
         public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-
-
-
     }
 }
