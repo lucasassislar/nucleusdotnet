@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿#if WINDOWS
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Nucleus.Gaming.Platform.Windows.Controls {
@@ -31,3 +32,4 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
         }
     }
 }
+#endif

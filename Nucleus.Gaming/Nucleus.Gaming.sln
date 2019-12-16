@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Gaming", "Nucleus.Gaming\Nucleus.Gaming.csproj", "{223DBDAE-E362-452C-9455-F518D002B154}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Gaming.NETFramework", "Nucleus.Gaming\Nucleus.Gaming.NETFramework.csproj", "{223DBDAE-E362-452C-9455-F518D002B154}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Gaming.Unsafe", "Nucleus.Gaming.Unsafe\Nucleus.Gaming.Unsafe.csproj", "{AFC00426-C357-4488-A19E-FE9AE5A20F04}"
 EndProject

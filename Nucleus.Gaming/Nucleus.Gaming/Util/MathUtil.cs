@@ -24,5 +24,27 @@ namespace Nucleus.Gaming {
 
             return a;
         }
+
+        public static double RecursiveSqrt(double value, int count) {
+            RecursiveSqrt(ref value, count);
+            return value;
+        }
+
+        public static void RecursiveSqrt(ref double value, int count) {
+            for (int i = 0; i < count; i++) {
+                value = Math.Sqrt(value);
+            }
+        }
+
+        public static double RecursivePercentage(double pc, int count) {
+            double remaining = 1;
+            double value = 0;
+            for (int i = 0; i < count; i++) {
+                double removed = remaining * pc;
+                value = removed;
+                remaining -= removed;
+            }
+            return value;
+        }
     }
 }

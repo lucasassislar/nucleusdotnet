@@ -25,7 +25,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;WINDOWS;UNSAFE;ALPHA;RELEASE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WINDOWS;UNSAFE;ALPHA;RELEASE;WINFORMS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -35,7 +35,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;WINDOWS;UNSAFE;ALPHA;RELEASE</DefineConstants>
+    <DefineConstants>TRACE;WINDOWS;UNSAFE;ALPHA;RELEASE;WINFORMS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -55,12 +55,15 @@
     <DefineConstants>WINDOWS</DefineConstants>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DotNetZip, Version=1.13.4.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.13.4\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Master\packages\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\server\DistroLucasServer\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
       <HintPath>..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
@@ -77,6 +80,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coop\BackupManager.cs" />
+    <Compile Include="Coop\Data\AppDomain\AppDomainSharedAttribute.cs" />
+    <Compile Include="Coop\Data\CallbackData.cs" />
+    <Compile Include="Coop\Data\HandlerTools.cs" />
+    <Compile Include="Coop\Data\Save\SaveInfo.cs" />
+    <Compile Include="Coop\Data\UserProfileOptions.cs" />
+    <Compile Include="Web\Db\DbManager.cs" />
     <Compile Include="Diagnostics\PanelTextWriter.cs" />
     <Compile Include="Diagnostics\Profiler\MeasureData.cs" />
     <Compile Include="Diagnostics\Profiler\MeasureKey.cs" />

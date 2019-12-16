@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SimpleHttpServer.Models {
+namespace Nucleus.Gaming.Web {
     public class HttpRequest {
         public string Method { get; set; }
         public string Url { get; set; }

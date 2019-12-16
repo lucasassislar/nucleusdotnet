@@ -1,5 +1,4 @@
-﻿using SimpleHttpServer.Models;
-using System;
+﻿using System;
 
 namespace Nucleus.Gaming.Web {
     [AttributeUsage(AttributeTargets.Method)]

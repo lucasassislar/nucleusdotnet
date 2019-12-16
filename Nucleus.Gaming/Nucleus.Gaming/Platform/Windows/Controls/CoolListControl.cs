@@ -1,4 +1,5 @@
-﻿using Nucleus.Gaming.Platform.Windows.Controls;
+﻿#if WINDOWS
+using Nucleus.Gaming.Platform.Windows.Controls;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -77,3 +78,4 @@ namespace Nucleus.Gaming.Windows.Controls {
         }
     }
 }
+#endif

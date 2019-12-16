@@ -1,4 +1,4 @@
-﻿using SplitScreenMe.Core;
+﻿using Nucleus.Gaming.Coop;
 using System;
 using System.Diagnostics;
 using System.Linq;

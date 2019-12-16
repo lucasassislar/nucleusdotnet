@@ -1,13 +1,12 @@
 ﻿// Copyright (C) 2016 by Barend Erasmus, David Jeske and donated to the public domain
 
-using SimpleHttpServer.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SimpleHttpServer.RouteHandlers {
+namespace Nucleus.Gaming.Web {
     public class FileSystemRouteHandler {
 
         public string BasePath { get; set; }

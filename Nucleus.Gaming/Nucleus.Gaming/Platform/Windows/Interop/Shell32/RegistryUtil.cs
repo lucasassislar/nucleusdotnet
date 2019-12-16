@@ -1,5 +1,7 @@
-﻿using Microsoft.Win32;
+﻿#if WINDOWS
+using Microsoft.Win32;
 using System;
+using System.Reflection;
 
 namespace Nucleus.Gaming.Windows.Interop {
     public static class RegistryUtil {
@@ -40,3 +42,4 @@ namespace Nucleus.Gaming.Windows.Interop {
         }
     }
 }
+#endif

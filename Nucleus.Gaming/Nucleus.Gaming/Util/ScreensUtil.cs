@@ -42,6 +42,9 @@ namespace Nucleus.Gaming {
             }
 
             return rects;
+#else 
+            throw new Exception();
+#endif
         }
 
         public static Rectangle[] AllScreensRec() {
@@ -54,6 +57,9 @@ namespace Nucleus.Gaming {
             }
 
             return rects;
+#else
+            throw new Exception();
+#endif
         }
     }
 }

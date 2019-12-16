@@ -1,4 +1,5 @@
-﻿namespace Nucleus.Gaming.Platform.Windows.Controls
+﻿#if WINDOWS
+namespace Nucleus.Gaming.Platform.Windows.Controls
 {
     partial class PictureButton
     {
@@ -20,7 +21,7 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+#region Component Designer generated code
 
         /// <summary> 
         /// Required method for Designer support - do not modify 
@@ -66,9 +67,10 @@
 
         }
 
-        #endregion
+#endregion
 
         private System.Windows.Forms.Button button_Picture;
         private System.Windows.Forms.Button button_Btn;
     }
 }
+#endif

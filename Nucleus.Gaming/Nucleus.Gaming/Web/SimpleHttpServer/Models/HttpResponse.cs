@@ -10,7 +10,7 @@ using System.Text;
 //       must be loaded into memory in the the Content property. If you want to send large files,
 //       this has to be reworked so a handler can write to the output stream instead. 
 
-namespace SimpleHttpServer.Models {
+namespace Nucleus.Gaming.Web {
     public enum HttpStatusCode {
         // for a full list of status codes, see..
         // https://en.wikipedia.org/wiki/List_of_HTTP_status_codes

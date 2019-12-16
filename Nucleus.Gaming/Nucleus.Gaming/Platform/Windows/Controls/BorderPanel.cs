@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if WINDOWS
+
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -120,3 +122,4 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
         }
     }
 }
+#endif

@@ -1,4 +1,4 @@
-﻿using SplitScreenMe.Core;
+﻿using Nucleus.Gaming.Coop;
 using System.Drawing;
 
 namespace Nucleus.Gaming {

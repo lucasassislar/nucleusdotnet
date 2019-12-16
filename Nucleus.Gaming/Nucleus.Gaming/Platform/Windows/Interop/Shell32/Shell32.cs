@@ -22,6 +22,7 @@ namespace Nucleus.Gaming.Windows.Interop {
         /// </summary>
         public const int MAX_TYPE = 80;
 
+#if WINFORMS
         /// <summary>
         /// Get the associated Icon for a file or application, this method always returns
         /// an icon.  If the strPath is invalid or there is no idonc the default icon is returned
@@ -44,5 +45,6 @@ namespace Nucleus.Gaming.Windows.Interop {
                 return Icon.FromHandle(info.hIcon);
             }
         }
+#endif
     }
 }

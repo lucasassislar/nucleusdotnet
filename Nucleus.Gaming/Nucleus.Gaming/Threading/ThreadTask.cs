@@ -39,6 +39,20 @@ namespace Nucleus.Gaming.Threading {
             Name = name;
         }
 
+        public bool CanExecute {
+            get {
+                if (Enabled) {
+                    for (int i = 0; i < DependsOn.Length; i++) {
+                        if (!DependsOn[i].Finished) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+        }
+
         public override string ToString() {
             if (Data == null) {
                 return $"{Name} {(Finished ? "(DONE)" : "")}";

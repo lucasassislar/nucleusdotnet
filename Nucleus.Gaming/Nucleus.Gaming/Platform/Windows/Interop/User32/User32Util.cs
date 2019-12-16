@@ -1,4 +1,5 @@
-﻿using Nucleus.Gaming.Windows.Interop;
+﻿#if WINFORMS
+using Nucleus.Gaming.Windows.Interop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -149,3 +150,4 @@ namespace Nucleus.Gaming.Windows {
         }
     }
 }
+#endif

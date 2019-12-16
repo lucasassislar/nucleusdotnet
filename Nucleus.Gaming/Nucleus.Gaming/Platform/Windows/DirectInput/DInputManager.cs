@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if WINDOWS
+using System;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -70,3 +71,4 @@ namespace Nucleus.Gaming.Platform.Windows.DirectInput {
         }
     }
 }
+#endif

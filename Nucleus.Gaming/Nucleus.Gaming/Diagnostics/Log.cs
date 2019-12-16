@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace Nucleus.Gaming.Diagnostics {
     public class Log {
@@ -83,8 +82,10 @@ namespace Nucleus.Gaming.Diagnostics {
                 }
             }
 
-            MessageBox.Show("Application crash. Log generated at Data/" + file);
-            Application.Exit();
+#if WINFORMS
+            System.Windows.Forms.MessageBox.Show("Application crash. Log generated at Data/" + file);
+            System.Windows.Forms.Application.Exit();
+#endif
         }
 
         public static void SetConsoleOutputLevel(OutputLevel level) {
