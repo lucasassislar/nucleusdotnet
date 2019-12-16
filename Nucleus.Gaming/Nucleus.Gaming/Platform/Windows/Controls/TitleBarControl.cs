@@ -68,6 +68,8 @@ namespace Nucleus.Gaming.Platform.Windows.Controls {
             this.BackColor = Color.FromArgb(255, 32, 34, 37);
             this.Padding = Padding.Empty;
             this.Margin = Padding.Empty;
+
+            this.SetStyle(ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
         }
 
         protected override void OnHandleCreated(EventArgs e) {

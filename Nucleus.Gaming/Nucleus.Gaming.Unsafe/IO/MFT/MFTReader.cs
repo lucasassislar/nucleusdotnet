@@ -1,21 +1,16 @@
 ﻿#if UNSAFE
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.IO;
 using System.ComponentModel;
+using System.IO;
+using System.Runtime.InteropServices;
 
-namespace Nucleus.Gaming.IO.MFT
-{
-    public class MFTReader
-    {
+namespace Nucleus.Gaming.IO.MFT {
+    public class MFTReader {
         private Dictionary<ulong, FileNameAndParentFrn> _directories = new Dictionary<ulong, FileNameAndParentFrn>();
 
-        public Dictionary<ulong, FileNameAndParentFrn> Directories
-        {
+        public Dictionary<ulong, FileNameAndParentFrn> Directories {
             get { return _directories; }
             set { _directories = value; }
         }
@@ -23,11 +18,9 @@ namespace Nucleus.Gaming.IO.MFT
         private IntPtr _changeJournalRootHandle;
         private string _drive;
 
-        public string Drive
-        {
+        public string Drive {
             get { return _drive; }
-            set 
-            { 
+            set {
                 _drive = value.Replace(@"\", "");
             }
         }
@@ -81,8 +74,7 @@ namespace Nucleus.Gaming.IO.MFT
         public static extern void ZeroMemory(IntPtr ptr, Int32 size);
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        public struct BY_HANDLE_FILE_INFORMATION
-        {
+        public struct BY_HANDLE_FILE_INFORMATION {
             public uint FileAttributes;
             public FILETIME CreationTime;
             public FILETIME LastAccessTime;
@@ -96,16 +88,14 @@ namespace Nucleus.Gaming.IO.MFT
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        public struct FILETIME
-        {
+        public struct FILETIME {
             public uint DateTimeLow;
             public uint DateTimeHigh;
         }
 
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        public struct USN_JOURNAL_DATA
-        {
+        public struct USN_JOURNAL_DATA {
             public UInt64 UsnJournalID;
             public Int64 FirstUsn;
             public Int64 NextUsn;
@@ -116,22 +106,19 @@ namespace Nucleus.Gaming.IO.MFT
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        public struct MFT_ENUM_DATA
-        {
+        public struct MFT_ENUM_DATA {
             public UInt64 StartFileReferenceNumber;
             public Int64 LowUsn;
             public Int64 HighUsn;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        public struct CREATE_USN_JOURNAL_DATA
-        {
+        public struct CREATE_USN_JOURNAL_DATA {
             public UInt64 MaximumSize;
             public UInt64 AllocationDelta;
         }
 
-        public class USN_RECORD
-        {
+        public class USN_RECORD {
             public UInt32 RecordLength;
             public UInt64 FileReferenceNumber;
             public UInt64 ParentFileReferenceNumber;
@@ -146,8 +133,7 @@ namespace Nucleus.Gaming.IO.MFT
             private const int FNL_OFFSET = 56;
             private const int FN_OFFSET = 58;
 
-            public USN_RECORD(IntPtr p)
-            {
+            public USN_RECORD(IntPtr p) {
                 this.RecordLength = (UInt32)Marshal.ReadInt32(p);
                 this.FileReferenceNumber = (UInt64)Marshal.ReadInt64(p, FR_OFFSET);
                 this.ParentFileReferenceNumber = (UInt64)Marshal.ReadInt64(p, PFR_OFFSET);
@@ -160,12 +146,10 @@ namespace Nucleus.Gaming.IO.MFT
 
         #endregion
 
-        public void EnumerateVolume(out Dictionary<UInt64, FileNameAndParentFrn> files, string[] fileExtensions)
-        {
+        public void EnumerateVolume(out Dictionary<UInt64, FileNameAndParentFrn> files, string[] fileExtensions) {
             files = new Dictionary<ulong, FileNameAndParentFrn>();
             IntPtr medBuffer = IntPtr.Zero;
-            try
-            {
+            try {
                 GetRootFrnEntry();
                 GetRootHandle();
 
@@ -173,33 +157,25 @@ namespace Nucleus.Gaming.IO.MFT
 
                 SetupMFT_Enum_DataBuffer(ref medBuffer);
                 EnumerateFiles(medBuffer, ref files, fileExtensions);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 //	Log.Info(e.Message, e);
                 Exception innerException = e.InnerException;
-                while (innerException != null)
-                {
+                while (innerException != null) {
                     //		Log.Info(innerException.Message, innerException);
                     innerException = innerException.InnerException;
                 }
                 throw new ApplicationException("Error in EnumerateVolume()", e);
-            }
-            finally
-            {
-                if (_changeJournalRootHandle.ToInt32() != MFTReader.INVALID_HANDLE_VALUE)
-                {
+            } finally {
+                if (_changeJournalRootHandle.ToInt32() != MFTReader.INVALID_HANDLE_VALUE) {
                     MFTReader.CloseHandle(_changeJournalRootHandle);
                 }
-                if (medBuffer != IntPtr.Zero)
-                {
+                if (medBuffer != IntPtr.Zero) {
                     Marshal.FreeHGlobal(medBuffer);
                 }
             }
         }
 
-        private void GetRootFrnEntry()
-        {
+        private void GetRootFrnEntry() {
             string driveRoot = string.Concat("\\\\.\\", _drive);
             driveRoot = string.Concat(driveRoot, Path.DirectorySeparatorChar);
             IntPtr hRoot = MFTReader.CreateFile(driveRoot,
@@ -210,33 +186,26 @@ namespace Nucleus.Gaming.IO.MFT
                 MFTReader.FILE_FLAG_BACKUP_SEMANTICS,
                 IntPtr.Zero);
 
-            if (hRoot.ToInt32() != MFTReader.INVALID_HANDLE_VALUE)
-            {
+            if (hRoot.ToInt32() != MFTReader.INVALID_HANDLE_VALUE) {
                 MFTReader.BY_HANDLE_FILE_INFORMATION fi = new MFTReader.BY_HANDLE_FILE_INFORMATION();
                 bool bRtn = MFTReader.GetFileInformationByHandle(hRoot, out fi);
-                if (bRtn)
-                {
+                if (bRtn) {
                     UInt64 fileIndexHigh = (UInt64)fi.FileIndexHigh;
                     UInt64 indexRoot = (fileIndexHigh << 32) | fi.FileIndexLow;
 
                     FileNameAndParentFrn f = new FileNameAndParentFrn(driveRoot, 0);
                     _directories.Add(indexRoot, f);
-                }
-                else
-                {
+                } else {
                     throw new IOException("GetFileInformationbyHandle() returned invalid handle",
                         new Win32Exception(Marshal.GetLastWin32Error()));
                 }
                 MFTReader.CloseHandle(hRoot);
-            }
-            else
-            {
+            } else {
                 throw new IOException("Unable to get root frn entry", new Win32Exception(Marshal.GetLastWin32Error()));
             }
         }
 
-        private void GetRootHandle()
-        {
+        private void GetRootHandle() {
             string vol = string.Concat("\\\\.\\", _drive);
             _changeJournalRootHandle = MFTReader.CreateFile(vol,
                  MFTReader.GENERIC_READ | MFTReader.GENERIC_WRITE,
@@ -245,18 +214,15 @@ namespace Nucleus.Gaming.IO.MFT
                  MFTReader.OPEN_EXISTING,
                  0,
                  IntPtr.Zero);
-            if (_changeJournalRootHandle.ToInt32() == MFTReader.INVALID_HANDLE_VALUE)
-            {
+            if (_changeJournalRootHandle.ToInt32() == MFTReader.INVALID_HANDLE_VALUE) {
                 throw new IOException("CreateFile() returned invalid handle",
                     new Win32Exception(Marshal.GetLastWin32Error()));
             }
         }
 
-        public string GetFullPath(FileNameAndParentFrn frn)
-        {
+        public string GetFullPath(FileNameAndParentFrn frn) {
             string address = "";
-            while (frn.ParentFrn != 0)
-            {
+            while (frn.ParentFrn != 0) {
                 address = Path.Combine(frn.Name, address);
                 frn = _directories[frn.ParentFrn];
             }
@@ -264,40 +230,31 @@ namespace Nucleus.Gaming.IO.MFT
             return this.Drive + @"\" + address;
         }
 
-        unsafe public void EnumerateFiles(IntPtr medBuffer, ref Dictionary<ulong, FileNameAndParentFrn> files, string[] fileExtensions)
-        {
+        public unsafe void EnumerateFiles(IntPtr medBuffer, ref Dictionary<ulong, FileNameAndParentFrn> files, string[] fileExtensions) {
             IntPtr pData = Marshal.AllocHGlobal(sizeof(UInt64) + 0x10000);
             MFTReader.ZeroMemory(pData, sizeof(UInt64) + 0x10000);
             uint outBytesReturned = 0;
 
             while (false != MFTReader.DeviceIoControl(_changeJournalRootHandle, MFTReader.FSCTL_ENUM_USN_DATA, medBuffer,
                                     sizeof(MFTReader.MFT_ENUM_DATA), pData, sizeof(UInt64) + 0x10000, out outBytesReturned,
-                                    IntPtr.Zero))
-            {
+                                    IntPtr.Zero)) {
                 IntPtr pUsnRecord = new IntPtr(pData.ToInt32() + sizeof(Int64));
-                while (outBytesReturned > 60)
-                {
+                while (outBytesReturned > 60) {
                     MFTReader.USN_RECORD usn = new MFTReader.USN_RECORD(pUsnRecord);
-                    if (0 != (usn.FileAttributes & MFTReader.FILE_ATTRIBUTE_DIRECTORY))
-                    {
+                    if (0 != (usn.FileAttributes & MFTReader.FILE_ATTRIBUTE_DIRECTORY)) {
                         //  
                         // handle directories  
                         //  
-                        if (!_directories.ContainsKey(usn.FileReferenceNumber))
-                        {
+                        if (!_directories.ContainsKey(usn.FileReferenceNumber)) {
                             _directories.Add(usn.FileReferenceNumber,
                                 new FileNameAndParentFrn(usn.FileName, usn.ParentFileReferenceNumber));
-                        }
-                        else
-                        {   // this is debug code and should be removed when we are certain that  
+                        } else {   // this is debug code and should be removed when we are certain that  
                             // duplicate frn's don't exist on a given drive.  To date, this exception has  
                             // never been thrown.  Removing this code improves performance....  
                             throw new Exception(string.Format("Duplicate FRN: {0} for {1}",
                                 usn.FileReferenceNumber, usn.FileName));
                         }
-                    }
-                    else
-                    {
+                    } else {
                         //   
                         // handle files  
                         //  
@@ -305,41 +262,29 @@ namespace Nucleus.Gaming.IO.MFT
                         // at this point we could get the * for the extension
                         bool add = true;
                         bool fullpath = false;
-                        if (fileExtensions != null && fileExtensions.Length != 0)
-                        {
-                            if (fileExtensions[0].ToString() == "*")
-                            {
+                        if (fileExtensions != null && fileExtensions.Length != 0) {
+                            if (fileExtensions[0].ToString() == "*") {
                                 add = true;
                                 fullpath = true;
-                            }
-                            else
-                            {
+                            } else {
                                 add = false;
                                 string s = Path.GetExtension(usn.FileName);
-                                foreach (string extension in fileExtensions)
-                                {
-                                    if (0 == string.Compare(s, extension, true))
-                                    {
+                                foreach (string extension in fileExtensions) {
+                                    if (0 == string.Compare(s, extension, true)) {
                                         add = true;
                                         break;
                                     }
                                 }
                             }
                         }
-                        if (add)
-                        {
-                            if (fullpath)
-                            {
-                                if (!files.ContainsKey(usn.FileReferenceNumber))
-                                {
+                        if (add) {
+                            if (fullpath) {
+                                if (!files.ContainsKey(usn.FileReferenceNumber)) {
                                     files.Add(usn.FileReferenceNumber,
                                         new FileNameAndParentFrn(usn.FileName, usn.ParentFileReferenceNumber));
-                                }
-                                else
-                                {
+                                } else {
                                     FileNameAndParentFrn frn = files[usn.FileReferenceNumber];
-                                    if (0 != string.Compare(usn.FileName, frn.Name, true))
-                                    {
+                                    if (0 != string.Compare(usn.FileName, frn.Name, true)) {
                                         //	Log.InfoFormat(
                                         //	"Attempt to add duplicate file reference number: {0} for file {1}, file from index {2}",
                                         //	usn.FileReferenceNumber, usn.FileName, frn.Name);
@@ -347,19 +292,13 @@ namespace Nucleus.Gaming.IO.MFT
                                             usn.FileReferenceNumber, usn.FileName));
                                     }
                                 }
-                            }
-                            else
-                            {
-                                if (!files.ContainsKey(usn.FileReferenceNumber))
-                                {
+                            } else {
+                                if (!files.ContainsKey(usn.FileReferenceNumber)) {
                                     files.Add(usn.FileReferenceNumber,
                                         new FileNameAndParentFrn(usn.FileName, usn.ParentFileReferenceNumber));
-                                }
-                                else
-                                {
+                                } else {
                                     FileNameAndParentFrn frn = files[usn.FileReferenceNumber];
-                                    if (0 != string.Compare(usn.FileName, frn.Name, true))
-                                    {
+                                    if (0 != string.Compare(usn.FileName, frn.Name, true)) {
                                         //	Log.InfoFormat(
                                         //	"Attempt to add duplicate file reference number: {0} for file {1}, file from index {2}",
                                         //	usn.FileReferenceNumber, usn.FileName, frn.Name);
@@ -378,8 +317,7 @@ namespace Nucleus.Gaming.IO.MFT
             Marshal.FreeHGlobal(pData);
         }
 
-        unsafe private void CreateChangeJournal()
-        {
+        private unsafe void CreateChangeJournal() {
             // This function creates a journal on the volume. If a journal already  
             // exists this function will adjust the MaximumSize and AllocationDelta  
             // parameters of the journal  
@@ -397,14 +335,12 @@ namespace Nucleus.Gaming.IO.MFT
 
             bool fOk = MFTReader.DeviceIoControl(_changeJournalRootHandle, MFTReader.FSCTL_CREATE_USN_JOURNAL,
                 cujdBuffer, sizeCujd, IntPtr.Zero, 0, out cb, IntPtr.Zero);
-            if (!fOk)
-            {
+            if (!fOk) {
                 throw new IOException("DeviceIoControl() returned false", new Win32Exception(Marshal.GetLastWin32Error()));
             }
         }
 
-        unsafe private void SetupMFT_Enum_DataBuffer(ref IntPtr medBuffer)
-        {
+        private unsafe void SetupMFT_Enum_DataBuffer(ref IntPtr medBuffer) {
             uint bytesReturned = 0;
             MFTReader.USN_JOURNAL_DATA ujd = new MFTReader.USN_JOURNAL_DATA();
 
@@ -416,8 +352,7 @@ namespace Nucleus.Gaming.IO.MFT
                 sizeof(MFTReader.USN_JOURNAL_DATA),  // Size Of Out Buffer  
                 out bytesReturned,          // Bytes Returned  
                 IntPtr.Zero);               // lpOverlapped  
-            if (bOk)
-            {
+            if (bOk) {
                 MFTReader.MFT_ENUM_DATA med;
                 med.StartFileReferenceNumber = 0;
                 med.LowUsn = 0;
@@ -426,9 +361,7 @@ namespace Nucleus.Gaming.IO.MFT
                 medBuffer = Marshal.AllocHGlobal(sizeMftEnumData);
                 MFTReader.ZeroMemory(medBuffer, sizeMftEnumData);
                 Marshal.StructureToPtr(med, medBuffer, true);
-            }
-            else
-            {
+            } else {
                 throw new IOException("DeviceIoControl() returned false", new Win32Exception(Marshal.GetLastWin32Error()));
             }
         }

@@ -15,6 +15,8 @@ namespace Nucleus.Gaming.Windows.Interop {
         internal static extern bool EnumThreadWindows(int dwThreadId, EnumThreadDelegate lpfn,
             IntPtr lParam);
 
+        [DllImport("user32.dll")]
+        static extern bool SetWindowText(IntPtr hWnd, string text);
 
         // size of a device name string
         private const int CCHDEVICENAME = 32;
@@ -198,9 +200,5 @@ namespace Nucleus.Gaming.Windows.Interop {
 
         [DllImport("user32.dll")]
         public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-
-
-
     }
 }

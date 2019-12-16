@@ -45,6 +45,17 @@ namespace Nucleus.Gaming.Tools.GameStarter {
             RunStartGame(data, true);
         }
 
+        public void BeginRenameMutex(int processId, params string[] mutex) {
+            data = new StartGameData();
+            data.Task = GameStarterTask.RenameMutex;
+
+            var list = mutex.ToList();
+            list.Insert(0, processId.ToString());
+            data.Parameters = list.ToArray();
+
+            RunStartGame(data, true);
+        }
+
         public void BeginScanKillMutex(string gameName, int instances, params string[] mutex) {
             data = StartGameUtil.BuildScanKillMutexData(gameName, instances, mutex);
             RunStartGame(data, true);

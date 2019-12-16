@@ -2,6 +2,11 @@
 
 namespace Nucleus.Gaming {
     public static class MathUtil {
+
+        public static int Clamp(int value, int min, int max) {
+            return Math.Max(min, Math.Min(value, max));
+        }
+
         /// <summary>
         /// Greatest Common Divisor
         /// </summary>

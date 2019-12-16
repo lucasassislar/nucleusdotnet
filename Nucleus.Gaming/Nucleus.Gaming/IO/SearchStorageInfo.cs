@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Nucleus.Gaming.Coop {
+namespace SplitScreenMe.Core {
     /// <summary>
     /// 
     /// </summary>

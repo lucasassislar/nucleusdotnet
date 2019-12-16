@@ -241,6 +241,23 @@ namespace Nucleus.Gaming {
             return false;
         }
 
+        public static bool RenameMutex(Process process, string mutexName) {
+            var handles = Win32Processes.GetHandles(process, "Mutant", "\\Sessions\\", mutexName);
+            if (handles.Count == 0) {
+                return false;
+            }
+
+            foreach (Win32API.SYSTEM_HANDLE_INFORMATION handle in handles) {
+                IntPtr ipHandle = IntPtr.Zero;
+                if (!Win32API.DuplicateHandle(Process.GetProcessById(handle.ProcessID).Handle, (IntPtr)handle.Handle, Win32API.GetCurrentProcess(), out ipHandle, 0, false, Win32API.DUPLICATE_CLOSE_SOURCE)) {
+                    Console.WriteLine("DuplicateHandle() failed, error = {0}", Marshal.GetLastWin32Error());
+                }
+                return true;
+            }
+
+            return false;
+        }
+
         public static bool MutexExists(Process process, string mutexName) {
             // 4 tries
             for (int i = 0; i < 4; i++) {

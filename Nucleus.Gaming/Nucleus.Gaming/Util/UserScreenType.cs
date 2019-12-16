@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Gaming.Coop {
+﻿namespace SplitScreenMe.Core {
     public enum UserScreenType {
         FullScreen = 0,
         DualHorizontal = 1,

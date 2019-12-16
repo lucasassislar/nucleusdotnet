@@ -1,6 +1,6 @@
-﻿using Nucleus.Gaming.Coop;
-using Nucleus.Gaming.Windows;
+﻿using Nucleus.Gaming.Windows;
 using Nucleus.Gaming.Windows.Interop;
+using SplitScreenMe.Core;
 using System.Drawing;
 
 namespace Nucleus.Gaming {
@@ -34,7 +34,6 @@ namespace Nucleus.Gaming {
         }
 
         public static UserScreen[] AllScreens() {
-#if WINDOWS
             Display[] all = User32Util.GetDisplays();
             UserScreen[] rects = new UserScreen[all.Length];
 
@@ -49,7 +48,6 @@ namespace Nucleus.Gaming {
         }
 
         public static Rectangle[] AllScreensRec() {
-#if WINDOWS
             //return GetSetup_Triple4kHorizontal();
             Display[] all = User32Util.GetDisplays();
             Rectangle[] rects = new Rectangle[all.Length];

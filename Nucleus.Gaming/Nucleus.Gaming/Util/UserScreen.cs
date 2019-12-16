@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Nucleus.Gaming.Coop {
+namespace SplitScreenMe.Core {
     [AppDomainShared]
     public class UserScreen {
         public Rectangle SwapTypeBounds { get; set; }

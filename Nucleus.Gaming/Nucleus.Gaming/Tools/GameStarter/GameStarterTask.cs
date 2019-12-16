@@ -5,6 +5,10 @@
 
         // kills a mutex for a specific process id (ADMIN)
         KillMutex,
+
+        // renames a mutex to a new random name
+        RenameMutex,
+
         // scans a specified process name until it's open and kill its mutexes (ADMIN)
         ScanKillMutex,
 

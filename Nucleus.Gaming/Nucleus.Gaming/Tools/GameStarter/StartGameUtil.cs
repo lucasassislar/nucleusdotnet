@@ -66,6 +66,14 @@ namespace Nucleus.Gaming.Tools.GameStarter {
             app.WaitForExit();
         }
 
+        public static void RenameMutex(Process p, params string[] mutex) {
+            ClearStartData();
+
+            StartGameApp app = new StartGameApp();
+            app.BeginKillMutex(p.Id, mutex);
+            app.WaitForExit();
+        }
+
         public static void SymlinkGames(SymlinkGameData[] games) {
             ClearStartData();
 

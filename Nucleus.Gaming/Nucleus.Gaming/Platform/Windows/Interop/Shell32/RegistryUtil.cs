@@ -23,26 +23,6 @@ namespace Nucleus.Gaming.Windows.Interop {
             }
         }
 
-        const string UriScheme = "nuke";
-        const string FriendlyName = "Nucleus Coop";
-
-        public static void RegisterUriScheme() {
-            using (var key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\Classes\\" + UriScheme)) {
-                string applicationLocation = Assembly.GetEntryAssembly().Location;
-
-                key.SetValue("", "URL:" + FriendlyName);
-                key.SetValue("URL Protocol", "");
-
-                using (var defaultIcon = key.CreateSubKey("DefaultIcon")) {
-                    defaultIcon.SetValue("", applicationLocation + ",1");
-                }
-
-                using (var commandKey = key.CreateSubKey(@"shell\open\command")) {
-                    commandKey.SetValue("", "\"" + applicationLocation + "\" \"%1\"");
-                }
-            }
-        }
-
         public static bool SetAssociation(string extension, string progId, string fileTypeDescription, string applicationFilePath) {
             bool madeChanges = false;
             madeChanges |= SetKeyDefaultValue(@"Software\Classes\" + extension, progId);
