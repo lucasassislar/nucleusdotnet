@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Drawing;
 using System.Linq;
 
@@ -112,6 +113,18 @@ namespace Nucleus.Gaming {
             }
             // Step 7
             return d[n, m];
+        }
+
+        public static string ArrayToString(Array array) {
+            string str = "";
+            for (int i = 0; i < array.Length; i++) {
+                object ob = ((IList)array)[i];
+                str += ob;
+                if (i != array.Length - 1) {
+                    ob += ", ";
+                }
+            }
+            return str;
         }
 
 #if WINFORMS

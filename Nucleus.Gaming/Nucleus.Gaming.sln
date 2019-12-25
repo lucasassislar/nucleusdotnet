@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Gaming.NETFramework
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.Gaming.Unsafe", "Nucleus.Gaming.Unsafe\Nucleus.Gaming.Unsafe.csproj", "{AFC00426-C357-4488-A19E-FE9AE5A20F04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nucleus.TaskApp", "Nucleus.TaskApp\Nucleus.TaskApp.csproj", "{36C1386F-95FD-49A3-AB12-A20C03ABB5B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,12 @@ Global
 		{AFC00426-C357-4488-A19E-FE9AE5A20F04}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AFC00426-C357-4488-A19E-FE9AE5A20F04}.TestDebug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AFC00426-C357-4488-A19E-FE9AE5A20F04}.TestDebug|Any CPU.Build.0 = Debug|Any CPU
+		{36C1386F-95FD-49A3-AB12-A20C03ABB5B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36C1386F-95FD-49A3-AB12-A20C03ABB5B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36C1386F-95FD-49A3-AB12-A20C03ABB5B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36C1386F-95FD-49A3-AB12-A20C03ABB5B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36C1386F-95FD-49A3-AB12-A20C03ABB5B5}.TestDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36C1386F-95FD-49A3-AB12-A20C03ABB5B5}.TestDebug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

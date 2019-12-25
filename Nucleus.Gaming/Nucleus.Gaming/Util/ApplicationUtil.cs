@@ -21,6 +21,11 @@ namespace Nucleus.Gaming.Util {
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data)));
         }
 
+        public static void PopulateObjectWithArgument(object target, string base64Str) {
+            string base64 = Encoding.UTF8.GetString(Convert.FromBase64String(base64Str));
+            JsonConvert.PopulateObject(base64, target);
+        }
+
         public static bool OnlyOneInstance() {
             if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1) {
                 MessageBox.Show("Nucleus Coop is already running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

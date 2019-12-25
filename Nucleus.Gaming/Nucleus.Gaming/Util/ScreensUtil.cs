@@ -42,9 +42,6 @@ namespace Nucleus.Gaming {
             }
 
             return rects;
-#else 
-            throw new Exception();
-#endif
         }
 
         public static Rectangle[] AllScreensRec() {
@@ -55,11 +52,7 @@ namespace Nucleus.Gaming {
             for (int i = 0; i < all.Length; i++) {
                 rects[i] = all[i].Bounds;
             }
-
             return rects;
-#else
-            throw new Exception();
-#endif
         }
     }
 }

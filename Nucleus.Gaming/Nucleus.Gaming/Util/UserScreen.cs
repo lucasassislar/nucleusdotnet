@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using Nucleus.Gaming.Coop;
+using System.Drawing;
 
 namespace SplitScreenMe.Core {
     [AppDomainShared]
