@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Nucleus.Gaming.Coop;
+using Nucleus.IO;
 using SplitScreenMe.Core;
 using System.Diagnostics;
 using System.IO;

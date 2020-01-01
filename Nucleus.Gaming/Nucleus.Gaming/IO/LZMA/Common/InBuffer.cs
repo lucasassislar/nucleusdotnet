@@ -1,7 +1,7 @@
 // InBuffer.cs
+// Source: https://www.7-zip.org/sdk.html   Adapted to follow namespaces and clean code rules
 
-namespace SevenZip.Buffer
-{
+namespace Nucleus.IO.LZMA {
 	public class InBuffer
 	{
 		byte[] m_Buffer;

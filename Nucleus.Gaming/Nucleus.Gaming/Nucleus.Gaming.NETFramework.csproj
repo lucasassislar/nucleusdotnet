@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Diagnostics\LogData.cs" />
     <Compile Include="IO\LZMA\Common\CRC.cs" />
     <Compile Include="IO\LZMA\Common\InBuffer.cs" />
     <Compile Include="IO\LZMA\Common\OutBuffer.cs" />

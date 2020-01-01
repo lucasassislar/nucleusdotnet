@@ -1,8 +1,8 @@
 ﻿using System.IO;
 
-namespace SplitScreenMe.Core {
+namespace Nucleus.IO {
     /// <summary>
-    /// 
+    /// A holder for a .NET DriveInfo and some Info
     /// </summary>
     public struct SearchStorageInfo {
         public DriveInfo Drive { get; private set; }

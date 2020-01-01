@@ -1,4 +1,4 @@
-﻿using Nucleus.Gaming.Diagnostics;
+﻿using Nucleus.Diagnostics;
 using System;
 
 namespace Nucleus.Gaming {

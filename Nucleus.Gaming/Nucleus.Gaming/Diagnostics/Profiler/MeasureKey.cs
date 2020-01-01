@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Gaming.Diagnostics {
+﻿namespace Nucleus.Diagnostics {
     public struct MeasureKey {
         public object Parent { get; private set; }
         public string Key { get; private set; }

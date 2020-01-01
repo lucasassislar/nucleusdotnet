@@ -1,14 +1,10 @@
 ﻿using System;
 using System.IO;
-using Encoder = SevenZip.Compression.LZMA.LzmaEncoder;
-using Decoder = SevenZip.Compression.LZMA.LzmaDecoder;
-using SevenZip;
-using SevenZip.Compression.LZMA;
+using Encoder = Nucleus.IO.LZMA.LzmaEncoder;
+using Decoder = Nucleus.IO.LZMA.LzmaDecoder;
 
-namespace Nucleus.Compression
-{
-    public static class LzmaHelper
-    {
+namespace Nucleus.IO.LZMA {
+    public static class LzmaHelper {
         private static int dictionary = 1 << 23;
         private static bool eos = false;
 
@@ -47,20 +43,16 @@ namespace Nucleus.Compression
                 };
 
 
-        public static byte[] Compress(byte[] inputBytes)
-        {
-            using (MemoryStream inStream = new MemoryStream(inputBytes))
-            {
-                using (MemoryStream outStream = new MemoryStream())
-                {
+        public static byte[] Compress(byte[] inputBytes) {
+            using (MemoryStream inStream = new MemoryStream(inputBytes)) {
+                using (MemoryStream outStream = new MemoryStream()) {
                     Compress(inStream, outStream);
                     return outStream.ToArray();
                 }
             }
         }
 
-        public static void Compress(Stream inStream, Stream outStream)
-        {
+        public static void Compress(Stream inStream, Stream outStream) {
             BinaryWriter writer = new BinaryWriter(outStream);
             //writer.WriteNucleusHeader();
             //writer.WriteNucleusLZMAHeader();
@@ -70,30 +62,26 @@ namespace Nucleus.Compression
             encoder.SetCoderProperties(propIDs, properties);
             encoder.WriteCoderProperties(outStream);
             long fileSize = inStream.Length;
-            for (int i = 0; i < 8; i++)
-            {
+            for (int i = 0; i < 8; i++) {
                 outStream.WriteByte((byte)(fileSize >> (8 * i)));
             }
 
             encoder.Code(inStream, outStream, -1, -1, null);
         }
 
-        public static void Decompress(Stream inStream, Stream outStream)
-        {
+        public static void Decompress(Stream inStream, Stream outStream) {
             BinaryReader reader = new BinaryReader(inStream);
             //reader.ReadNucleusHeader();
             //reader.ReadNucleusLZMAHeader();
 
             LzmaDecoder decoder = new LzmaDecoder();
             byte[] properties2 = new byte[5];
-            if (inStream.Read(properties2, 0, 5) != 5)
-            {
+            if (inStream.Read(properties2, 0, 5) != 5) {
                 throw new Exception("input .lzma is too short");
             }
 
             long outSize = 0;
-            for (int i = 0; i < 8; i++)
-            {
+            for (int i = 0; i < 8; i++) {
                 int v = inStream.ReadByte();
                 if (v < 0)
                     throw (new Exception("Can't Read 1"));
@@ -105,12 +93,9 @@ namespace Nucleus.Compression
             decoder.Code(inStream, outStream, compressedSize, outSize, null);
         }
 
-        public static byte[] Decompress(byte[] inputBytes)
-        {
-            using (MemoryStream inStream = new MemoryStream(inputBytes))
-            {
-                using (MemoryStream outStream = new MemoryStream())
-                {
+        public static byte[] Decompress(byte[] inputBytes) {
+            using (MemoryStream inStream = new MemoryStream(inputBytes)) {
+                using (MemoryStream outStream = new MemoryStream()) {
                     Decompress(inStream, outStream);
                     return outStream.ToArray();
                 }

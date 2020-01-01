@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Gaming.Diagnostics {
+﻿namespace Nucleus.Diagnostics {
     /// <summary>
     /// Importance level of the output
     /// </summary>

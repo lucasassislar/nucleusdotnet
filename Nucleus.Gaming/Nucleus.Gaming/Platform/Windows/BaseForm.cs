@@ -1,4 +1,5 @@
 ﻿#if WINDOWS
+using Nucleus.DPI;
 using Nucleus.Gaming;
 using Nucleus.Gaming.Coop;
 using Nucleus.Gaming.Platform.Windows.Controls;

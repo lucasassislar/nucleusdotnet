@@ -3,33 +3,20 @@ using Nucleus.Gaming.Windows;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-#if WINFORMS
 using System.Windows.Forms;
-#endif
 
-namespace Nucleus.Gaming {
-    // this is not the right solution bruh
+namespace Nucleus.DPI {
+    // TODO: from me to myself - this is not the right solution bruh
+    // TODO: what should we name the namespace
     public static class DPIManager {
         public static float Scale = 1f;
+
         private static List<IDynamicSized> components = new List<IDynamicSized>();
 
-#if WINFORMS
         public static Font Font;
-#endif
 
         public static void PreInitialize() {
             Scale = User32Util.GetDPIScalingFactor();
-        }
-
-        private static void UpdateFont() {
-#if WINFORMS
-            if (Font != null) {
-                Font.Dispose();
-            }
-
-            int fontSize = (int)(12 * DPIManager.Scale);
-            Font = new Font("Segoe UI", fontSize, GraphicsUnit.Point);
-#endif
         }
 
         public static void AddForm(Form form) {
@@ -43,26 +30,15 @@ namespace Nucleus.Gaming {
             UpdateFont();
         }
 
-        private static void AppForm_LocationChanged(object sender, EventArgs e) {
-            Form form = (Form)sender;
-            uint val = User32Util.GetDpiForWindow(form.Handle);
-            float newScale = val / 96.0f;
-            float dif = Math.Abs(newScale - Scale);
-
-            if (dif > 0.001f) {
-                // DPI changed
-                Scale = newScale;
-                UpdateFont();
-
-                // update all components
-                form.Invoke((Action)delegate () {
-                    UpdateAll();
-                });
-            }
-        }
-
         public static void ForceUpdate() {
             UpdateAll();
+        }
+
+        private static void UpdateFont() {
+            Font?.Dispose();
+
+            int fontSize = (int)(12 * DPIManager.Scale);
+            Font = new Font("Segoe UI", fontSize, GraphicsUnit.Point);
         }
 
         private static void UpdateAll() {
@@ -86,6 +62,24 @@ namespace Nucleus.Gaming {
 
         public static void Unregister(IDynamicSized component) {
             components.Remove(component);
+        }
+
+        private static void AppForm_LocationChanged(object sender, EventArgs e) {
+            Form form = (Form)sender;
+            uint val = User32Util.GetDpiForWindow(form.Handle);
+            float newScale = val / 96.0f;
+            float dif = Math.Abs(newScale - Scale);
+
+            if (dif > 0.001f) {
+                // DPI changed
+                Scale = newScale;
+                UpdateFont();
+
+                // update all components
+                form.Invoke((Action)delegate () {
+                    UpdateAll();
+                });
+            }
         }
     }
 }

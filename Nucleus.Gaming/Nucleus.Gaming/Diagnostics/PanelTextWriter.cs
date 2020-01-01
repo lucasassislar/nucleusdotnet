@@ -1,22 +1,32 @@
-﻿using System;
+﻿using Nucleus.Gaming;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Nucleus.Gaming {
+namespace Nucleus.Diagnostics {
+    /// <summary>
+    /// Custom Text Writer that allows the Panel renderer to ignore cursor movements
+    /// </summary>
     public class PanelTextWriter : TextWriter {
-        private StreamWriter original;
         public StreamWriter Original { get { return original; } }
 
+        public string LineClear { get; private set; }
         public int CurrentLine { get; set; }
         public int MaxLines { get; set; }
         public int PanelY { get; set; }
-        public string LineClear { get; private set; }
-
-        private List<string> lines;
-
         public bool RenderingPanel { get; set; }
+
+        public override Encoding Encoding {
+            get {
+                return Encoding.ASCII;
+            }
+        }
+
         private object locker = new object();
+        private List<string> lines;
+        private StreamWriter original;
+        private int backCounter;
 
         public PanelTextWriter() {
             lines = new List<string>();
@@ -34,6 +44,7 @@ namespace Nucleus.Gaming {
                 original.Write(value);
             }
         }
+
         public void PWrite(string value, ConsoleColor color) {
             lock (locker) {
                 ConsoleColor current = Console.ForegroundColor;
@@ -42,6 +53,7 @@ namespace Nucleus.Gaming {
                 Console.ForegroundColor = current;
             }
         }
+
         public void PWriteLine(string value) {
             lock (locker) {
                 original.WriteLine(value);
@@ -57,8 +69,6 @@ namespace Nucleus.Gaming {
 
             original.Write(value);
         }
-
-        private int backCounter;
 
         public override void WriteLine(string value) {
             base.WriteLine(value);
@@ -84,12 +94,6 @@ namespace Nucleus.Gaming {
                 }
 
                 Console.SetCursorPosition(startCursorX, startCursorY);
-            }
-        }
-
-        public override Encoding Encoding {
-            get {
-                return Encoding.ASCII;
             }
         }
     }

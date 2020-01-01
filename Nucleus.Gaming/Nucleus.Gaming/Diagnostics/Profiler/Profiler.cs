@@ -2,10 +2,24 @@
 using System.Diagnostics;
 using System.Linq;
 
-namespace Nucleus.Gaming.Diagnostics {
+namespace Nucleus.Diagnostics {
+    /// <summary>
+    /// Simple profiler to measure task timing by unique-key
+    /// </summary>
     public static class Profiler {
-        private static Dictionary<MeasureKey, MeasureData> measuring = new Dictionary<MeasureKey, MeasureData>();
+        private static Dictionary<MeasureKey, MeasureData> measuring;
 
+        public static List<MeasureData> AllData { get; private set; }
+
+        static Profiler() {
+            measuring = new Dictionary<MeasureKey, MeasureData>();
+        }
+
+        /// <summary>
+        /// Returns currently evealuating Profiler data by the ThreadID
+        /// </summary>
+        /// <param name="threadId"></param>
+        /// <returns></returns>
         public static MeasureData? GetCurrentlyMeasuringByThread(int threadId) {
             lock (measuring) {
                 MeasureData data = measuring.Values.FirstOrDefault(c => c.ThreadID == threadId);
@@ -15,8 +29,6 @@ namespace Nucleus.Gaming.Diagnostics {
                 return data;
             }
         }
-
-        public static List<MeasureData> AllData = new List<MeasureData>();
 
         public static void StartMeasuring(object parent, string uniqueKey, int thread) {
             MeasureKey reference = new MeasureKey(parent, uniqueKey);
@@ -37,8 +49,6 @@ namespace Nucleus.Gaming.Diagnostics {
             long now = Stopwatch.GetTimestamp();
             double result = (now - timestamp.RecordedValue) / (double)Stopwatch.Frequency;
             AllData.Add(new MeasureData(reference, result, timestamp.ThreadID));
-
-            //ConsoleU.WriteLine($"Finished job {uniqueKey} in {(result * 1000).ToString("F0")}ms (Thread ${timestamp.ThreadID})", ConsoleColor.Yellow, OutputLevel.Low);
 
             return result;
         }

@@ -1,12 +1,16 @@
-﻿using Nucleus.Gaming.Util;
+﻿using Nucleus.Gaming;
+using Nucleus.Gaming.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
-namespace Nucleus.Gaming.Diagnostics {
+namespace Nucleus.Diagnostics {
+    /// <summary>
+    /// Singleton class for writing log information to a text file
+    /// </summary>
     public class Log {
-        private static Log instance;
+        public static readonly long MaxSize = 1024 * 1024 * 1024; // 16mb max log file (overkill af)
         public static Log Instance {
             get {
                 if (instance == null) {
@@ -16,18 +20,20 @@ namespace Nucleus.Gaming.Diagnostics {
             }
         }
 
-        public static readonly long MaxSize = 1024 * 1024 * 1024; // 16mb
+        private static Log instance;
         private string logPath;
         private Stream logStream;
         private StreamWriter writer;
-        private object locker;
         private OutputLevel consoleLevel;
         private bool enableLogging;
         private List<ILogNode> logCallbacks;
+        private object locker;
+        private object writeLineLock;
 
         public Log(bool enableLogging) {
             this.enableLogging = enableLogging;
             locker = new object();
+            writeLineLock = new object();
 
             instance = this;
             logCallbacks = new List<ILogNode>();
@@ -44,12 +50,36 @@ namespace Nucleus.Gaming.Diagnostics {
             }
         }
 
+        public static void WriteLine(Exception ex) {
+            Instance.PLog(ex.Message, ConsoleColor.Gray, OutputLevel.Medium);
+        }
+
         public static void RegisterForLogCallback(ILogNode node) {
             Instance.logCallbacks.Add(node);
         }
 
         public static void UnregisterForLogCallback(ILogNode node) {
             Instance.logCallbacks.Remove(node);
+        }
+
+        public static void SetConsoleOutputLevel(OutputLevel level) {
+            instance.consoleLevel = level;
+        }
+
+        public static string ReadLine() {
+            return Console.ReadLine();
+        }
+
+        public static void WriteLine() {
+            Instance.PLog("", ConsoleColor.Gray, OutputLevel.Low);
+        }
+
+        public static void WriteLine(string str, ConsoleColor color = ConsoleColor.Gray, OutputLevel displayLevel = OutputLevel.Low) {
+            Instance.PLog(str, color, displayLevel);
+        }
+
+        public static void WriteLine(object str, ConsoleColor color = ConsoleColor.Gray, OutputLevel displayLevel = OutputLevel.Low) {
+            Instance.PLog(str.ToString(), color, displayLevel);
         }
 
         public void LogExceptionFile(string appDataPath, Exception ex) {
@@ -63,7 +93,7 @@ namespace Nucleus.Gaming.Diagnostics {
                     writer.WriteLine("[Header]");
                     writer.WriteLine(now.ToLongDateString());
                     writer.WriteLine(now.ToLongTimeString());
-                    writer.WriteLine("Nucleus Coop Alpha v" + Globals.Version);
+                    writer.WriteLine($"{Globals.Name} v{Globals.Version}");
                     writer.WriteLine("[PC Specs]");
 
                     writer.WriteLine("[Message]");
@@ -88,30 +118,6 @@ namespace Nucleus.Gaming.Diagnostics {
 #endif
         }
 
-        public static void SetConsoleOutputLevel(OutputLevel level) {
-            instance.consoleLevel = level;
-        }
-
-        protected static string GetLogPath() {
-            if (ApplicationUtil.IsGameTasksApp()) {
-                return Path.Combine(ApplicationUtil.GetAppDataPath(), "gametasks.log");
-            }
-            return Path.Combine(ApplicationUtil.GetAppDataPath(), "app.log");
-        }
-
-        private object writeLineLock = new object();
-        private void WriteLine(string str, ConsoleColor color) {
-            lock (writeLineLock) {
-                DateTime now = DateTime.Now;
-                ConsoleColor startColor = Console.ForegroundColor;
-
-                Console.ForegroundColor = color;
-                Console.Write($"[{now.ToLongTimeString()}] ");
-                Console.Write(str + Environment.NewLine);
-                Console.ForegroundColor = startColor;
-            }
-        }
-
         public void PLog(string str, ConsoleColor color, OutputLevel displayLevel) {
             if (displayLevel >= consoleLevel) {
                 WriteLine(str, color);
@@ -123,15 +129,22 @@ namespace Nucleus.Gaming.Diagnostics {
             }
         }
 
-        public struct LogData {
-            public string String { get; set; }
-            public ConsoleColor Color { get; set; }
-            public OutputLevel OutputLevel { get; set; }
+        protected static string GetLogPath() {
+            if (ApplicationUtil.IsGameTasksApp()) {
+                return Path.Combine(ApplicationUtil.GetAppDataPath(), "gametasks.log");
+            }
+            return Path.Combine(ApplicationUtil.GetAppDataPath(), "app.log");
+        }
 
-            public LogData(string str, ConsoleColor color, OutputLevel displayLevel) {
-                String = str;
-                Color = color;
-                OutputLevel = displayLevel;
+        private void WriteLine(string str, ConsoleColor color) {
+            lock (writeLineLock) {
+                DateTime now = DateTime.Now;
+                ConsoleColor startColor = Console.ForegroundColor;
+
+                Console.ForegroundColor = color;
+                Console.Write($"[{now.ToLongTimeString()}] ");
+                Console.Write(str + Environment.NewLine);
+                Console.ForegroundColor = startColor;
             }
         }
 
@@ -147,23 +160,6 @@ namespace Nucleus.Gaming.Diagnostics {
                     logStream.Position = 0;// write on top
                 }
             }
-        }
-
-        public static string ReadLine() {
-            return Console.ReadLine();
-        }
-        public static void WriteLine() {
-            Instance.PLog("", ConsoleColor.Gray, OutputLevel.Low);
-        }
-        public static void WriteLine(string str, ConsoleColor color = ConsoleColor.Gray, OutputLevel displayLevel = OutputLevel.Low) {
-            Instance.PLog(str, color, displayLevel);
-        }
-        public static void WriteLine(object str, ConsoleColor color = ConsoleColor.Gray, OutputLevel displayLevel = OutputLevel.Low) {
-            Instance.PLog(str.ToString(), color, displayLevel);
-        }
-
-        public static void WriteLine(Exception ex) {
-            Instance.PLog(ex.Message, ConsoleColor.Gray, OutputLevel.Medium);
         }
     }
 }

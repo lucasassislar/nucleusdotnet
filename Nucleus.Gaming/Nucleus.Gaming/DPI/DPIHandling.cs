@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Gaming {
+﻿namespace Nucleus.DPI {
     /// <summary>
     /// The way the game we're running handles DPI scaling
     /// </summary>
@@ -11,13 +11,13 @@
 
         /// <summary>
         /// Scaled will scale the width and height 
-        /// by the DPI of the system (see that it's not per-monitor)
+        /// by the DPI of the system (see that it's NOT per-monitor)
         /// </summary>
         Scaled,
 
         /// <summary>
         /// InvScaled will scale the width and height 
-        /// by 1 / DPI of the system (see that it's not per-monitor)
+        /// by 1 / DPI of the system (see that it's NOT per-monitor)
         /// </summary>
         InvScaled
     }

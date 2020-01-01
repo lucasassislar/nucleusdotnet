@@ -1,8 +1,8 @@
 // Common/CRC.cs
+// Source: https://www.7-zip.org/sdk.html   Adapted to follow namespaces and clean code rules
 
-namespace SevenZip
-{
-	class CRC
+namespace Nucleus.IO.LZMA {
+        class CRC
 	{
 		public static readonly uint[] Table;
 
