@@ -6,6 +6,11 @@
     <OutputType>WinExe</OutputType>
     <StartupObject />
     <UseWindowsForms>true</UseWindowsForms>
+    <PackageLicenseExpression>MIT License Copyright (c) 2020 Lucas Assis</PackageLicenseExpression>
+    <Copyright>MIT License Copyright (c) 2020 Lucas Assis</Copyright>
+    <Description>NucleusDotNET is a cross-platform library used for the development of .NET applications It compiles under .NET Framework 4 (Client) or .NET Core 3</Description>
+    <PackageProjectUrl>https://github.com/lucasassislar/nucleusdotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lucasassislar/nucleusdotnet</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
