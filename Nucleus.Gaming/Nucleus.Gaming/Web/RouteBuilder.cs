@@ -53,8 +53,8 @@ namespace Nucleus.Web {
 
                                         List<object> objs = new List<object>();
                                         objs.Add(request);
-                                        for (int i = route.SubPaths + 1; i < subPaths.Length; i++) {
-                                            string sub = subPaths[i];
+                                        for (int z = route.SubPaths + 1; z < subPaths.Length; z++) {
+                                            string sub = subPaths[u];
                                             objs.Add(sub);
                                         }
 
