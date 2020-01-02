@@ -1,4 +1,5 @@
-﻿using Nucleus.Gaming.Coop;
+﻿using Nucleus.Platform.Windows;
+using Nucleus.Platform.Windows.Interop;
 using System;
 using System.Drawing;
 
