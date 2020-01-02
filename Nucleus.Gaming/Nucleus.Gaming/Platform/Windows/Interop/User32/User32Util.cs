@@ -1,14 +1,14 @@
 ﻿#if WINFORMS
-using Nucleus.Gaming.Windows.Interop;
+using Nucleus.Platform.Windows.Interop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using static Nucleus.Gaming.Windows.Interop.User32Interop;
+using static Nucleus.Platform.Windows.Interop.User32Interop;
 
-namespace Nucleus.Gaming.Windows {
+namespace Nucleus.Platform.Windows {
     public static class User32Util {
         public static Control GetFocusControl() {
             Control focusControl = null;
@@ -34,7 +34,7 @@ namespace Nucleus.Gaming.Windows {
             var handles = new List<IntPtr>();
 
             foreach (ProcessThread thread in Process.GetProcessById(processId).Threads) {
-                EnumThreadWindows(thread.Id, (hWnd, lParam) => {
+                User32Interop.EnumThreadWindows(thread.Id, (hWnd, lParam) => {
                     handles.Add(hWnd);
                     return true;
                 }, IntPtr.Zero);
@@ -56,7 +56,7 @@ namespace Nucleus.Gaming.Windows {
             int LogicalScreenHeight = Gdi32Interop.GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
             int PhysicalScreenHeight = Gdi32Interop.GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
 
-            float ScreenScalingFactor = (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
+            float ScreenScalingFactor = PhysicalScreenHeight / (float)LogicalScreenHeight;
 
             return ScreenScalingFactor;
         }

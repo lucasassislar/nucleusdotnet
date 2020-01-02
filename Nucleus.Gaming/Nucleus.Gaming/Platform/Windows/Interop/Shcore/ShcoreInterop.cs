@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Nucleus.Gaming.Windows.Interop {
+namespace Nucleus.Platform.Windows.Interop {
     /// <summary>
     /// Interop functionality for Windows 8.1+
     /// </summary>

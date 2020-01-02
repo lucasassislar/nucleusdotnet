@@ -1,4 +1,4 @@
-﻿namespace WindowScrape.Constants {
+﻿namespace Nucleus.WindowScrape {
     public enum WindowLongFlags : int {
         GWL_EXSTYLE = -20,
         GWLP_HINSTANCE = -6,

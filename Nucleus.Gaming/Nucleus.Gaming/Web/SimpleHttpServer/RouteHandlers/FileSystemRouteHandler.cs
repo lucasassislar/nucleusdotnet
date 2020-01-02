@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Nucleus.Gaming.Web {
+namespace Nucleus.Web {
     public class FileSystemRouteHandler {
 
         public string BasePath { get; set; }
@@ -100,7 +100,7 @@ namespace Nucleus.Gaming.Web {
         }
 
 
-        private static IDictionary<string, string> _mappings = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase) {
+        private static readonly IDictionary<string, string> _mappings = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase) {
 
         #region Big freaking list of mime types
 

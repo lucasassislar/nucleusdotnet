@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 
-namespace Nucleus.Gaming.Threading {
+namespace Nucleus.Threading {
     public class TaskManager {
-        private List<ThreadTask> queuedTasks;
-        private Thread[] threads;
-        private bool finished;
-        private ThreadData[] threadDatas;
+        private readonly bool finished;
+
+        private readonly List<ThreadTask> queuedTasks;
+        private readonly ThreadData[] threadDatas;
+
+        private readonly Thread[] threads;
         private bool autoSort = false;
 
         public List<ThreadTask> QueuedTasks { get { return queuedTasks; } }

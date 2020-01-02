@@ -1,4 +1,4 @@
-﻿using Nucleus.Gaming.Coop;
+﻿using Nucleus;
 using System.Drawing;
 
 namespace SplitScreenMe.Core {
@@ -13,12 +13,10 @@ namespace SplitScreenMe.Core {
         public Rectangle MonitorBounds { get; set; }
 
         private UserScreen() {
-
         }
 
         public UserScreen(Rectangle display) {
             this.MonitorBounds = display;
-
             Type = UserScreenType.FullScreen;
         }
 

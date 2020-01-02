@@ -1,10 +1,4 @@
-﻿using Nucleus.Gaming.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nucleus.TaskManager {
+﻿namespace Nucleus.TaskManager {
     public class TaskData {
         public string TypeName { get; set; }
         public string AssemblyName { get; set; }

@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace Nucleus.Gaming.Platform.Windows {
+namespace Nucleus.Platform.Windows {
     public static class FormGraphicsUtil {
         public static Bitmap BuildCharToBitmap(Size size, int fontSize, Color color, string str, int rectBorder = 0, int reduce = 0) {
             using (Font font = new Font("Arial", fontSize)) {

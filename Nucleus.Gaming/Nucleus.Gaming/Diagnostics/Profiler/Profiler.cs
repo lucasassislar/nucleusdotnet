@@ -7,7 +7,7 @@ namespace Nucleus.Diagnostics {
     /// Simple profiler to measure task timing by unique-key
     /// </summary>
     public static class Profiler {
-        private static Dictionary<MeasureKey, MeasureData> measuring;
+        private static readonly Dictionary<MeasureKey, MeasureData> measuring;
 
         public static List<MeasureData> AllData { get; private set; }
 
@@ -47,7 +47,7 @@ namespace Nucleus.Diagnostics {
             }
 
             long now = Stopwatch.GetTimestamp();
-            double result = (now - timestamp.RecordedValue) / (double)Stopwatch.Frequency;
+            double result = (now - timestamp.RecordedValue) / Stopwatch.Frequency;
             AllData.Add(new MeasureData(reference, result, timestamp.ThreadID));
 
             return result;

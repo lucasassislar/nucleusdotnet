@@ -1,9 +1,8 @@
 ﻿#if WINDOWS
 using System;
 using System.Windows.Forms;
-using Win32;
 
-namespace Nucleus.Gaming.Platform.Windows.Controls {
+namespace Nucleus.Platform.Windows.Controls {
     public class MouseMessageFilter : IMessageFilter, IDisposable {
         public MouseMessageFilter() {
         }

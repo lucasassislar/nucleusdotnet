@@ -1,12 +1,10 @@
 ﻿using Newtonsoft.Json;
-using Nucleus.Gaming.Coop;
 using Nucleus.IO;
-using SplitScreenMe.Core;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
-namespace Nucleus.Gaming.Tools.GameStarter {
+namespace Nucleus.Tools.GameStarter {
     /// <summary>
     /// Util class for executing and reading output from the Nucleus.Coop.StartGame application
     /// </summary>

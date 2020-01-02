@@ -2,7 +2,7 @@
 
 using System;
 
-namespace Nucleus.Gaming.Platform.Windows.IO.MFT {
+namespace Nucleus.Platform.Windows.IO.MFT {
     public class FileNameAndParentFrn {
         private string _name;
         public string Name {

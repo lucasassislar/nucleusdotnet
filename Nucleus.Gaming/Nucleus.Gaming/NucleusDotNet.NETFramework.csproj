@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nucleus</RootNamespace>
-    <AssemblyName>Nucleus.Gaming</AssemblyName>
+    <AssemblyName>NucleusDotNet</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -102,7 +102,7 @@
     <Compile Include="Util\ConversionUtil.cs" />
     <Compile Include="Util\Extensions\BinaryReaderExtensions.cs" />
     <Compile Include="Util\Extensions\BinaryWriterExtensions.cs" />
-    <Compile Include="Util\ResourceStrings.cs" />
+    <Compile Include="Util\Reusable\ResourceStrings.cs" />
     <Compile Include="Web\Db\DbManager.cs" />
     <Compile Include="Diagnostics\PanelTextWriter.cs" />
     <Compile Include="Diagnostics\Profiler\MeasureData.cs" />
@@ -115,8 +115,8 @@
     <Compile Include="Threading\ThreadData.cs" />
     <Compile Include="Threading\ThreadTask.cs" />
     <Compile Include="Util\ApplicationUtil.cs" />
-    <Compile Include="Util\UserScreen.cs" />
-    <Compile Include="Util\UserScreenType.cs" />
+    <Compile Include="Util\Screen\UserScreen.cs" />
+    <Compile Include="Util\Screen\UserScreenType.cs" />
     <Compile Include="Web\RouteAttribute.cs" />
     <Compile Include="Web\RouteBuilder.cs" />
     <Compile Include="Web\RouteManagerAttribute.cs" />
@@ -220,7 +220,6 @@
     <None Include="Platform\Windows\Interop\Interceptor\Win32.cs" />
     <None Include="Platform\Windows\Interop\Interceptor\Win32EnumWindows.cs" />
     <Compile Include="Platform\Windows\Interop\Interceptor\Win32Messages.cs" />
-    <None Include="Platform\Windows\Interop\Interceptor\WindowInterceptor.cs" />
     <Compile Include="Platform\Windows\Interop\User32\User32Util.cs" />
     <Compile Include="Platform\Windows\Interop\User32\User32Interop.cs" />
     <Compile Include="Platform\Windows\Interop\User32\User32_WS.cs" />
@@ -232,7 +231,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="RAction.cs" />
-    <Compile Include="RequestResult.cs" />
+    <Compile Include="Util\Reusable\RequestResult.cs" />
     <Compile Include="Tools\GameStarter\StartGameApp.cs" />
     <Compile Include="Tools\GameStarter\Data\StartGameData.cs" />
     <Compile Include="Tools\GameStarter\GameStarterTask.cs" />
@@ -249,8 +248,8 @@
     </Compile>
     <Compile Include="Util\AssemblyUtil.cs" />
     <Compile Include="Util\CmdUtil.cs" />
-    <Compile Include="Util\Palette.cs" />
-    <Compile Include="Util\ConsoleU.cs" />
+    <Compile Include="Util\Console\Palette.cs" />
+    <Compile Include="Util\Console\ConsoleU.cs" />
     <Compile Include="Util\Extensions\DirectoryInfoExtensions.cs" />
     <Compile Include="Util\FileUtil.cs" />
     <Compile Include="Util\MathUtil.cs" />

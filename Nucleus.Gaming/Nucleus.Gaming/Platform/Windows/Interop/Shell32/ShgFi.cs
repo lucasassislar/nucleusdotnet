@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nucleus.Gaming.Windows.Interop {
+namespace Nucleus.Platform.Windows.Interop {
     [Flags]
     public enum ShgFi : int {
         /// <summary>get icon</summary>

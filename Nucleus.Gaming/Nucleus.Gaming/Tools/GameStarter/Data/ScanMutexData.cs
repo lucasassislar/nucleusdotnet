@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Gaming.Tools.GameStarter {
+﻿namespace Nucleus.Tools.GameStarter {
     public class ScanMutexData {
         public string ProcessName { get; set; }
         public string[] Mutexes { get; set; }

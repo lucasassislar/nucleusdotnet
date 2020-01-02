@@ -12,7 +12,7 @@ namespace Nucleus.IO.LZMA {
 
         const UInt32 kIfinityPrice = 0xFFFFFFF;
 
-        static Byte[] g_FastPos = new Byte[1 << 11];
+        static readonly Byte[] g_FastPos = new Byte[1 << 11];
 
         static LzmaEncoder() {
             const Byte kFastSlots = 22;
@@ -44,7 +44,7 @@ namespace Nucleus.IO.LZMA {
 
         Base.State _state = new Base.State();
         Byte _previousByte;
-        UInt32[] _repDistances = new UInt32[Base.kNumRepDistances];
+        readonly UInt32[] _repDistances = new UInt32[Base.kNumRepDistances];
 
         void BaseInit() {
             _state.Init();
@@ -143,9 +143,9 @@ namespace Nucleus.IO.LZMA {
         class LenEncoder {
             BitEncoder _choice = new BitEncoder();
             BitEncoder _choice2 = new BitEncoder();
-            BitTreeEncoder[] _lowCoder = new BitTreeEncoder[Base.kNumPosStatesEncodingMax];
-            BitTreeEncoder[] _midCoder = new BitTreeEncoder[Base.kNumPosStatesEncodingMax];
-            BitTreeEncoder _highCoder = new BitTreeEncoder(Base.kNumHighLenBits);
+            readonly BitTreeEncoder[] _lowCoder = new BitTreeEncoder[Base.kNumPosStatesEncodingMax];
+            readonly BitTreeEncoder[] _midCoder = new BitTreeEncoder[Base.kNumPosStatesEncodingMax];
+            readonly BitTreeEncoder _highCoder = new BitTreeEncoder(Base.kNumHighLenBits);
 
             public LenEncoder() {
                 for (UInt32 posState = 0; posState < Base.kNumPosStatesEncodingMax; posState++) {
@@ -205,9 +205,9 @@ namespace Nucleus.IO.LZMA {
         const UInt32 kNumLenSpecSymbols = Base.kNumLowLenSymbols + Base.kNumMidLenSymbols;
 
         class LenPriceTableEncoder : LenEncoder {
-            UInt32[] _prices = new UInt32[Base.kNumLenSymbols << Base.kNumPosStatesBitsEncodingMax];
+            readonly UInt32[] _prices = new UInt32[Base.kNumLenSymbols << Base.kNumPosStatesBitsEncodingMax];
             UInt32 _tableSize;
-            UInt32[] _counters = new UInt32[Base.kNumPosStatesEncodingMax];
+            readonly UInt32[] _counters = new UInt32[Base.kNumPosStatesEncodingMax];
 
             public void SetTableSize(UInt32 tableSize) { _tableSize = tableSize; }
 
@@ -255,28 +255,23 @@ namespace Nucleus.IO.LZMA {
             public void MakeAsShortRep() { BackPrev = 0; ; Prev1IsChar = false; }
             public bool IsShortRep() { return (BackPrev == 0); }
         };
-        Optimal[] _optimum = new Optimal[kNumOpts];
+
+        readonly Optimal[] _optimum = new Optimal[kNumOpts];
         IMatchFinder _matchFinder = null;
-        Encoder _rangeEncoder = new Encoder();
-
-        BitEncoder[] _isMatch = new BitEncoder[Base.kNumStates << Base.kNumPosStatesBitsMax];
-        BitEncoder[] _isRep = new BitEncoder[Base.kNumStates];
-        BitEncoder[] _isRepG0 = new BitEncoder[Base.kNumStates];
-        BitEncoder[] _isRepG1 = new BitEncoder[Base.kNumStates];
-        BitEncoder[] _isRepG2 = new BitEncoder[Base.kNumStates];
-        BitEncoder[] _isRep0Long = new BitEncoder[Base.kNumStates << Base.kNumPosStatesBitsMax];
-
-        BitTreeEncoder[] _posSlotEncoder = new BitTreeEncoder[Base.kNumLenToPosStates];
-
-        BitEncoder[] _posEncoders = new BitEncoder[Base.kNumFullDistances - Base.kEndPosModelIndex];
-        BitTreeEncoder _posAlignEncoder = new BitTreeEncoder(Base.kNumAlignBits);
-
-        LenPriceTableEncoder _lenEncoder = new LenPriceTableEncoder();
-        LenPriceTableEncoder _repMatchLenEncoder = new LenPriceTableEncoder();
-
-        LiteralEncoder _literalEncoder = new LiteralEncoder();
-
-        UInt32[] _matchDistances = new UInt32[Base.kMatchMaxLen * 2 + 2];
+        readonly Encoder _rangeEncoder = new Encoder();
+        readonly BitEncoder[] _isMatch = new BitEncoder[Base.kNumStates << Base.kNumPosStatesBitsMax];
+        readonly BitEncoder[] _isRep = new BitEncoder[Base.kNumStates];
+        readonly BitEncoder[] _isRepG0 = new BitEncoder[Base.kNumStates];
+        readonly BitEncoder[] _isRepG1 = new BitEncoder[Base.kNumStates];
+        readonly BitEncoder[] _isRepG2 = new BitEncoder[Base.kNumStates];
+        readonly BitEncoder[] _isRep0Long = new BitEncoder[Base.kNumStates << Base.kNumPosStatesBitsMax];
+        readonly BitTreeEncoder[] _posSlotEncoder = new BitTreeEncoder[Base.kNumLenToPosStates];
+        readonly BitEncoder[] _posEncoders = new BitEncoder[Base.kNumFullDistances - Base.kEndPosModelIndex];
+        readonly BitTreeEncoder _posAlignEncoder = new BitTreeEncoder(Base.kNumAlignBits);
+        readonly LenPriceTableEncoder _lenEncoder = new LenPriceTableEncoder();
+        readonly LenPriceTableEncoder _repMatchLenEncoder = new LenPriceTableEncoder();
+        readonly LiteralEncoder _literalEncoder = new LiteralEncoder();
+        readonly UInt32[] _matchDistances = new UInt32[Base.kMatchMaxLen * 2 + 2];
 
         UInt32 _numFastBytes = kNumFastBytesDefault;
         UInt32 _longestMatchLength;
@@ -288,10 +283,9 @@ namespace Nucleus.IO.LZMA {
         UInt32 _optimumCurrentIndex;
 
         bool _longestMatchWasFound;
-
-        UInt32[] _posSlotPrices = new UInt32[1 << (Base.kNumPosSlotBits + Base.kNumLenToPosStatesBits)];
-        UInt32[] _distancesPrices = new UInt32[Base.kNumFullDistances << Base.kNumLenToPosStatesBits];
-        UInt32[] _alignPrices = new UInt32[Base.kAlignTableSize];
+        readonly UInt32[] _posSlotPrices = new UInt32[1 << (Base.kNumPosSlotBits + Base.kNumLenToPosStatesBits)];
+        readonly UInt32[] _distancesPrices = new UInt32[Base.kNumFullDistances << Base.kNumLenToPosStatesBits];
+        readonly UInt32[] _alignPrices = new UInt32[Base.kAlignTableSize];
         UInt32 _alignPriceCount;
 
         UInt32 _distTableSize = (kDefaultDictionaryLogSize * 2);
@@ -464,8 +458,8 @@ namespace Nucleus.IO.LZMA {
             return _optimumCurrentIndex;
         }
 
-        UInt32[] reps = new UInt32[Base.kNumRepDistances];
-        UInt32[] repLens = new UInt32[Base.kNumRepDistances];
+        readonly UInt32[] reps = new UInt32[Base.kNumRepDistances];
+        readonly UInt32[] repLens = new UInt32[Base.kNumRepDistances];
 
 
         UInt32 GetOptimum(UInt32 position, out UInt32 backRes) {
@@ -519,7 +513,7 @@ namespace Nucleus.IO.LZMA {
             Byte matchByte = _matchFinder.GetIndexByte((Int32)(0 - _repDistances[0] - 1 - 1));
 
             if (lenMain < 2 && currentByte != matchByte && repLens[repMaxIndex] < 2) {
-                backRes = (UInt32)0xFFFFFFFF;
+                backRes = 0xFFFFFFFF;
                 return 1;
             }
 
@@ -798,7 +792,7 @@ namespace Nucleus.IO.LZMA {
                                     _isMatch[(state2.Index << Base.kNumPosStatesBitsMax) + posStateNext].GetPrice0() +
                                     _literalEncoder.GetSubCoder(position + lenTest,
                                     _matchFinder.GetIndexByte((Int32)lenTest - 1 - 1)).GetPrice(true,
-                                    _matchFinder.GetIndexByte((Int32)((Int32)lenTest - 1 - (Int32)(reps[repIndex] + 1))),
+                                    _matchFinder.GetIndexByte((Int32)lenTest - 1 - (Int32)(reps[repIndex] + 1)),
                                     _matchFinder.GetIndexByte((Int32)lenTest - 1));
                             state2.UpdateChar();
                             posStateNext = (position + lenTest + 1) & _posStateMask;
@@ -1130,7 +1124,7 @@ namespace Nucleus.IO.LZMA {
         }
 
         const int kPropSize = 5;
-        Byte[] properties = new Byte[kPropSize];
+        readonly Byte[] properties = new Byte[kPropSize];
 
         public void WriteCoderProperties(System.IO.Stream outStream) {
             properties[0] = (Byte)((_posStateBits * 5 + _numLiteralPosStateBits) * 9 + _numLiteralContextBits);
@@ -1139,7 +1133,7 @@ namespace Nucleus.IO.LZMA {
             outStream.Write(properties, 0, kPropSize);
         }
 
-        UInt32[] tempPrices = new UInt32[Base.kNumFullDistances];
+        readonly UInt32[] tempPrices = new UInt32[Base.kNumFullDistances];
         UInt32 _matchPriceCount;
 
         void FillDistancesPrices() {
@@ -1178,7 +1172,7 @@ namespace Nucleus.IO.LZMA {
         }
 
 
-        static string[] kMatchFinderIDs =
+        static readonly string[] kMatchFinderIDs =
         {
             "BT2",
             "BT4",
@@ -1250,26 +1244,26 @@ namespace Nucleus.IO.LZMA {
                         Int32 v = (Int32)prop;
                         if (v < 0 || v > (UInt32)Base.kNumPosStatesBitsEncodingMax)
                             throw new InvalidParamException();
-                        _posStateBits = (int)v;
-                        _posStateMask = (((UInt32)1) << (int)_posStateBits) - 1;
+                        _posStateBits = v;
+                        _posStateMask = (((UInt32)1) << _posStateBits) - 1;
                         break;
                     }
                     case CoderPropID.LitPosBits: {
                         if (!(prop is Int32))
                             throw new InvalidParamException();
                         Int32 v = (Int32)prop;
-                        if (v < 0 || v > (UInt32)Base.kNumLitPosStatesBitsEncodingMax)
+                        if (v < 0 || v > Base.kNumLitPosStatesBitsEncodingMax)
                             throw new InvalidParamException();
-                        _numLiteralPosStateBits = (int)v;
+                        _numLiteralPosStateBits = v;
                         break;
                     }
                     case CoderPropID.LitContextBits: {
                         if (!(prop is Int32))
                             throw new InvalidParamException();
                         Int32 v = (Int32)prop;
-                        if (v < 0 || v > (UInt32)Base.kNumLitContextBitsMax)
+                        if (v < 0 || v > Base.kNumLitContextBitsMax)
                             throw new InvalidParamException(); ;
-                        _numLiteralContextBits = (int)v;
+                        _numLiteralContextBits = v;
                         break;
                     }
                     case CoderPropID.EndMarker: {

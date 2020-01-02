@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
-using WindowScrape.Constants;
-using WindowScrape.Types;
 
-namespace WindowScrape.Static {
+namespace Nucleus.WindowScrape {
     public static class HwndInterface {
         #region Windows
         public static List<IntPtr> EnumHwnds() {
@@ -144,7 +142,7 @@ namespace WindowScrape.Static {
 
         #endregion
 
-        #region lib
+        #region LIB
 
         static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
         static readonly IntPtr HWND_NOTOPMOST = new IntPtr(-2);
@@ -224,6 +222,5 @@ namespace WindowScrape.Static {
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
         #endregion
-
     }
 }

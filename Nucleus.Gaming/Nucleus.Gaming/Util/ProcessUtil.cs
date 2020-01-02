@@ -1,13 +1,13 @@
-﻿using Nucleus.Gaming.Interop;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 #if WINDOWS
 using System.Management;
+using Nucleus.Platform.Windows;
 #endif
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class ProcessUtil {
         public static Process RunAsDesktopUser(ProcessStartInfo startInfo) {
             if (string.IsNullOrWhiteSpace(startInfo.FileName))

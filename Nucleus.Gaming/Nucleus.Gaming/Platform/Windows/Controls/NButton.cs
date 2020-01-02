@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Nucleus.Gaming.Platform.Windows.Controls {
+namespace Nucleus.Platform.Windows.Controls {
     public class NButton : Button {
         protected Color defaultForeColor = Color.Black;
         protected Color disabledForeColor = Color.Black;

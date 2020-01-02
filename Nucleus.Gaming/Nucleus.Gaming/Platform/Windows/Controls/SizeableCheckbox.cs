@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Nucleus.Gaming.Platform.Windows.Controls {
+namespace Nucleus.Platform.Windows.Controls {
     // From http://stackoverflow.com/questions/3166244/how-to-increase-the-size-of-checkbox-in-winforms
     public class SizeableCheckbox : CheckBox {
         public SizeableCheckbox() {

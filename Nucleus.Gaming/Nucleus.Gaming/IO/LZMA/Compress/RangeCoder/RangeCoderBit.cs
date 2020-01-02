@@ -38,7 +38,7 @@ namespace Nucleus.IO.LZMA {
             }
         }
 
-        private static UInt32[] ProbPrices = new UInt32[kBitModelTotal >> kNumMoveReducingBits];
+        private static readonly UInt32[] ProbPrices = new UInt32[kBitModelTotal >> kNumMoveReducingBits];
 
         static BitEncoder() {
             const int kNumBits = (kNumBitModelTotalBits - kNumMoveReducingBits);
@@ -75,7 +75,7 @@ namespace Nucleus.IO.LZMA {
         public void Init() { Prob = kBitModelTotal >> 1; }
 
         public uint Decode(Decoder rangeDecoder) {
-            uint newBound = (uint)(rangeDecoder.Range >> kNumBitModelTotalBits) * (uint)Prob;
+            uint newBound = (rangeDecoder.Range >> kNumBitModelTotalBits) * Prob;
             if (rangeDecoder.Code < newBound) {
                 rangeDecoder.Range = newBound;
                 Prob += (kBitModelTotal - Prob) >> kNumMoveBits;

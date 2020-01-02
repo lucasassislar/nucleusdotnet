@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Gaming.Tools.GameStarter {
+﻿namespace Nucleus.Tools.GameStarter {
     public enum GameStarterTask {
         // runs the game and orphans its process
         StartGame,

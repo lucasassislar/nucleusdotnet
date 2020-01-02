@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Nucleus.Gaming.Platform.Windows.Controls {
+namespace Nucleus.Platform.Windows.Controls {
     public class TransparentControl : Control {
         public TransparentControl() {
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);

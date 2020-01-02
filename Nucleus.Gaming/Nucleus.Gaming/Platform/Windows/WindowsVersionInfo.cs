@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 
 // Thakts to Brisingr Aerowing for help with the Windows 10 adapatation
 
-namespace Nucleus.Gaming.Windows {
+namespace Nucleus.Platform.Windows {
     /// <summary>
     /// Provides detailed information about the host operating system.
     /// </summary>
@@ -899,7 +899,7 @@ namespace Nucleus.Gaming.Windows {
                 IntPtr fnPtr = GetProcAddress(handle, "IsWow64Process");
 
                 if (fnPtr != IntPtr.Zero) {
-                    return (IsWow64ProcessDelegate)Marshal.GetDelegateForFunctionPointer((IntPtr)fnPtr, typeof(IsWow64ProcessDelegate));
+                    return (IsWow64ProcessDelegate)Marshal.GetDelegateForFunctionPointer(fnPtr, typeof(IsWow64ProcessDelegate));
                 }
             }
 

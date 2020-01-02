@@ -1,6 +1,4 @@
-﻿using Nucleus.Gaming;
-using Nucleus.Gaming.Util;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
@@ -21,14 +19,14 @@ namespace Nucleus.Diagnostics {
         }
 
         private static Log instance;
-        private string logPath;
-        private Stream logStream;
-        private StreamWriter writer;
+        private readonly string logPath;
+        private readonly Stream logStream;
+        private readonly StreamWriter writer;
         private OutputLevel consoleLevel;
-        private bool enableLogging;
-        private List<ILogNode> logCallbacks;
-        private object locker;
-        private object writeLineLock;
+        private readonly bool enableLogging;
+        private readonly List<ILogNode> logCallbacks;
+        private readonly object locker;
+        private readonly object writeLineLock;
 
         public Log(bool enableLogging) {
             this.enableLogging = enableLogging;

@@ -2,10 +2,9 @@
 
 using System;
 
-namespace Nucleus.Gaming.Web {
+namespace Nucleus.Web {
     public class Route {
         public string Name { get; set; } // descriptive name for debugging
-
 
         public string UrlRegex { get; set; }
         public string Method { get; set; }

@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Nucleus.Gaming.Platform.Windows.Interop {
+namespace Nucleus.Platform.Windows.Interop {
     internal static class Kernel32Interop {
         [DllImport("kernel32.dll")]
         public static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, SymbolicLink dwFlags);

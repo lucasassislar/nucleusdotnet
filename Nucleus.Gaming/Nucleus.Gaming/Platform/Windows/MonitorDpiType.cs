@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Gaming.Windows {
+﻿namespace Nucleus.Platform.Windows {
     /// <summary>
     /// Identifies the dots per inch (dpi) setting for a monitor.
     /// </summary>

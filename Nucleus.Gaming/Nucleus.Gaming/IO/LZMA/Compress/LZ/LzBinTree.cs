@@ -3,7 +3,7 @@
 using System;
 
 namespace Nucleus.IO.LZMA {
-        public class BinTree : InWindow, IMatchFinder {
+    public class BinTree : InWindow, IMatchFinder {
         UInt32 _cyclicBufferPos;
         UInt32 _cyclicBufferSize = 0;
         UInt32 _matchMaxLen;

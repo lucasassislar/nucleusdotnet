@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using static System.Windows.Forms.Control;
 
-namespace Nucleus.Gaming.Platform.Windows.Controls {
+namespace Nucleus.Platform.Windows.Controls {
     public partial class ListBoxControlCollection : ControlCollection {
         public Panel Panel { get; private set; }
         public ControlListBox ListBox { get; private set; }

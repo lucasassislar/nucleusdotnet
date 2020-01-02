@@ -58,7 +58,7 @@ namespace Nucleus.IO.LZMA {
         }
 
         public void ShiftLow() {
-            if ((uint)Low < (uint)0xFF000000 || (uint)(Low >> 32) == 1) {
+            if ((uint)Low < 0xFF000000 || (uint)(Low >> 32) == 1) {
                 byte temp = _cache;
                 do {
                     Stream.WriteByte((byte)(temp + (Low >> 32)));

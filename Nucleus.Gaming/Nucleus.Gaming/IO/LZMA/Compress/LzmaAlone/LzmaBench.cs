@@ -5,10 +5,10 @@ using System;
 using System.IO;
 
 namespace Nucleus.IO.LZMA {
-        /// <summary>
-        /// LZMA Benchmark
-        /// </summary>
-        internal abstract class LzmaBench {
+    /// <summary>
+    /// LZMA Benchmark
+    /// </summary>
+    internal abstract class LzmaBench {
         const UInt32 kAdditionalSize = (6 << 20);
         const UInt32 kCompressedAdditionalSize = (1 << 10);
         const UInt32 kMaxLzmaPropSize = 10;
@@ -26,7 +26,7 @@ namespace Nucleus.IO.LZMA {
         };
 
         class CBitRandomGenerator {
-            CRandomGenerator RG = new CRandomGenerator();
+            readonly CRandomGenerator RG = new CRandomGenerator();
             UInt32 Value;
             int NumBits;
             public void Init() {
@@ -52,7 +52,7 @@ namespace Nucleus.IO.LZMA {
         };
 
         class CBenchRandomGenerator {
-            CBitRandomGenerator RG = new CBitRandomGenerator();
+            readonly CBitRandomGenerator RG = new CBitRandomGenerator();
             UInt32 Pos;
             UInt32 Rep0;
 
@@ -162,7 +162,7 @@ namespace Nucleus.IO.LZMA {
         static UInt64 GetCompressRating(UInt32 dictionarySize, UInt64 elapsedTime, UInt64 size) {
             UInt64 t = GetLogSize(dictionarySize) - (18 << kSubBits);
             UInt64 numCommandsForOne = 1060 + ((t * t * 10) >> (2 * kSubBits));
-            UInt64 numCommands = (UInt64)(size) * numCommandsForOne;
+            UInt64 numCommands = size * numCommandsForOne;
             return MyMultDiv64(numCommands, elapsedTime);
         }
 
@@ -216,7 +216,7 @@ namespace Nucleus.IO.LZMA {
 #endif
         }
 
-        static public int LzmaBenchmark(Int32 numIterations, UInt32 dictionarySize) {
+        public static int LzmaBenchmark(Int32 numIterations, UInt32 dictionarySize) {
             if (numIterations <= 0)
                 return 0;
             if (dictionarySize < (1 << 18)) {

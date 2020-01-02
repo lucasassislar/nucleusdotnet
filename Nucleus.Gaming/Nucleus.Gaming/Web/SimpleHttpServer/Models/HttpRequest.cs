@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nucleus.Gaming.Web {
+namespace Nucleus.Web {
     public class HttpRequest {
         public string Method { get; set; }
         public string Url { get; set; }

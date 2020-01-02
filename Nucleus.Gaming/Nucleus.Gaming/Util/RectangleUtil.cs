@@ -1,8 +1,8 @@
-﻿using Nucleus.Gaming.Coop;
+﻿#if WINFORMS
 using SplitScreenMe.Core;
 using System.Drawing;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class RectangleUtil {
         public static float CalculateHeight(float oWidth, float oHeight, float nWidth) {
             return (oWidth / oHeight) * nWidth;
@@ -130,3 +130,4 @@ namespace Nucleus.Gaming {
         }
     }
 }
+#endif

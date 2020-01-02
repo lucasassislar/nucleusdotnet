@@ -4,10 +4,10 @@
 using System.IO;
 
 namespace Nucleus.IO.LZMA {
-        public class OutBuffer {
-        private byte[] m_Buffer;
+    public class OutBuffer {
+        private readonly byte[] m_Buffer;
         private uint m_Pos;
-        private uint m_BufferSize;
+        private readonly uint m_BufferSize;
         private Stream m_Stream;
         private ulong m_ProcessedSize;
 

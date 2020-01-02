@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public class RequestResult {
         public dynamic BaseData { get; protected set; }
 
@@ -43,16 +43,6 @@ namespace Nucleus.Gaming {
         public void SetAdditionalData(object data) {
             this.AdditionalData = data;
         }
-
-        //public void SetSuccess(bool success)
-        //{
-        //    this.Success = success;
-        //}
-
-        //public void SetFailed(bool failed)
-        //{
-        //    this.Failed = failed;
-        //}
 
         public void SetLogData(string logData) {
             LogData = logData;

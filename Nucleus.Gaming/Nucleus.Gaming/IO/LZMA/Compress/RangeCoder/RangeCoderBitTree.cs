@@ -2,9 +2,9 @@
 using System;
 
 namespace Nucleus.IO.LZMA {
-        struct BitTreeEncoder {
-        BitEncoder[] Models;
-        int NumBitLevels;
+    struct BitTreeEncoder {
+        readonly BitEncoder[] Models;
+        readonly int NumBitLevels;
 
         public BitTreeEncoder(int numBitLevels) {
             NumBitLevels = numBitLevels;
@@ -86,8 +86,8 @@ namespace Nucleus.IO.LZMA {
     }
 
     struct BitTreeDecoder {
-        BitDecoder[] Models;
-        int NumBitLevels;
+        readonly BitDecoder[] Models;
+        readonly int NumBitLevels;
 
         public BitTreeDecoder(int numBitLevels) {
             NumBitLevels = numBitLevels;

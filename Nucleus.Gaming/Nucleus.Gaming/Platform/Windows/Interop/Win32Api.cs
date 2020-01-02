@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Nucleus.Gaming.Interop {
+namespace Nucleus.Platform.Windows {
     public class Win32API {
         [DllImport("ntdll.dll")]
         public static extern int NtQueryObject(IntPtr ObjectHandle, int

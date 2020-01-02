@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class DirectoryInfoExtensions {
         /// <summary>
         /// Searches for a specific file in the current directory

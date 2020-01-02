@@ -1,11 +1,9 @@
-﻿using Nucleus.Gaming.Coop;
-using Nucleus.IO;
-using SplitScreenMe.Core;
+﻿using Nucleus.IO;
 using System;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Nucleus.Gaming.Tools.GameStarter {
+namespace Nucleus.Tools.GameStarter {
     public class StartGameApp {
         private Process process;
         private string lastLine;

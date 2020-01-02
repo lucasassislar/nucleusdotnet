@@ -2,11 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using WindowScrape.Constants;
-using WindowScrape.Static;
 using Point = System.Drawing.Point;
 
-namespace WindowScrape.Types {
+namespace Nucleus.WindowScrape {
     /// <summary>
     /// Allows the searching, navigation, and manipulation of Hwnd objects.
     /// </summary>
@@ -50,9 +48,9 @@ namespace WindowScrape.Types {
             get { return HwndInterface.GetHwndPos(NativePtr); }
             set {
                 if (TopMost) {
-                    HwndInterface.SetHwndPosTopMost(NativePtr, (int)value.X, (int)value.Y);
+                    HwndInterface.SetHwndPosTopMost(NativePtr, value.X, value.Y);
                 } else {
-                    HwndInterface.SetHwndPos(NativePtr, (int)value.X, (int)value.Y);
+                    HwndInterface.SetHwndPos(NativePtr, value.X, value.Y);
                 }
             }
         }
@@ -80,9 +78,9 @@ namespace WindowScrape.Types {
             get { return HwndInterface.GetHwndSize(NativePtr); }
             set {
                 if (TopMost) {
-                    HwndInterface.SetHwndSizeTopMost(NativePtr, (int)value.Width, (int)value.Height);
+                    HwndInterface.SetHwndSizeTopMost(NativePtr, value.Width, value.Height);
                 } else {
-                    HwndInterface.SetHwndSize(NativePtr, (int)value.Width, (int)value.Height);
+                    HwndInterface.SetHwndSize(NativePtr, value.Width, value.Height);
                 }
             }
         }

@@ -1,9 +1,11 @@
-﻿using Nucleus.Gaming.Windows;
-using Nucleus.Gaming.Windows.Interop;
-using SplitScreenMe.Core;
-using System.Drawing;
+﻿using System.Drawing;
 
-namespace Nucleus.Gaming {
+#if WINDOWS
+using Nucleus.Platform.Windows.Interop;
+using Nucleus.Platform.Windows;
+#endif
+
+namespace SplitScreenMe.Core {
     public static class ScreensUtil {
         public static UserScreen[] GetSetup_Triple4kHorizontal() {
             return new UserScreen[]

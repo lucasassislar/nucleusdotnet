@@ -1,9 +1,9 @@
 ﻿using Nucleus.Diagnostics;
 using System;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class ConsoleU {
-        private static object locker = new object();
+        private static readonly object locker = new object();
         public static OutputLevel currentLevel = OutputLevel.High;
 
         private static string CropLine(string line) {

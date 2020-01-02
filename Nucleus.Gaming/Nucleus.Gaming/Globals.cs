@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     /// <summary>
     /// Holds shared information for the whole library
     /// </summary>

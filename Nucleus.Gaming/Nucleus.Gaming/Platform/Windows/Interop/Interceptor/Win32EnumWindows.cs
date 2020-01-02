@@ -11,39 +11,35 @@ using System.Threading;
 //using System.Messaging;
 using System.Text;
 using System.Configuration;
-using System.Collections; 
+using System.Collections;
 
-namespace CliverSoft
-{
+namespace Nucleus.Platform.Windows {
     /// <summary>
     /// contains collected window info
     /// </summary>
-	public struct Window
-	{
-		public string path;
-		public string text;
-		public string internal_text;
-		public string class_name;
-		public int level;
-		public int parent_id;
-	}
+	public struct Window {
+        public string path;
+        public string text;
+        public string internal_text;
+        public string class_name;
+        public int level;
+        public int parent_id;
+    }
 
 
-	public class EnumWindows
-	{
-		public ArrayList Windows = new ArrayList();
+    public class EnumWindows {
+        public ArrayList Windows = new ArrayList();
 
         /// <summary>
         /// enum all windows including child windows
         /// </summary>
         /// <param name="print_to_log"></param>
-		public EnumWindows(bool print_to_log)
-		{
+		public EnumWindows(bool print_to_log) {
             //Print2Log = print_to_log;
-			Windows.Clear();
+            Windows.Clear();
             Win32.Functions.EnumWindows(new Win32.Functions.EnumProc(this.enum_window_call_back), 0);
-//			Message.Inform("Completed");
-		}
+            //			Message.Inform("Completed");
+        }
 
         /// <summary>
         /// invoke building child window tree for give parent window
@@ -51,31 +47,30 @@ namespace CliverSoft
         /// <param name="hwnd"></param>
         /// <param name="lValue"></param>
         /// <returns></returns>
-		bool enum_window_call_back(IntPtr hwnd, int lValue) 
-		{
-			Window w = new Window();
+		bool enum_window_call_back(IntPtr hwnd, int lValue) {
+            Window w = new Window();
 
-			w.level = 0;
-			w.parent_id = -1;
+            w.level = 0;
+            w.parent_id = -1;
 
-			StringBuilder s = new StringBuilder(255);;
-					
-			Win32.Functions.GetClassName(hwnd, s, 255);
-			w.class_name = s.ToString();
-			Win32.Functions.GetWindowText(hwnd, s, 255);
-			w.text = s.ToString();
-			Win32.Functions.InternalGetWindowText(hwnd, s, 255);
-			w.internal_text = s.ToString();
-			w.path = "[" + w.text + "]";
+            StringBuilder s = new StringBuilder(255); ;
 
-			Windows.Add(w);
-					
-			//Message.Write2Log(w.level + " " + w.path + " - " + w.class_name);
+            Win32.Functions.GetClassName(hwnd, s, 255);
+            w.class_name = s.ToString();
+            Win32.Functions.GetWindowText(hwnd, s, 255);
+            w.text = s.ToString();
+            Win32.Functions.InternalGetWindowText(hwnd, s, 255);
+            w.internal_text = s.ToString();
+            w.path = "[" + w.text + "]";
 
-            Win32.Functions.EnumChildWindows(hwnd, new Win32.Functions.EnumProc(this.enum_child_window_call_back), Windows.Count - 1);			
-					
-			return true;
-		}
+            Windows.Add(w);
+
+            //Message.Write2Log(w.level + " " + w.path + " - " + w.class_name);
+
+            Win32.Functions.EnumChildWindows(hwnd, new Win32.Functions.EnumProc(this.enum_child_window_call_back), Windows.Count - 1);
+
+            return true;
+        }
 
         /// <summary>
         /// build child window tree recurcively
@@ -83,30 +78,29 @@ namespace CliverSoft
         /// <param name="hwnd"></param>
         /// <param name="parent_id"></param>
         /// <returns></returns>
-        bool enum_child_window_call_back(IntPtr hwnd, int parent_id) 
-		{
-			Window w = new Window();
+        bool enum_child_window_call_back(IntPtr hwnd, int parent_id) {
+            Window w = new Window();
 
-			w.level = ((Window)Windows[parent_id]).level + 1;
-			w.parent_id = parent_id;
+            w.level = ((Window)Windows[parent_id]).level + 1;
+            w.parent_id = parent_id;
 
-			StringBuilder s = new StringBuilder(255);
-					
-			Win32.Functions.GetClassName(hwnd, s, 255);
-			w.class_name = s.ToString();
-			Win32.Functions.GetWindowText(hwnd, s, 255);
-			w.text = s.ToString();
-			Win32.Functions.InternalGetWindowText(hwnd, s, 255);
-			w.internal_text = s.ToString();
-			w.path = ((Window)Windows[parent_id]).path + "[" + w.text + "]";
+            StringBuilder s = new StringBuilder(255);
 
-			Windows.Add(w);
-					
-			//Message.Write2Log(w.level + " " + w.path + " - " + w.class_name);
+            Win32.Functions.GetClassName(hwnd, s, 255);
+            w.class_name = s.ToString();
+            Win32.Functions.GetWindowText(hwnd, s, 255);
+            w.text = s.ToString();
+            Win32.Functions.InternalGetWindowText(hwnd, s, 255);
+            w.internal_text = s.ToString();
+            w.path = ((Window)Windows[parent_id]).path + "[" + w.text + "]";
 
-            Win32.Functions.EnumChildWindows(hwnd, new Win32.Functions.EnumProc(this.enum_child_window_call_back), Windows.Count - 1);			
-					
-			return true;
-		}
-	}
+            Windows.Add(w);
+
+            //Message.Write2Log(w.level + " " + w.path + " - " + w.class_name);
+
+            Win32.Functions.EnumChildWindows(hwnd, new Win32.Functions.EnumProc(this.enum_child_window_call_back), Windows.Count - 1);
+
+            return true;
+        }
+    }
 }

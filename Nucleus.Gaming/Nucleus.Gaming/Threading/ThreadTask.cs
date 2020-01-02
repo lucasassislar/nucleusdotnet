@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 
-namespace Nucleus.Gaming.Threading {
+namespace Nucleus.Threading {
     public class ThreadTask {
         public int ThreadID { get; private set; }
         public string Prefix { get; private set; }

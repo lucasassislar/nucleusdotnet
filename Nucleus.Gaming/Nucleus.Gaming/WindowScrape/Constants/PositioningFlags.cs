@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WindowScrape.Constants {
+namespace Nucleus.WindowScrape {
     [Flags]
     public enum PositioningFlags : uint {
         SWP_NOSIZE = 0x0001,

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.IO;
-using Encoder = Nucleus.IO.LZMA.LzmaEncoder;
-using Decoder = Nucleus.IO.LZMA.LzmaDecoder;
 
 namespace Nucleus.IO.LZMA {
     public static class LzmaHelper {
-        private static int dictionary = 1 << 23;
-        private static bool eos = false;
+        private static readonly int dictionary = 1 << 23;
+        private static readonly bool eos = false;
 
         // << 21 in case of low ram
         // static Int32 posStateBits = 2;
@@ -17,7 +15,7 @@ namespace Nucleus.IO.LZMA {
         // static   Int32 algorithm = 2;
         // static    Int32 numFastBytes = 128;
 
-        private static CoderPropID[] propIDs =
+        private static readonly CoderPropID[] propIDs =
                 {
                     CoderPropID.DictionarySize,
                     CoderPropID.PosStateBits,
@@ -30,14 +28,14 @@ namespace Nucleus.IO.LZMA {
                 };
 
         // these are the default properties, keeping it simple for now:
-        private static object[] properties =
+        private static readonly object[] properties =
                 {
-                    (Int32)(dictionary),
-                    (Int32)(2),
-                    (Int32)(3),
-                    (Int32)(0),
-                    (Int32)(2),
-                    (Int32)(128),
+                    dictionary,
+                    2,
+                    3,
+                    0,
+                    2,
+                    128,
                     "bt4",
                     eos
                 };

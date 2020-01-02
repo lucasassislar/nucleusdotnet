@@ -7,15 +7,15 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace Nucleus.Gaming.Web {
+namespace Nucleus.Web {
     public class HttpServer {
         public int Port {
             get; private set;
         }
 
         private TcpListener Listener;
-        private HttpProcessor Processor;
-        private bool IsActive = true;
+        private readonly HttpProcessor Processor;
+        private readonly bool IsActive = true;
         private Thread serverThread;
 
         public HttpServer(int port, List<Route> routes, string path) {
@@ -45,7 +45,7 @@ namespace Nucleus.Gaming.Web {
         /// </summary>
         public bool DebugLock { get; set; }
 
-        private object DebugLocker = new object();
+        private readonly object DebugLocker = new object();
 
         private void ServerThread(object state) {
             while (this.IsActive) {

@@ -1,5 +1,4 @@
-﻿using Nucleus.Gaming;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -23,9 +22,9 @@ namespace Nucleus.Diagnostics {
             }
         }
 
-        private object locker = new object();
-        private List<string> lines;
-        private StreamWriter original;
+        private readonly object locker = new object();
+        private readonly List<string> lines;
+        private readonly StreamWriter original;
         private int backCounter;
 
         public PanelTextWriter() {

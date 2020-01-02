@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nucleus {
+﻿namespace Nucleus {
     public static class ResourceStrings {
-        public const string WrongHeaderNotX = "Wrong header, not a DirectX File.";
+        public const string WrongHeaderNotX = "Wrong header, not a DirectX Model File.";
 
         public const string WrongHeaderNotNucleus = "Wrong header, not a Nucleus File.";
         public const string WrongHeaderNotNucleusFont = "Wrong header, not a Nucleus Font. You may be trying to load another Nucleus File as a Font.";

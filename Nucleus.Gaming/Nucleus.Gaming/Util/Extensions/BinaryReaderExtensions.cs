@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class BinaryReaderExtensions {
         public static bool ReadNucleusHeader(this BinaryReader reader) {
             char N = reader.ReadChar();

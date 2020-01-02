@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Nucleus.Gaming.Windows.Interop {
+namespace Nucleus.Platform.Windows.Interop {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
     public struct ShFileInfo {
         public ShFileInfo(bool b) {

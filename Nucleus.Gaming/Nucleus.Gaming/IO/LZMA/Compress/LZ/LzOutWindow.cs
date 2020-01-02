@@ -2,7 +2,7 @@
 // Source: https://www.7-zip.org/sdk.html   Adapted to follow namespaces and clean code rules
 
 namespace Nucleus.IO.LZMA {
-        public class OutWindow {
+    public class OutWindow {
         byte[] _buffer = null;
         uint _pos;
         uint _windowSize = 0;

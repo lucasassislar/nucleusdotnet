@@ -3,12 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Nucleus.Gaming.Platform.Windows.Interop {
+namespace Nucleus.Platform.Windows.Interop {
     /// <summary>
     /// Create a New INI file to store or load data
     /// </summary>
     public class IniFile {
-        private string path;
+        private readonly string path;
 
         public string Path {
             get { return path; }

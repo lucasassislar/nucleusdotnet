@@ -1,12 +1,11 @@
 ﻿#if WINDOWS
-using Nucleus.Gaming.Platform.Windows.Controls;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Nucleus.Gaming.Windows.Controls {
+namespace Nucleus.Platform.Windows.Controls {
     public class CoolListControl : UserControl, IRadioControl {
-        private Label titleLabel;
+        private readonly Label titleLabel;
         protected Label descLabel;
 
         protected int defaultHeight = 72;

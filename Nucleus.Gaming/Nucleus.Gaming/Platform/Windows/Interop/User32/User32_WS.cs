@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nucleus.Gaming.Windows.Interop {
+namespace Nucleus.Platform.Windows.Interop {
     public static class User32_WS {
         /*GWL_ID = (-12)
         GWL_STYLE = (-16)

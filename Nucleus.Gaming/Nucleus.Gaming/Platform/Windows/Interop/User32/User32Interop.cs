@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Nucleus.Gaming.Windows.Interop {
+namespace Nucleus.Platform.Windows.Interop {
     public static class User32Interop {
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
         public static extern IntPtr GetFocus();

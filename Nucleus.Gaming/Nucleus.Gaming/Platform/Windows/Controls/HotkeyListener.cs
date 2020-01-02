@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace Nucleus.Gaming.Platform.Windows.Controls {
+namespace Nucleus.Platform.Windows.Controls {
     public partial class HotkeyListener : Form {
         public HotkeyListener() {
             InitializeComponent();

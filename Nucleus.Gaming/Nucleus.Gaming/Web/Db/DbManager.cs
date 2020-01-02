@@ -1,5 +1,5 @@
-﻿namespace Nucleus.Gaming.Web.Db {
+﻿namespace Nucleus.Web.Db {
     public class DbManager {
-
+        // TO-DO: database technology lol
     }
 }

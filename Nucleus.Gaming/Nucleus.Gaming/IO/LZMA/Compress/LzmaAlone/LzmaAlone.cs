@@ -2,8 +2,7 @@
 using System;
 using System.IO;
 namespace Nucleus.IO.LZMA {
-        //using CommandLineParser;
-        using System.Collections.Generic;
+    //using CommandLineParser;
 
     public class CDoubleStream : Stream {
         public System.IO.Stream s1;
@@ -94,7 +93,7 @@ namespace Nucleus.IO.LZMA {
                 if (c < '0' || c > '9')
                     return false;
                 v *= 10;
-                v += (Int32)(c - '0');
+                v += c - '0';
             }
             return true;
         }

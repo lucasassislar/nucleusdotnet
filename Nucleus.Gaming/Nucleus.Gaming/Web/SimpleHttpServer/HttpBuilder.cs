@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace Nucleus.Gaming.Web {
+namespace Nucleus.Web {
     class HttpBuilder {
         public static HttpResponse InternalServerError(Dictionary<string, string> headers) {
             string content = File.ReadAllText("Resources/Pages/500.html");

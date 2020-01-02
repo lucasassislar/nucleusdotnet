@@ -1,8 +1,8 @@
-﻿using Nucleus.Gaming.Platform.Windows.Interop;
+﻿using Nucleus.Platform.Windows.Interop;
 using System;
 using System.IO;
 
-namespace Nucleus.Gaming.Platform.Windows.IO {
+namespace Nucleus.Platform.Windows.IO {
     public static class WinDirectoryUtil {
         public static void LinkFiles(string rootFolder, string destination, out int exitCode, string[] exclusions, string[] copyInstead) {
             exitCode = 1;

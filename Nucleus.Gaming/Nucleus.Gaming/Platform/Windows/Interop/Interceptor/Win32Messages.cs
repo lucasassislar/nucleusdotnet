@@ -1,5 +1,5 @@
 
-namespace Win32 {
+namespace Nucleus.Platform.Windows {
     public enum Messages : int {
         // THESE 2 ARE NOT DOCUMENTED IN THE OFFICIAL DOCS!
         WM_NCUAHDRAWCAPTION = 0x00AE,

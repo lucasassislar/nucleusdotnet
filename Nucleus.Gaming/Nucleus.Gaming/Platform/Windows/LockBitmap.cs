@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace Nucleus.Gaming.Platform.Windows {
+namespace Nucleus.Platform.Windows {
     public class LockBitmap {
-        Bitmap source = null;
+        readonly Bitmap source = null;
         IntPtr Iptr = IntPtr.Zero;
         BitmapData bitmapData = null;
 

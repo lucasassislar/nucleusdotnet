@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class AssemblyUtil {
         public static string GetStartFolder() {
             Assembly entry = Assembly.GetEntryAssembly();

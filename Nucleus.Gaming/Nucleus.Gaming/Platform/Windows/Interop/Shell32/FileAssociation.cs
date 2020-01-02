@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Gaming.Windows.Interop {
+﻿namespace Nucleus.Platform.Windows.Interop {
     public class FileAssociation {
         public string Extension { get; set; }
         public string ProgId { get; set; }

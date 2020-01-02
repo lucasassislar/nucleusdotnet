@@ -9,14 +9,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace Nucleus.Gaming.Web {
+namespace Nucleus.Web {
     public class HttpProcessor {
-        private static int MAX_POST_SIZE = 10 * 1024 * 1024; // 10MB
+        private static readonly int MAX_POST_SIZE = 10 * 1024 * 1024; // 10MB
 
-        private List<Route> Routes = new List<Route>();
-        private string basePath;
-        private Dictionary<string, string> mimeTypes;
-        private string indexPath;
+        private readonly List<Route> Routes = new List<Route>();
+        private readonly string basePath;
+        private readonly Dictionary<string, string> mimeTypes;
+        private readonly string indexPath;
 
         public HttpProcessor(string basePath) {
             this.basePath = basePath;
@@ -246,7 +246,7 @@ namespace Nucleus.Gaming.Web {
                 }
 
                 return response;
-            } catch (Exception ex) {
+            } catch (Exception) {
                 //log.Error(ex);
                 return HttpBuilder.InternalServerError(headers);
             }

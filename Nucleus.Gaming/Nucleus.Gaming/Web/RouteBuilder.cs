@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Nucleus.Gaming.Web {
+namespace Nucleus.Web {
     public class RouteBuilder {
         public List<Route> BuildRoute(Assembly baseAssembly) {
             List<Route> routes = new List<Route>();

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class ObjectUtil {
         public static void DeepCopy(object sourceObj, object destinationObj) {
             Type t = sourceObj.GetType();

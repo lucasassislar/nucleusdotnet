@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class SteamUtil {
         public static readonly string SteamProcess = "steam";
 

@@ -1,8 +1,4 @@
-﻿using Nucleus.Gaming.Util;
-using System;
-using System.Text;
-
-namespace Nucleus.Gaming.Tools.GameStarter {
+﻿namespace Nucleus.Tools.GameStarter {
     public class StartGameData {
         public GameStarterTask Task { get; set; }
         public string[] Parameters { get; set; }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Nucleus.Gaming.Windows.Interop {
+namespace Nucleus.Platform.Windows.Interop {
     /// <summary>
     /// 
     /// </summary>
@@ -20,9 +20,9 @@ namespace Nucleus.Gaming.Windows.Interop {
         }
 
         private Rectangle bounds;
-        private string deviceName;
-        private bool primary;
-        private IntPtr ptr;
+        private readonly string deviceName;
+        private readonly bool primary;
+        private readonly IntPtr ptr;
 
         public Display(IntPtr pointer, Rectangle size, string device, bool isPrimary) {
             ptr = pointer;

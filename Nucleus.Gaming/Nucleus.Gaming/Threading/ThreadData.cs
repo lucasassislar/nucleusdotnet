@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Gaming.Threading {
+﻿namespace Nucleus.Threading {
     public class ThreadData {
         public int ThreadID { get; private set; }
         public ThreadTask CurrentTask;

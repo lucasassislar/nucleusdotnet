@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class MathUtil {
 
         public static int Clamp(int value, int min, int max) {

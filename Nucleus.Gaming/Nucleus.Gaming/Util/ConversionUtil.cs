@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nucleus.Gaming {
+﻿namespace Nucleus {
     public static class ConversionUtil {
         public static float MillisecondToSecond(float milliseconds) {
             return milliseconds / 1000f;

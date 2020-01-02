@@ -2,7 +2,7 @@
 // Source: https://www.7-zip.org/sdk.html   Adapted to follow namespaces and clean code rules
 
 namespace Nucleus.IO.LZMA {
-        internal abstract class Base {
+    internal abstract class Base {
         public const uint kNumRepDistances = 4;
         public const uint kNumStates = 12;
 
@@ -39,7 +39,7 @@ namespace Nucleus.IO.LZMA {
             len -= kMatchMinLen;
             if (len < kNumLenToPosStates)
                 return len;
-            return (uint)(kNumLenToPosStates - 1);
+            return kNumLenToPosStates - 1;
         }
 
         public const int kNumAlignBits = 4;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nucleus.Gaming.Web {
+namespace Nucleus.Web {
     [AttributeUsage(AttributeTargets.Class)]
     public class RouteManagerAttribute : Attribute {
         public string UrlRegex { get; set; }

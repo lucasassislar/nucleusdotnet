@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Nucleus.Gaming.Platform.Windows.IO.MFT {
+namespace Nucleus.Platform.Windows.IO.MFT {
     public class MFTReader {
         private Dictionary<ulong, FileNameAndParentFrn> _directories = new Dictionary<ulong, FileNameAndParentFrn>();
 
@@ -190,7 +190,7 @@ namespace Nucleus.Gaming.Platform.Windows.IO.MFT {
                 MFTReader.BY_HANDLE_FILE_INFORMATION fi = new MFTReader.BY_HANDLE_FILE_INFORMATION();
                 bool bRtn = MFTReader.GetFileInformationByHandle(hRoot, out fi);
                 if (bRtn) {
-                    UInt64 fileIndexHigh = (UInt64)fi.FileIndexHigh;
+                    UInt64 fileIndexHigh = fi.FileIndexHigh;
                     UInt64 indexRoot = (fileIndexHigh << 32) | fi.FileIndexLow;
 
                     FileNameAndParentFrn f = new FileNameAndParentFrn(driveRoot, 0);

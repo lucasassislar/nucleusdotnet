@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Gaming.Windows.Interop {
+﻿namespace Nucleus.Platform.Windows.Interop {
     /// <summary>
     /// Enumeration of the different ways of showing a window using 
     /// ShowWindow

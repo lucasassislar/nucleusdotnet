@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class CmdUtil {
         public static void ExecuteCommand(string workingDirectory, out int exitCode, params string[] commands) {
             exitCode = 0;

@@ -2,9 +2,9 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace Nucleus.Gaming.Windows.Interop {
+namespace Nucleus.Platform.Windows.Interop {
     public static class Shell32Interop {
-        private static object getIconState = new object();
+        private static readonly object getIconState = new object();
 
         [DllImport("shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);

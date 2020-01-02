@@ -1,9 +1,8 @@
 ﻿#if WINDOWS
 using Microsoft.Win32;
 using System;
-using System.Reflection;
 
-namespace Nucleus.Gaming.Windows.Interop {
+namespace Nucleus.Platform.Windows.Interop {
     public static class RegistryUtil {
         private const int SHCNE_ASSOCCHANGED = 0x8000000;
         private const int SHCNF_FLUSH = 0x1000;

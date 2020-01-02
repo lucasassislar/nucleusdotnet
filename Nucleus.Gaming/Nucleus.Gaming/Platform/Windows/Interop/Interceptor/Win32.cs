@@ -11,10 +11,8 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Win32
-{
-    static public class Functions
-    {
+namespace Nucleus.Platform.Windows {
+    static public class Functions {
         public delegate bool EnumProc(IntPtr hwnd, int lParam);
         //public delegate IntPtr HookProc(IntPtr nCode, IntPtr wParam, IntPtr lParam);
 
@@ -25,38 +23,37 @@ namespace Win32
 
         [DllImport("kernel32.dll")]
         public static extern uint GetCurrentThreadId();
-        
+
         [DllImport("user32.dll")]
         public static extern IntPtr SetWindowsHookEx(HookType hook, HookProc callback, IntPtr hMod, uint dwThreadId);
-        
+
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct CWPSTRUCT
-        {
+        public struct CWPSTRUCT {
             public IntPtr lparam;
             public IntPtr wparam;
             public int message;
             public IntPtr hwnd;
-        } 
-        
+        }
+
         [DllImport("user32.dll")]
         public static extern IntPtr UnhookWindowsHookEx(IntPtr hhk);
-        
+
         [DllImport("user32.dll")]
         public static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
-        
+
         //[DllImport("user32.dll")]
         //public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, CustomWindowProc dwNewLong);
-        
+
         [DllImport("user32.dll")]
         public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
-        
+
         //[DllImport("user32.dll")] 
         //public static extern IntPtr SetClassLong(IntPtr hWnd, int nIndex, CustomWindowProc dwNewLong); 
-        
+
         //[DllImport("user32.dll")] 
         //public static extern IntPtr DefWindowProc(IntPtr hWnd, uint Msg, IntPtr wParam,IntPtr lParam); 
-        
+
         [DllImport("user32.dll")]
         public static extern IntPtr DefDlgProc(IntPtr hDlg, uint Msg, IntPtr wParam, IntPtr lParam);
 
@@ -122,8 +119,7 @@ namespace Win32
         public static extern bool EnumThreadWindows(uint dwThreadId, EnumProc cbf, int lParam);
     }
 
-    public enum HookType : int
-    {
+    public enum HookType : int {
         WH_JOURNALRECORD = 0,
         WH_JOURNALPLAYBACK = 1,
         WH_KEYBOARD = 2,
@@ -141,8 +137,7 @@ namespace Win32
         WH_MOUSE_LL = 14
     }
 
-    public struct CWPRETSTRUCT
-    {
+    public struct CWPRETSTRUCT {
         public IntPtr lResult;
         public IntPtr lParam;
         public IntPtr wParam;

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class FileUtil {
         public static void Write(byte[] data, string place) {
             using (MemoryStream str = new MemoryStream(data)) {

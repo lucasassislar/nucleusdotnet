@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class ThreadUtil {
         public static int MainThreadId { get; private set; }
 

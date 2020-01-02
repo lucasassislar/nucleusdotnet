@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Nucleus.Gaming.Windows.Interop {
+namespace Nucleus.Platform.Windows.Interop {
     public struct Rect {
         public int Left;
         public int Top;

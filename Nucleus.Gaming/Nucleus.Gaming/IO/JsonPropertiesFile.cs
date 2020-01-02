@@ -4,7 +4,7 @@ using System.IO;
 namespace Nucleus.IO {
     public class JsonPropertiesFile {
         protected string pathToFile;
-        private object locker = new object();
+        private readonly object locker = new object();
 
         public JsonPropertiesFile(string _pathToFile) {
             this.pathToFile = _pathToFile;

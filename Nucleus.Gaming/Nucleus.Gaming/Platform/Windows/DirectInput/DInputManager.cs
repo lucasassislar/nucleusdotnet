@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace Nucleus.Gaming.Platform.Windows.DirectInput {
+namespace Nucleus.Windows.DirectInput {
     public static class DInputManager {
-        private static DInputLibrary[] libraries = new DInputLibrary[]
+        private static readonly DInputLibrary[] libraries = new DInputLibrary[]
             {
                 new DInputLibrary()
                 {
@@ -39,7 +39,7 @@ namespace Nucleus.Gaming.Platform.Windows.DirectInput {
             public int ID;
         };
 
-        private static DInputLibrary library;
+        private static readonly DInputLibrary library;
         public static DInputLibrary Library { get { return library; } }
 
         static DInputManager() {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class Palette {
         public static ConsoleColor Success = ConsoleColor.Green;
         public static ConsoleColor Help = ConsoleColor.Green;

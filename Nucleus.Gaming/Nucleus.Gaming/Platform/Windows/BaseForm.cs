@@ -1,15 +1,11 @@
 ﻿#if WINDOWS
 using Nucleus.DPI;
-using Nucleus.Gaming;
-using Nucleus.Gaming.Coop;
-using Nucleus.Gaming.Platform.Windows.Controls;
-using Nucleus.Gaming.Windows;
 using SplitScreenMe.Core;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Nucleus.Coop {
+namespace Nucleus.Platform.Windows.Controls {
     /// <summary>
     /// Form that all other forms inherit from. Has all
     /// the default design parameters to have the Nucleus Coop look and feel
@@ -17,7 +13,7 @@ namespace Nucleus.Coop {
     public class BaseForm : Form, IDynamicSized {
         private const int cGrip = 16;      // Grip size
         private const int cCaption = 32;   // Caption bar height;
-        private MouseMessageFilter filter;
+        private readonly MouseMessageFilter filter;
 
         public Panel FormContent { get; private set; }
 
@@ -195,9 +191,9 @@ namespace Nucleus.Coop {
             this.SetDesktopLocation(cursorScreen.X + 100, cursorScreen.Y + 100);
         }
 
-        int borderSpace = 20;
-        int borderDiameter = 6;
-        int topBorderDiameter = 3;
+        readonly int borderSpace = 20;
+        readonly int borderDiameter = 6;
+        readonly int topBorderDiameter = 3;
 
         enum MovementDirection {
             None, Right, Left, Top, Bottom,

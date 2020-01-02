@@ -1,4 +1,4 @@
-﻿namespace Nucleus.Gaming.Tools.GameStarter {
+﻿namespace Nucleus.Tools.GameStarter {
     public class SymlinkGameData {
         public string SourcePath { get; set; }
         public string DestinationPath { get; set; }

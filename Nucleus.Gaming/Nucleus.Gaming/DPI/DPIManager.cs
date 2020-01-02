@@ -1,5 +1,5 @@
 ﻿#if WINFORMS
-using Nucleus.Gaming.Windows;
+using Nucleus.Platform.Windows;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +11,7 @@ namespace Nucleus.DPI {
     public static class DPIManager {
         public static float Scale = 1f;
 
-        private static List<IDynamicSized> components = new List<IDynamicSized>();
+        private static readonly List<IDynamicSized> components = new List<IDynamicSized>();
 
         public static Font Font;
 

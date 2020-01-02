@@ -1,5 +1,5 @@
 ﻿#if WINDOWS
-namespace Nucleus.Gaming.Platform.Windows.Controls {
+namespace Nucleus.Platform.Windows.Controls {
     public interface IMouseHoverControl {
         TransparentControl Mouse { get; }
     }

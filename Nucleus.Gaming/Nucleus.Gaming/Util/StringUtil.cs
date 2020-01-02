@@ -3,7 +3,7 @@ using System.Collections;
 using System.Drawing;
 using System.Linq;
 
-namespace Nucleus.Gaming {
+namespace Nucleus {
     public static class StringUtil {
 
         public static string GetCollisionStringStart(string aStr, string bStr) {

@@ -1,5 +1,5 @@
 ﻿#if WINDOWS
-namespace Nucleus.Gaming.Platform.Windows.Controls
+namespace Nucleus.Platform.Windows.Controls 
 {
     partial class PictureButton
     {
