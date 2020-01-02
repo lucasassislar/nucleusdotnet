@@ -49,11 +49,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Nucleus.Gaming\Nucleus.Gaming.NETFramework.csproj">
-      <Project>{223dbdae-e362-452c-9455-f518d002b154}</Project>
-      <Name>Nucleus.Gaming.NETFramework</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

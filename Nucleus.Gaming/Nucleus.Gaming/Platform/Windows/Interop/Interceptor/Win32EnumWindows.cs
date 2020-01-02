@@ -6,6 +6,8 @@
 //        07 September 2006
 //Copyright: (C) 2006, Sergey Stoyan
 //********************************************************************************************
+#if WINDOWS
+
 using System;
 using System.Threading;
 //using System.Messaging;
@@ -104,3 +106,4 @@ namespace Nucleus.Platform.Windows {
         }
     }
 }
+#endif

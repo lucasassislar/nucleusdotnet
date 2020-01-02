@@ -5,6 +5,7 @@ using System;
 namespace Nucleus.Web {
     public class Route {
         public string Name { get; set; } // descriptive name for debugging
+        public int SubPaths { get; set; }
 
         public string UrlRegex { get; set; }
         public string Method { get; set; }

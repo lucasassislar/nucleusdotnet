@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿#if WINFORMS
+using System.Windows.Forms;
 using static System.Windows.Forms.Control;
 
 namespace Nucleus.Platform.Windows.Controls {
@@ -32,3 +33,4 @@ namespace Nucleus.Platform.Windows.Controls {
         }
     }
 }
+#endif

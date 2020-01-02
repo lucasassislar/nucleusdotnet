@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Nucleus.Web {
@@ -38,9 +39,26 @@ namespace Nucleus.Web {
                                     RouteAttribute routeAtt = (RouteAttribute)mAttribute;
                                     Route route = routeAtt.Route;
                                     string urlRegex = route.UrlRegex;
-                                    route.UrlRegex = $"{baseUrl}/{urlRegex}";
+                                    if (string.IsNullOrEmpty(urlRegex)) {
+                                        route.UrlRegex = baseUrl;
+                                    } else {
+                                        route.UrlRegex = $"{baseUrl}/{urlRegex}";
+                                    }
+                                    route.SubPaths = route.UrlRegex.Count(c => c == '/');
+
                                     route.Callable = (HttpRequest request) => {
-                                        return (HttpResponse)method.Invoke(routeManager, new object[] { request });
+                                        Route r = route;
+                                        string path = request.Path;
+                                        string[] subPaths = path.Split('/');
+
+                                        List<object> objs = new List<object>();
+                                        objs.Add(request);
+                                        for (int i = route.SubPaths + 1; i < subPaths.Length; i++) {
+                                            string sub = subPaths[i];
+                                            objs.Add(sub);
+                                        }
+
+                                        return (HttpResponse)method.Invoke(routeManager, objs.ToArray());
                                     };
                                     routes.Add(route);
 
