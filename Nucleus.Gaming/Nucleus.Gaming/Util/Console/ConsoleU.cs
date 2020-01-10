@@ -16,6 +16,13 @@ namespace Nucleus {
             return line;
         }
 
+        public static void WriteLine(string line) {
+            lock (locker) {
+                line = CropLine(line);
+                Console.WriteLine(line);
+            }
+        }
+
         public static void WriteLine(string line, ConsoleColor foreGroundColor) {
             lock (locker) {
                 line = CropLine(line);
