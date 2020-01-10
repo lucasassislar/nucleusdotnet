@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
+#if WINFORMS
 using System.Windows.Forms;
+#endif
 
 namespace Nucleus {
     public static class ApplicationUtil {
@@ -25,8 +27,10 @@ namespace Nucleus {
 
         public static bool OnlyOneInstance() {
             if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1) {
+#if WINFORMS
                 MessageBox.Show("Nucleus Coop is already running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
+#endif
                 return true;
             }
             return false;

@@ -225,6 +225,7 @@ namespace Nucleus {
         }
 
         public static bool KillMutex(Process process, string mutexName) {
+#if WINDOWS
             var handles = Win32Processes.GetHandles(process, "Mutant", "\\Sessions\\", mutexName);
             if (handles.Count == 0) {
                 return false;
@@ -239,9 +240,13 @@ namespace Nucleus {
             }
 
             return false;
+#else
+            throw new PlatformNotSupportedException();
+#endif
         }
 
         public static bool RenameMutex(Process process, string mutexName) {
+#if WINDOWS
             var handles = Win32Processes.GetHandles(process, "Mutant", "\\Sessions\\", mutexName);
             if (handles.Count == 0) {
                 return false;
@@ -256,9 +261,13 @@ namespace Nucleus {
             }
 
             return false;
+#else
+            throw new PlatformNotSupportedException();
+#endif
         }
 
         public static bool MutexExists(Process process, string mutexName) {
+#if WINDOWS
             // 4 tries
             for (int i = 0; i < 4; i++) {
                 try {
@@ -271,6 +280,9 @@ namespace Nucleus {
                 }
             }
             return false;
+#else
+            throw new PlatformNotSupportedException();
+#endif
         }
 
         public static List<int> GetChildrenProcesses(Process process) {

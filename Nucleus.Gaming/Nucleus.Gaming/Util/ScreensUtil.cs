@@ -1,9 +1,7 @@
-﻿using System.Drawing;
-
-#if WINDOWS
+﻿using Nucleus.Platform.Windows;
 using Nucleus.Platform.Windows.Interop;
-using Nucleus.Platform.Windows;
-#endif
+using System;
+using System.Drawing;
 
 namespace SplitScreenMe.Core {
     public static class ScreensUtil {
@@ -36,6 +34,7 @@ namespace SplitScreenMe.Core {
         }
 
         public static UserScreen[] AllScreens() {
+#if WINDOWS
             Display[] all = User32Util.GetDisplays();
             UserScreen[] rects = new UserScreen[all.Length];
 
@@ -44,9 +43,13 @@ namespace SplitScreenMe.Core {
             }
 
             return rects;
+#else 
+            throw new Exception();
+#endif
         }
 
         public static Rectangle[] AllScreensRec() {
+#if WINDOWS
             //return GetSetup_Triple4kHorizontal();
             Display[] all = User32Util.GetDisplays();
             Rectangle[] rects = new Rectangle[all.Length];
@@ -54,7 +57,11 @@ namespace SplitScreenMe.Core {
             for (int i = 0; i < all.Length; i++) {
                 rects[i] = all[i].Bounds;
             }
+
             return rects;
+#else
+            throw new Exception();
+#endif
         }
     }
 }
