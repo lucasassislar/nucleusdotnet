@@ -2,7 +2,15 @@
 NucleusDotNET is a cross-platform library used for the development of .NET applications
 It compiles under .NET Framework 4 (Client) or .NET Core 3
 
-Support its development by donating to my Patreon! https://www.patreon.com/distro
+Support its development by donating! 
+
+Patreon: https://www.patreon.com/distro
+Bitcoin: 37UABQVXTsy1qsu2RTyYGJ5qAN24jtM5vm
+Ethereum: 0x6fd82824cfdEDAF489e55aF67Ec1E8232813AAD3
+Litecoin: LZ6uPb6QjzxtYd3KgVWoNdezQVwTi6hsh5
+Bitcoin Cash: 1EQFkXUKPB9RLA8BpiFKkPAfqrz6dNyyBy
+
+Any amount is welcome!
 
 Subscribe to our subreddit: https://www.reddit.com/r/nucleuscoop/
 
