@@ -13,6 +13,7 @@ namespace Nucleus.Diagnostics {
 
         static Profiler() {
             measuring = new Dictionary<MeasureKey, MeasureData>();
+            AllData = new List<MeasureData>();
         }
 
         /// <summary>

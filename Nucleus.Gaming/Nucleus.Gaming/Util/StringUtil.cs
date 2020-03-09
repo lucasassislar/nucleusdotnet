@@ -5,6 +5,19 @@ using System.Linq;
 
 namespace Nucleus {
     public static class StringUtil {
+        public static string ClearTextString(string strValue) {
+            while (strValue.Contains("\t")) {
+                strValue = strValue.Replace("\t", "");
+            }
+            return strValue;
+        }
+
+        public static string ClearStartSpaces(string strValue) {
+            while (strValue[0] == ' ') {
+                strValue = strValue.Remove(0, 1);
+            }
+            return strValue;
+        }
 
         public static string GetCollisionStringStart(string aStr, string bStr) {
             string col = "";
