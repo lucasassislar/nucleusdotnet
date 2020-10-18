@@ -22,14 +22,17 @@ Task Manager system that delegates tasks and can have Delegate rules for the exe
 
 
 * TaskApp (WIP)
-- Application that you give tasks and it executes them on a parent-less process
+    - Application that you give tasks and it executes them on a parent-less process
 
 * MFT scan
-- Unsafe code but it works wonders.
-- If the storage is NTFS, you can scan the Master File Table to find files inside the user's disk incredibly fast (like 5 seconds to list all *.exe files)
+    - Unsafe code but it works wonders.
+    - If the storage is NTFS, you can scan the Master File Table to find files inside the user's disk incredibly fast (like 5 seconds to list all *.exe files)
 
 * Profiling
-- VERY Simple but fast system to benchmark/measure the time needed to finish tasks
+    - VERY Simple but fast system to benchmark/measure the time needed to finish tasks
+    
+* Console Engine
+    - Used to quickly build console commands, and automatically register them on the application.
 
 
 # Projects Using NucleusDotNet
