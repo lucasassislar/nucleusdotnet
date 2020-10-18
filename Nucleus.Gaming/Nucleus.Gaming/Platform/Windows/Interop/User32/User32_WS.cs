@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if WINDOWS
+using System;
 
 namespace Nucleus.Platform.Windows.Interop {
     public static class User32_WS {
@@ -80,3 +81,4 @@ namespace Nucleus.Platform.Windows.Interop {
         public const UInt32 WS_EX_NOACTIVATE = 0x08000000;
     }
 }
+#endif

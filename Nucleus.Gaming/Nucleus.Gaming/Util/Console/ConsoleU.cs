@@ -3,8 +3,18 @@ using System;
 
 namespace Nucleus {
     public static class ConsoleU {
-        private static readonly object locker = new object();
         public static OutputLevel currentLevel = OutputLevel.High;
+        private static readonly object locker = new object();
+
+        private static bool WaitingForInput;
+
+        public static string ReadLine() {
+            WaitingForInput = true;
+            Console.Write("> ");
+            string line = Console.ReadLine();
+            WaitingForInput = false;
+            return line;
+        }
 
         private static string CropLine(string line) {
             int maxSize = Console.WindowWidth;

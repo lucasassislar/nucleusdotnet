@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if WINDOWS
+using System;
 using System.Drawing;
 
 namespace Nucleus.Platform.Windows.Interop {
@@ -32,3 +33,4 @@ namespace Nucleus.Platform.Windows.Interop {
         }
     }
 }
+#endif

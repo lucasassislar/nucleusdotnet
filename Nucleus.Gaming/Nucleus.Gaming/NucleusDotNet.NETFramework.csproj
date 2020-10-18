@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nucleus</RootNamespace>
-    <AssemblyName>NucleusDotNet</AssemblyName>
+    <AssemblyName>NucleusDotNet.NETFramework</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -74,6 +74,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Console\CommandFeedback.cs" />
+    <Compile Include="Console\ConsoleCommand.cs" />
+    <Compile Include="Console\ConsoleManager.cs" />
     <Compile Include="Diagnostics\LogData.cs" />
     <Compile Include="IO\LZMA\Common\CRC.cs" />
     <Compile Include="IO\LZMA\Common\InBuffer.cs" />
@@ -104,7 +107,6 @@
     <Compile Include="Diagnostics\Profiler\Profiler.cs" />
     <Compile Include="AppDomainSharedAttribute.cs" />
     <Compile Include="IO\SearchStorageInfo.cs" />
-    <Compile Include="Platform\Windows\Controls\ListBoxControlCollection.cs" />
     <Compile Include="Threading\TaskManager.cs" />
     <Compile Include="Threading\ThreadData.cs" />
     <Compile Include="Threading\ThreadTask.cs" />
@@ -127,104 +129,15 @@
     <Compile Include="WindowScrape\Static\HwndInterface.cs" />
     <Compile Include="WindowScrape\Types\APIRECT.cs" />
     <Compile Include="WindowScrape\Types\HwndObject.cs" />
-    <Compile Include="Platform\Windows\BaseForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\BorderPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\BorderPanel.Designer.cs">
-      <DependentUpon>BorderPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\ControlListBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\CoolListControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\CustomTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\HotkeyListener.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\HotkeyListener.Designer.cs">
-      <DependentUpon>HotkeyListener.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\ICanProceed.cs" />
-    <Compile Include="Platform\Windows\Controls\IHighlightControl.cs" />
-    <Compile Include="Platform\Windows\Controls\ImageButton.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\IMouseHoverControl.cs" />
-    <Compile Include="Platform\Windows\Controls\MouseMessageFilter.cs" />
-    <Compile Include="Platform\Windows\Controls\NButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\PictureButton.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\PictureButton.Designer.cs">
-      <DependentUpon>PictureButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\SizeableCheckbox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\TextMessageBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\TextMessageBox.Designer.cs">
-      <DependentUpon>TextMessageBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Diagnostics\OutputLevel.cs" />
-    <Compile Include="Platform\Windows\Controls\TitleBarControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\Controls\TransparentControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Platform\Windows\DirectInput\DInputManager.cs" />
-    <Compile Include="DPI\DPIHandling.cs" />
-    <Compile Include="DPI\DPIManager.cs" />
-    <Compile Include="DPI\DPIMonitor.cs" />
-    <Compile Include="DPI\IDynamicSized.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="IO\JsonPropertiesFile.cs" />
-    <Compile Include="Platform\Windows\FormGraphicsUtil.cs" />
-    <Compile Include="Platform\Windows\Interop\Shell32\FileAssociation.cs" />
-    <Compile Include="Platform\Windows\Interop\Shell32\RegistryUtil.cs" />
-    <Compile Include="Platform\Windows\IO\WinDirectoryUtil.cs" />
-    <Compile Include="Platform\Windows\LockBitmap.cs" />
-    <Compile Include="Platform\Windows\IO\MFT\FileNameAndParentFrn.cs" />
-    <Compile Include="Platform\Windows\IO\MFT\MFTReader.cs" />
-    <Compile Include="Platform\Windows\Interop\Gdi32\Gdi32Interop.cs" />
-    <Compile Include="Platform\Windows\Interop\Kernel32\Kernel32Interop.cs" />
-    <Compile Include="Platform\Windows\Interop\Kernel32\SymbolicLink.cs" />
-    <Compile Include="Platform\Windows\Interop\Shcore\ShcoreInterop.cs" />
-    <Compile Include="Platform\Windows\Interop\User32\Structures\Display.cs" />
-    <Compile Include="Platform\Windows\Interop\User32\C\Rect.cs" />
     <Compile Include="Diagnostics\ILogNode.cs" />
     <Compile Include="Tools\GameStarter\Data\ScanMutexData.cs" />
     <Compile Include="Tools\GameStarter\Data\SymlinkGameData.cs" />
     <Compile Include="Util\ThreadUtil.cs" />
-    <Compile Include="Platform\Windows\Interop\Shell32\Shell32.cs" />
-    <Compile Include="Platform\Windows\Interop\Shell32\ShFileInfo.cs" />
-    <Compile Include="Platform\Windows\Interop\Shell32\ShgFi.cs" />
-    <Compile Include="Platform\Windows\Interop\Kernel32\IniFile.cs" />
     <None Include="packages.config" />
-    <None Include="Platform\Windows\Interop\Interceptor\Win32.cs" />
-    <None Include="Platform\Windows\Interop\Interceptor\Win32EnumWindows.cs" />
-    <Compile Include="Platform\Windows\Interop\Interceptor\Win32Messages.cs" />
-    <Compile Include="Platform\Windows\Interop\User32\User32Util.cs" />
-    <Compile Include="Platform\Windows\Interop\User32\User32Interop.cs" />
-    <Compile Include="Platform\Windows\Interop\User32\User32_WS.cs" />
-    <Compile Include="Platform\Windows\Interop\Win32Api.cs" />
-    <Compile Include="Platform\Windows\Interop\User32\WindowShowStyle.cs" />
     <Compile Include="Diagnostics\Log.cs" />
-    <Compile Include="Platform\Windows\Controls\ImageButtonState.cs" />
-    <Compile Include="Platform\Windows\Controls\StateImageButton.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="RAction.cs" />
     <Compile Include="Util\Reusable\RequestResult.cs" />
     <Compile Include="Tools\GameStarter\StartGameApp.cs" />
@@ -232,9 +145,6 @@
     <Compile Include="Tools\GameStarter\GameStarterTask.cs" />
     <Compile Include="Util\ObjectUtil.cs" />
     <Compile Include="Util\RectangleUtil.cs" />
-    <Compile Include="Platform\Windows\MonitorDpiType.cs" />
-    <Compile Include="Platform\Windows\ProcessDpiAwareness.cs" />
-    <Compile Include="Platform\Windows\WindowsVersionInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -248,22 +158,11 @@
     <Compile Include="Util\Extensions\DirectoryInfoExtensions.cs" />
     <Compile Include="Util\FileUtil.cs" />
     <Compile Include="Util\MathUtil.cs" />
-    <Compile Include="Util\ProcessUtil.cs" />
-    <Compile Include="Util\ScreensUtil.cs" />
     <Compile Include="Tools\GameStarter\StartGameUtil.cs" />
     <Compile Include="Util\SteamUtil.cs" />
     <Compile Include="Util\StringUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Platform\Windows\BaseForm.resx">
-      <DependentUpon>BaseForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Platform\Windows\Controls\PictureButton.resx">
-      <DependentUpon>PictureButton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Platform\Windows\Controls\TextMessageBox.resx">
-      <DependentUpon>TextMessageBox.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -301,15 +200,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>

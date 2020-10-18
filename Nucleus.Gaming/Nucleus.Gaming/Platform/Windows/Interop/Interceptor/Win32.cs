@@ -1,3 +1,4 @@
+#if WINDOWS
 //********************************************************************************************
 //Author: Sergey Stoyan, CliverSoft.com
 //        http://cliversoft.com
@@ -145,3 +146,4 @@ namespace Nucleus.Platform.Windows {
         public IntPtr hwnd;
     };
 }
+#endif

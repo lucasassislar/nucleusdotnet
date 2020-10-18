@@ -1,4 +1,5 @@
-﻿namespace Nucleus.Platform.Windows.Interop {
+﻿#if WINDOWS
+namespace Nucleus.Platform.Windows.Interop {
     /// <summary>
     /// Enumeration of the different ways of showing a window using 
     /// ShowWindow
@@ -61,3 +62,4 @@
         ForceMinimized = 11
     }
 }
+#endif

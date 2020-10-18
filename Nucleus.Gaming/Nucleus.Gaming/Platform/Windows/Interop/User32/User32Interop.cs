@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if WINDOWS
+using System;
 using System.Runtime.InteropServices;
 
 namespace Nucleus.Platform.Windows.Interop {
@@ -202,3 +203,4 @@ namespace Nucleus.Platform.Windows.Interop {
         public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
     }
 }
+#endif

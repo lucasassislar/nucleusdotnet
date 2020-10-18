@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if WINDOWS
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -344,3 +345,4 @@ namespace Nucleus.Platform.Windows {
         }
     }
 }
+#endif

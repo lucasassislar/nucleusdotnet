@@ -1,4 +1,4 @@
-
+#if WINDOWS
 namespace Nucleus.Platform.Windows {
     public enum Messages : int {
         // THESE 2 ARE NOT DOCUMENTED IN THE OFFICIAL DOCS!
@@ -993,3 +993,4 @@ namespace Nucleus.Platform.Windows {
         LM_GETITEM = (WM_USER + 0x303)
     }
 }
+#endif

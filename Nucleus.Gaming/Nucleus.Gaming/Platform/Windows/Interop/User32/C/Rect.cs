@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿#if WINDOWS
+using System.Drawing;
 
 namespace Nucleus.Platform.Windows.Interop {
     public struct Rect {
@@ -12,3 +13,4 @@ namespace Nucleus.Platform.Windows.Interop {
         }
     }
 }
+#endif
