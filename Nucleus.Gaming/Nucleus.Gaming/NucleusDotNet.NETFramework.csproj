@@ -10,13 +10,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nucleus</RootNamespace>
     <AssemblyName>NucleusDotNet.NETFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -96,9 +97,10 @@
     <Compile Include="IO\LZMA\Compress\RangeCoder\RangeCoderBitTree.cs" />
     <Compile Include="IO\LZMA\ICoder.cs" />
     <Compile Include="TaskManager\TaskData.cs" />
-    <Compile Include="Util\ConversionUtil.cs" />
+    <Compile Include="Util\Utils\ConversionUtil.cs" />
     <Compile Include="Util\Extensions\BinaryReaderExtensions.cs" />
     <Compile Include="Util\Extensions\BinaryWriterExtensions.cs" />
+    <Compile Include="Util\Helpers\AsyncHelpers.cs" />
     <Compile Include="Util\Reusable\ResourceStrings.cs" />
     <Compile Include="Web\Db\DbManager.cs" />
     <Compile Include="Diagnostics\PanelTextWriter.cs" />
@@ -110,7 +112,7 @@
     <Compile Include="Threading\TaskManager.cs" />
     <Compile Include="Threading\ThreadData.cs" />
     <Compile Include="Threading\ThreadTask.cs" />
-    <Compile Include="Util\ApplicationUtil.cs" />
+    <Compile Include="Util\Utils\ApplicationUtil.cs" />
     <Compile Include="Util\Screen\UserScreen.cs" />
     <Compile Include="Util\Screen\UserScreenType.cs" />
     <Compile Include="Web\RouteAttribute.cs" />
@@ -135,7 +137,7 @@
     <Compile Include="Diagnostics\ILogNode.cs" />
     <Compile Include="Tools\GameStarter\Data\ScanMutexData.cs" />
     <Compile Include="Tools\GameStarter\Data\SymlinkGameData.cs" />
-    <Compile Include="Util\ThreadUtil.cs" />
+    <Compile Include="Util\Utils\ThreadUtil.cs" />
     <None Include="packages.config" />
     <Compile Include="Diagnostics\Log.cs" />
     <Compile Include="RAction.cs" />
@@ -143,24 +145,24 @@
     <Compile Include="Tools\GameStarter\StartGameApp.cs" />
     <Compile Include="Tools\GameStarter\Data\StartGameData.cs" />
     <Compile Include="Tools\GameStarter\GameStarterTask.cs" />
-    <Compile Include="Util\ObjectUtil.cs" />
-    <Compile Include="Util\RectangleUtil.cs" />
+    <Compile Include="Util\Utils\ObjectUtil.cs" />
+    <Compile Include="Util\Utils\RectangleUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Util\AssemblyUtil.cs" />
-    <Compile Include="Util\CmdUtil.cs" />
+    <Compile Include="Util\Utils\AssemblyUtil.cs" />
+    <Compile Include="Util\Utils\CmdUtil.cs" />
     <Compile Include="Util\Console\Palette.cs" />
     <Compile Include="Util\Console\ConsoleU.cs" />
     <Compile Include="Util\Extensions\DirectoryInfoExtensions.cs" />
-    <Compile Include="Util\FileUtil.cs" />
-    <Compile Include="Util\MathUtil.cs" />
+    <Compile Include="Util\Utils\FileUtil.cs" />
+    <Compile Include="Util\Utils\MathUtil.cs" />
     <Compile Include="Tools\GameStarter\StartGameUtil.cs" />
-    <Compile Include="Util\SteamUtil.cs" />
-    <Compile Include="Util\StringUtil.cs" />
+    <Compile Include="Util\Utils\SteamUtil.cs" />
+    <Compile Include="Util\Utils\StringUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

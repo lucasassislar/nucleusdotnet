@@ -24,7 +24,7 @@ namespace Nucleus.Web {
             indexPath = "index.html";
             mimeTypes = new Dictionary<string, string>();
             mimeTypes.Add(".jpg", "image/jpeg");
-            mimeTypes.Add(".html", "text/html");
+            mimeTypes.Add(".html", "text/html; charset=utf-8");
             mimeTypes.Add(".js", "application/javascript");
             mimeTypes.Add(".json", "application/json");
             mimeTypes.Add(".css", "text/css");
