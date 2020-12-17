@@ -16,8 +16,7 @@ namespace Nucleus.ConsoleEngine {
             silentMode = value;
         }
 
-        public void Init() {
-            //ConsoleU.WriteLine("DistroLucas's FileUtils v" + FileUtilsGlobals.DisplayVersion.ToString("F2", CultureInfo.InvariantCulture), ConsoleColor.White);
+        public ConsoleManager() {
             commands = new Dictionary<string, ConsoleCommand>();
         }
 

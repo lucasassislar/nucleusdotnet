@@ -23,7 +23,15 @@ namespace Nucleus.Platform.Windows.Controls {
         private Font btnFont;
         private Font titleFont;
 
-        public bool EnableMaximize { get; set; } = true;
+        private bool enableMaximize;
+        public bool EnableMaximize {
+            get { return enableMaximize; }
+            set {
+                if (value != enableMaximize) {
+                    SwapMaximize(value);
+                }
+            }
+        }
         public bool ShowIcon { get; set; }
         public int StripWidth { get; set; } = 30;
 
@@ -78,6 +86,28 @@ namespace Nucleus.Platform.Windows.Controls {
             InitializeButtons();
         }
 
+        private void SwapMaximize(bool newValue) {
+            if (maximize == null) {
+                enableMaximize = newValue;
+                return;
+            }
+
+            if (newValue) {
+                // maximize enabled
+                maximize.Visible = true;
+                maximize.Left = close.Left - 26;
+                maximize.Text = "[]";
+                maximize.Click += Maximize_Click;
+                minimize.Left = maximize.Left - 26;
+            } else {
+                // maximize disabled
+                maximize.Visible = false;
+                minimize.Left = close.Left - 26;
+            }
+
+            enableMaximize = newValue;
+        }
+
         private void InitializeButtons() {
             btnFont = new Font(this.Font.FontFamily, 6, FontStyle.Regular);
             titleFont = new Font(this.Font.FontFamily, 10, FontStyle.Regular);
@@ -114,14 +144,8 @@ namespace Nucleus.Platform.Windows.Controls {
             close.Text = "X";
             close.Click += Close_Click;
 
-            if (EnableMaximize) {
-                maximize.Left = close.Left - 26;
-                maximize.Text = "[]";
-                maximize.Click += Maximize_Click;
-                minimize.Left = maximize.Left - 26;
-            } else {
-                minimize.Left = close.Left - 26;
-            }
+            // force update maximize
+            SwapMaximize(EnableMaximize);
 
             minimize.Text = "_";
             minimize.Click += Minimize_Click;
@@ -177,13 +201,33 @@ namespace Nucleus.Platform.Windows.Controls {
             e.Graphics.DrawString(text, this.titleLabel.Font, Brushes.White, x, 1);
         }
 
+        public void EnableWholeFormDrag(Control control) {
+            control.MouseDown += Control_MouseDown;
+            control.MouseMove += Control_MouseMove;
+            control.MouseUp += Control_MouseUp;
+        }
+
+        private void Control_MouseDown(object sender, MouseEventArgs e) {
+            OnMouseDown(e);
+        }
+
+        private void Control_MouseMove(object sender, MouseEventArgs e) {
+            OnMouseMove(e);
+        }
+
+        private void Control_MouseUp(object sender, MouseEventArgs e) {
+            OnMouseUp(e);
+        }
+
         protected override void OnMouseDown(MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
                 Form parent = this.ParentForm;
                 if (parent != null) {
                     mouseDown = true;
-                    Point nP = new Point(e.Location.X + this.Location.X, e.Location.Y + this.Location.Y);
-                    dragStartPoint = nP;
+
+                    //dragStartPoint = new Point(e.Location.X + this.Location.X, e.Location.Y + this.Location.Y);
+                    dragStartPoint = new Point(e.Location.X, e.Location.Y);
+
                     //User32Interop.ReleaseCapture();
                     //User32Interop.SendMessage(parent.Handle, User32_WS.WM_NCLBUTTONDOWN, User32_WS.HT_CAPTION, 0);
 

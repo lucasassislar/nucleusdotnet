@@ -10,11 +10,14 @@ namespace Nucleus.ConsoleEngine {
 
         public ConsoleCommand(ConsoleManager manager) {
             consoleManager = manager;
+            CommandColor = ConsoleColor.White;
         }
 
-        public abstract string Command { get; }
-        public abstract string Help { get; }
+        public virtual bool Hidden { get; }
+        public virtual ConsoleColor CommandColor { get; }
+        public virtual string Help { get; }
 
+        public abstract string Command { get; }
         public abstract CommandFeedback Execute(string[] args);
     }
 }

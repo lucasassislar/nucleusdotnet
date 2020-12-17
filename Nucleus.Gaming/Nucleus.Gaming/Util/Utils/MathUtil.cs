@@ -2,9 +2,32 @@
 
 namespace Nucleus {
     public static class MathUtil {
+        public static float Lerp(float value1, float value2, float amount) {
+            return value1 + (value2 - value1) * amount;
+        }
+
+        public static double Lerp(double value1, double value2, double amount) {
+            return value1 + (value2 - value1) * amount;
+        }
+
+        public static int Lerp(int value1, int value2, float amount) {
+            return (int)Lerp((float)value1, value2, amount);
+        }
+
+        public static int Lerp(int value1, int value2, double amount) {
+            return (int)Lerp((double)value1, value2, amount);
+        }
 
         public static int Clamp(int value, int min, int max) {
             return Math.Max(min, Math.Min(value, max));
+        }
+
+        public static float ToDegrees(float radians) {
+            return (float)(radians * 57.295779513082320876798154814105);
+        }
+
+        public static float ToRadians(float degrees) {
+            return (float)(degrees * 0.017453292519943295769236907684886);
         }
 
         /// <summary>

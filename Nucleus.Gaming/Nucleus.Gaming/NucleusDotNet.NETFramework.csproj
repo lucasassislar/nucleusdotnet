@@ -75,9 +75,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Console\CommandFeedback.cs" />
-    <Compile Include="Console\ConsoleCommand.cs" />
-    <Compile Include="Console\ConsoleManager.cs" />
+    <Compile Include="Animation\AnimationClip.cs" />
+    <Compile Include="Animation\AnimationClipAction.cs" />
+    <Compile Include="Animation\AnimationFrame.cs" />
+    <Compile Include="Animation\AnimationPlayer.cs" />
+    <Compile Include="Animation\AnimationPlayerInvoker.cs" />
+    <Compile Include="Animation\InterpolationType.cs" />
+    <Compile Include="Animation\Interpolators\InterpolatorService.cs" />
+    <Compile Include="Animation\Interpolators\SinInterpolator.cs" />
+    <Compile Include="ConsoleEngine\CommandFeedback.cs" />
+    <Compile Include="ConsoleEngine\ConsoleCommand.cs" />
+    <Compile Include="ConsoleEngine\ConsoleManager.cs" />
+    <Compile Include="ConsoleEngine\SubTask\ConsoleSubTaskDelegate.cs" />
+    <Compile Include="ConsoleEngine\SubTask\ConsoleSubTaskManager.cs" />
     <Compile Include="Diagnostics\LogData.cs" />
     <Compile Include="IO\LZMA\Common\CRC.cs" />
     <Compile Include="IO\LZMA\Common\InBuffer.cs" />
@@ -96,12 +106,14 @@
     <Compile Include="IO\LZMA\Compress\RangeCoder\RangeCoderBit.cs" />
     <Compile Include="IO\LZMA\Compress\RangeCoder\RangeCoderBitTree.cs" />
     <Compile Include="IO\LZMA\ICoder.cs" />
+    <Compile Include="Network\HttpUtil.cs" />
     <Compile Include="TaskManager\TaskData.cs" />
     <Compile Include="Util\Utils\ConversionUtil.cs" />
     <Compile Include="Util\Extensions\BinaryReaderExtensions.cs" />
     <Compile Include="Util\Extensions\BinaryWriterExtensions.cs" />
     <Compile Include="Util\Helpers\AsyncHelpers.cs" />
     <Compile Include="Util\Reusable\ResourceStrings.cs" />
+    <Compile Include="Util\Utils\PointUtils.cs" />
     <Compile Include="Web\Db\DbManager.cs" />
     <Compile Include="Diagnostics\PanelTextWriter.cs" />
     <Compile Include="Diagnostics\Profiler\MeasureData.cs" />
