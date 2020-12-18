@@ -6,7 +6,7 @@ namespace Nucleus {
         public static OutputLevel currentLevel = OutputLevel.High;
         private static readonly object locker = new object();
 
-        private static bool WaitingForInput;
+        public static bool WaitingForInput { get; private set; }
 
         public static string ReadLine() {
             WaitingForInput = true;

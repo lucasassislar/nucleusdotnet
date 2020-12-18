@@ -28,5 +28,11 @@ namespace Nucleus.ConsoleEngine {
 
             return command.Execute(newArgs);
         }
+
+        public ConsoleCommand GetCommand(string cmd) {
+            ConsoleCommand command;
+            tasks.TryGetValue(cmd, out command);
+            return command;
+        }
     }
 }

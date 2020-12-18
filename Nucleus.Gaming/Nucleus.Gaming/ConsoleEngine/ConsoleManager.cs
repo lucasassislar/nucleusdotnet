@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace Nucleus.ConsoleEngine {
     public class ConsoleManager {
-        public Dictionary<string, ConsoleCommand> commands;
         private bool silentMode;
+        protected bool running;
+        public Dictionary<string, ConsoleCommand> commands;
 
         public void SetSilentMode(bool value) {
             silentMode = value;
@@ -20,34 +21,13 @@ namespace Nucleus.ConsoleEngine {
             commands = new Dictionary<string, ConsoleCommand>();
         }
 
-        public static IEnumerable<Assembly> GetAssemblies() {
-            var list = new List<string>();
-            var stack = new Stack<Assembly>();
-
-            stack.Push(Assembly.GetEntryAssembly());
-
-            do {
-                var asm = stack.Pop();
-
-                yield return asm;
-
-                foreach (var reference in asm.GetReferencedAssemblies())
-                    if (!list.Contains(reference.FullName)) {
-                        stack.Push(Assembly.Load(reference));
-                        list.Add(reference.FullName);
-                    }
-
-            }
-            while (stack.Count > 0);
-        }
-
-
         public void SearchFromLoadedAssemblies() {
             Type consoleType = typeof(ConsoleCommand);
 
             Assembly entryAssembly = Assembly.GetEntryAssembly();
             string folder = Path.GetDirectoryName(entryAssembly.Location);
             string[] arrDlls = Directory.GetFiles(folder, "*.dll");
+            arrDlls = ArrayUtil.Join(arrDlls, Directory.GetFiles(folder, "*.exe"));
 
             //AssemblyName[] assNames = entryAssembly.GetReferencedAssemblies();
             //Assembly[] assemblies = new Assembly[] { entryAssembly };
@@ -56,16 +36,19 @@ namespace Nucleus.ConsoleEngine {
             for (int i = 0; i < arrDlls.Length; i++) {
                 string strDllPath = arrDlls[i];
                 //Assembly assembly = assemblies[i];
-                Assembly assembly = Assembly.LoadFrom(strDllPath);
-                Type[] types = assembly.GetTypes();
-                for (int j = 0; j < types.Length; j++) {
-                    Type t = types[j];
 
-                    if (t.IsSubclassOf(consoleType)) {
-                        ConsoleCommand cmd = (ConsoleCommand)Activator.CreateInstance(t, this);
-                        commands.Add(cmd.Command, cmd);
+                try {
+                    Assembly assembly = Assembly.LoadFrom(strDllPath);
+                    Type[] types = assembly.GetTypes();
+                    for (int j = 0; j < types.Length; j++) {
+                        Type t = types[j];
+
+                        if (t.IsSubclassOf(consoleType)) {
+                            ConsoleCommand cmd = (ConsoleCommand)Activator.CreateInstance(t, this);
+                            commands.Add(cmd.Command, cmd);
+                        }
                     }
-                }
+                } catch { }
             }
         }
 
@@ -110,21 +93,78 @@ namespace Nucleus.ConsoleEngine {
         }
 
         public void Run() {
-            for (; ; )
-            {
-                string line = ConsoleU.ReadLine();
-                ExecuteCommand(line);
+            running = true;
+
+            for (; ; ) {
+                Tick();
+
+                if (!running) {
+                    break;
+                }
             }
         }
 
-        public void ProcessCommand(string command) {
-
+        protected virtual void Tick() {
+            string line = ReadLine();
+            ExecuteCommand(line);
         }
 
         public ConsoleCommand GetCommand(string cmd) {
             ConsoleCommand command;
             commands.TryGetValue(cmd, out command);
             return command;
+        }
+
+        public string ReadLine() {
+            Console.SetCursorPosition(1, Console.WindowHeight - 3);
+            Console.Write("> ");
+
+            string line = "";
+
+            string word = "";
+            ConsoleCommand cmd = null;
+            for (; ; ) {
+                ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
+                ConsoleKey consoleKey = consoleKeyInfo.Key;
+                char character = consoleKeyInfo.KeyChar;
+
+                if (consoleKey == ConsoleKey.Enter) {
+                    break;
+                } else if (consoleKey == ConsoleKey.Spacebar) {
+                    // new word, check if last word is a command
+                    if (cmd == null) {
+                        cmd = this.GetCommand(word);
+                    } else {
+                        // check if subtasks exist
+                        cmd = cmd.SubTasks?.GetCommand(word);
+                    }
+
+                    if (cmd != null) {
+                        // change colors
+                        Console.SetCursorPosition(Console.CursorLeft - word.Length - 1, Console.CursorTop);
+                        ConsoleU.Write(word + character, cmd.CommandColor);
+                    }
+
+                    word = "";
+                } else if (consoleKey == ConsoleKey.Backspace) {
+                    return ReadLine();
+
+                    //Console.Write(" ");
+                    //Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+
+                    //line = line.Substring(line.Length - 1, 1);
+                    //word = word.Substring(line.Length - 1, 1);
+                }
+
+                line += character;
+
+                if (consoleKey != ConsoleKey.Spacebar) {
+                    word += character;
+                }
+            }
+
+            Console.WriteLine();
+            return line;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Nucleus.ConsoleEngine {
         public virtual bool Hidden { get; }
         public virtual ConsoleColor CommandColor { get; }
         public virtual string Help { get; }
+        public virtual ConsoleSubTaskManager SubTasks { get; }
 
         public abstract string Command { get; }
         public abstract CommandFeedback Execute(string[] args);
