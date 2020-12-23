@@ -89,6 +89,7 @@
     <Compile Include="ConsoleEngine\ConsoleManager.cs" />
     <Compile Include="ConsoleEngine\SubTask\ConsoleSubTaskDelegate.cs" />
     <Compile Include="ConsoleEngine\SubTask\ConsoleSubTaskManager.cs" />
+    <Compile Include="NukeMongo\NukeMongoClient.cs" />
     <Compile Include="Diagnostics\LogData.cs" />
     <Compile Include="IO\LZMA\Common\CRC.cs" />
     <Compile Include="IO\LZMA\Common\InBuffer.cs" />
