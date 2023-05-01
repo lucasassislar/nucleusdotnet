@@ -4,6 +4,10 @@ using System.Drawing;
 
 namespace Nucleus {
     public static class RectangleUtil {
+        public static Rectangle FromRectF(RectangleF rect) {
+            return new Rectangle((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
+        }
+
         public static float CalculateHeight(float oWidth, float oHeight, float nWidth) {
             return (oWidth / oHeight) * nWidth;
         }

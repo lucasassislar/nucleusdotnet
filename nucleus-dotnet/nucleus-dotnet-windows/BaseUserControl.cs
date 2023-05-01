@@ -23,7 +23,7 @@ namespace Nucleus.Platform.Windows.Controls {
             this.SetStyle(ControlStyles.ResizeRedraw, true); // this is to avoid visual artifacts
 
             // create it here, else the designer will show the default windows font
-            Font = new Font("Segoe UI", 12, GraphicsUnit.Point);
+            Font = new Font("Segoe UI", 12, FontStyle.Regular, GraphicsUnit.Point);
         }
 
         /// <summary>

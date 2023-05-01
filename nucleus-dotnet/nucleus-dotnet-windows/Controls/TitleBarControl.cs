@@ -24,6 +24,8 @@ namespace Nucleus.Platform.Windows.Controls {
         private Font titleFont;
 
         private bool enableMaximize;
+
+        [Browsable(true)]
         public bool EnableMaximize {
             get { return enableMaximize; }
             set {

@@ -8,10 +8,12 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>TRACE;WINDOWS;WINFORMS</DefineConstants>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;WINDOWS;WINFORMS</DefineConstants>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +26,14 @@
     <None Include="BaseForm.resx" />
     <None Include="Controls\PictureButton.resx" />
     <None Include="Controls\TextMessageBox.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\nucleus-dotnet\NucleusDotNet.NETCore.csproj" />
   </ItemGroup>
 
 </Project>
