@@ -17,6 +17,8 @@ namespace Nucleus.Platform.Windows.Controls {
 
         public Panel FormContent { get; private set; }
 
+        public bool AdjustFormMonitor { get; protected set; } = true;
+
 #if SHADOWS
         private Bitmap hShadowImage;
         private Bitmap vShadowImage;
@@ -174,6 +176,10 @@ namespace Nucleus.Platform.Windows.Controls {
         /// </summary>
         /// <param name="f">The form to move</param>
         protected void SetUpForm() {
+            if (!AdjustFormMonitor) {
+                return;
+            }
+
             UserScreen[] screens = ScreensUtil.AllScreens();
             Point pos = Cursor.Position;
 
